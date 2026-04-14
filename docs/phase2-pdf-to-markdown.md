@@ -345,7 +345,7 @@ G:\obsidian\base\
 
 - **一个 PDF 对应一个 MD**，不要生成 `.txt` 文件
 - 文件名格式：`AuthorYear_ShortTitle`（无空格，下划线连接）
-- 例如：`Metzger2023_Neuroprosthesis_Speech_Avatar`
+- 例如：`Vaswani2017_Attention_Is_All_You_Need`
 
 ### 转换后的处理流程
 

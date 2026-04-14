@@ -97,7 +97,7 @@ sed -i 's|<PAPER_SEARCH_MCP_PATH>|/c/Users/YOUR_USERNAME/projects/paper-search-m
 ```bash
 # 重启 Claude Code 会话，测试 Skill
 # 在 Claude Code 中输入：
-/paper-search search "neural speech decoding" -n 3 -s arxiv
+/paper-search search "graph neural networks" -n 3 -s arxiv
 ```
 
 ### 3. 安装 Zotero + Jasminum（推荐）
@@ -270,10 +270,10 @@ export PAPER_SEARCH_MCP_CORE_API_KEY="your_core_key"
 /paper-search sources
 
 # 测试 CORE 搜索
-/paper-search search "brain computer interface" -n 3 -s core
+/paper-search search "computer vision" -n 3 -s core
 
 # 测试 Semantic Scholar 搜索
-/paper-search search "brain computer interface" -n 3 -s semantic
+/paper-search search "natural language processing" -n 3 -s semantic
 ```
 
 > **推荐配置优先级：** CORE + Semantic Scholar + Unpaywall email（3 个免费，5 分钟配置完成）→ IEEE（需审核等待）→ DOAJ/ACM（视需求）
@@ -285,7 +285,7 @@ export PAPER_SEARCH_MCP_CORE_API_KEY="your_core_key"
 ### 示例 1：搜索论文
 
 ```bash
-/paper-search search "neural speech decoding" -n 10 -s arxiv,semantic
+/paper-search search "graph neural networks" -n 10 -s arxiv,semantic
 ```
 
 **参数说明：**

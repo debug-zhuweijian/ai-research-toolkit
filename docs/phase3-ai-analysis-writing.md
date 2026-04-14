@@ -89,7 +89,7 @@
 在 Claude Code 中执行以下测试：
 
 ```
-请用 web-search-prime 搜索 "neural speech decoding 2025"
+请用 web-search-prime 搜索 "graph neural networks 2025"
 ```
 
 如果返回搜索结果，说明 MCP 服务器配置正确。
@@ -106,13 +106,13 @@
 
 ```
 请用 MinerU 的 parse_documents 将论文 PDF 转为 Markdown
-文件路径：G:\obsidian\base\Smith2024_Neural_Decoding\Smith2024_Neural_Decoding.pdf
+文件路径：G:\obsidian\base\Smith2024_Graph_Neural_Networks\Smith2024_Graph_Neural_Networks.pdf
 ```
 
 **执行审阅**：
 
 ```
-/paper-review Smith2024_Neural_Decoding.md
+/paper-review Smith2024_Graph_Neural_Networks.md
 ```
 
 **输出报告结构**：
@@ -166,8 +166,8 @@
 **场景**：对某个研究方向进行多文献横向对比。
 
 ```
-/deep-research-v5 "对比 2020-2025 年间基于深度学习的语音解码方法，
-包括 EEG、ECoG、声学特征提取等技术路线的优缺点"
+/deep-research-v5 "对比 2020-2025 年间基于图神经网络的方法，
+包括 GCN、GAT、GraphSAGE 等技术路线的优缺点"
 ```
 
 **输出**：
@@ -183,8 +183,8 @@
 **场景**：撰写论文的某个章节。
 
 ```
-/academic-writing "撰写关于神经语音解码领域的 Introduction，
-重点从 Broca/Wernicke 的经典发现过渡到现代深度学习方法，
+/academic-writing "撰写关于图神经网络领域的 Introduction，
+重点从早期的图嵌入方法过渡到现代消息传递框架，
 引用 10-15 篇关键文献"
 ```
 

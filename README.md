@@ -119,14 +119,14 @@ If everything passes, you are ready to go. If a step fails, the script tells you
 
 ## Usage Walkthrough: From Zero to Knowledge Base
 
-### Scenario: You just chose a research direction "Neural Speech Decoding"
+### Scenario: You just chose a research direction "Graph Neural Networks"
 
-You are a new graduate student. Your advisor said "look into neural speech decoding." Here is how you go from zero to a structured knowledge base in one afternoon.
+You are a new graduate student. Your advisor said "look into graph neural networks." Here is how you go from zero to a structured knowledge base in one afternoon.
 
 #### Step 1: Search Papers
 
 ```
-> /paper-search search "neural speech decoding brain-computer interface" -n 20 -s arxiv,semanticscholar,pubmed
+> /paper-search search "graph neural networks knowledge distillation" -n 20 -s arxiv,semanticscholar,pubmed
 ```
 
 Expected output (condensed):
@@ -134,23 +134,23 @@ Expected output (condensed):
 ```
 Found 60 results (20 per source × 3 sources):
 
-[arxiv] 2401.12345 - A Neural Speech Decoding Framework for Real-Time BCI
+[arxiv] 2401.12345 - A Graph Neural Network Framework for Molecular Property Prediction
          Authors: Zhang et al. (2024)  Citations: 12
-         Abstract: We propose a framework that decodes speech from EEG...
+         Abstract: We propose a GNN framework that predicts molecular properties...
 
-[semantic] 87f3a... - Decoding Speech from Intracranial Recordings
-         Authors: Moses et al. (2021)  Citations: 389
-         Abstract: We demonstrate real-time speech synthesis from...
+[semantic] 87f3a... - Attention-Based Graph Convolutional Networks
+         Authors: Vaswani et al. (2021)  Citations: 389
+         Abstract: We demonstrate attention mechanisms for graph-structured data...
 
-[pubmed] PMID:38291034 - Neural correlates of attempted speech production
-         Authors: Chartier et al. (2023)  Citations: 67
-         Abstract: We recorded cortical activity during attempted speech...
+[pubmed] PMID:38291034 - Knowledge distillation for graph neural networks
+         Authors: Chen et al. (2023)  Citations: 67
+         Abstract: We present a knowledge distillation approach for compressing GNNs...
 ```
 
 Save the paper IDs that look relevant. You can also search by year range:
 
 ```
-> /paper-search search "neural speech decoding" -n 10 -s semantic -y 2022-2025
+> /paper-search search "graph neural networks" -n 10 -s semantic -y 2022-2025
 ```
 
 #### Step 2: Download Papers
@@ -179,13 +179,13 @@ The skill invokes MinerU's MCP server, which sends the PDF to OpenXLab for parsi
 Input:  ./downloads/2401.12345.pdf
 Output: Markdown text (below)
 
-Save to: G:\obsidian\base\Zhang2024_Neural_Speech_Decoding_BCI\Zhang2024_EN.md
+Save to: G:\obsidian\base\Zhang2024_Graph_Neural_Networks\Zhang2024_EN.md
 ```
 
 Save the output to a structured directory. The naming convention is `FirstAuthorYear_ShortTitle`:
 
 ```
-G:\obsidian\base\Zhang2024_Neural_Speech_Decoding_BCI\
+G:\obsidian\base\Zhang2024_Graph_Neural_Networks\
 ├── Zhang2024_EN.pdf      ← original PDF
 └── Zhang2024_EN.md       ← converted Markdown
 ```
@@ -208,19 +208,19 @@ For batch conversion of many PDFs:
 Output (structured review):
 
 ```
-## Paper Review: A Neural Speech Decoding Framework for Real-Time BCI
+## Paper Review: A Graph Neural Network Framework for Molecular Property Prediction
 
-**Research Question:** Can we decode continuous speech from EEG in real-time?
-**Method:** Transformer-based encoder with temporal attention on EEG segments
-**Dataset:** 12 participants, 500 sentences each, 64-channel EEG
-**Key Result:** 45.2% word error rate on continuous speech (SOTA for EEG)
-**Evidence Quality:** MODERATE — small sample size, no external validation
+**Research Question:** Can GNNs accurately predict molecular properties with limited labeled data?
+**Method:** Transformer-based graph encoder with attention on molecular substructures
+**Dataset:** 12 benchmark datasets, 500 molecules each, multi-task learning
+**Key Result:** 95.2% average accuracy on molecular property prediction (SOTA)
+**Evidence Quality:** MODERATE — limited benchmark diversity, no external validation
 **Limitations:**
-  - Only healthy participants (no BCI users)
-  - Sentence vocabulary limited to 500 words
-  - No comparison with ECoG/STEREO-EEG approaches
+  - Only tested on small molecules (no polymer or protein graphs)
+  - Benchmark datasets limited to 500 molecules each
+  - No comparison with knowledge distillation approaches
 **Reusable for you:**
-  - The temporal attention architecture (Figure 3) could transfer to your EEG setup
+  - The attention architecture (Figure 3) could transfer to your graph learning setup
   - Their data augmentation strategy (Section 4.2) addresses the low-sample problem
   - Open-source code: github.com/...
 ```
@@ -228,7 +228,7 @@ Output (structured review):
 **Multi-paper deep research:**
 
 ```
-> /deep-research-v5 "Compare neural speech decoding methods from 2020 to 2025: EEG vs ECoG vs stereo-EEG approaches, focusing on real-time performance and vocabulary size"
+> /deep-research-v5 "Compare graph neural network methods from 2020 to 2025: GCN vs GAT vs GraphSAGE approaches, focusing on scalability and inductive learning capabilities"
 ```
 
 This dispatches parallel sub-agents that each search, read, and write structured notes. The lead agent synthesizes everything into a long-form report with traceable citations. Typical output: 3000-5000 word report in 5-8 minutes.
@@ -248,9 +248,9 @@ Scanning I:\claude-docs\ for new files...
   DUPE:     0 files
 
 New files:
-  [md] Zhang2024_Neural_Speech_Decoding_BCI_EN.md
-  [md] Moses2021_Decoding_Speech_Intracranial_EN.md
-  [md] Chartier2023_Neural_Correlates_Speech_EN.md
+  [md] Zhang2024_Graph_Neural_Networks_EN.md
+  [md] Vaswani2021_Attention_Graph_Convolutional_EN.md
+  [md] Chen2023_Knowledge_Distillation_GNN_EN.md
 ```
 
 Confirm and ingest:
@@ -305,17 +305,17 @@ Now that you understand the landscape, start writing:
 
 ```
 > /academic-writing
-  "Draft a related work section for my thesis on neural speech decoding.
-   Cover: EEG-based approaches, ECoG-based approaches, and hybrid methods.
-   Cite the papers in my knowledge base. Target venue: IEEE TBME."
+  "Draft a related work section for my thesis on graph neural networks.
+   Cover: GCN-based approaches, attention-based approaches, and hybrid methods.
+   Cite the papers in my knowledge base. Target venue: IEEE TPAMI."
 ```
 
 Generate presentation slides:
 
 ```
 > /academic-pptx
-  "Create a 15-minute conference presentation on my survey of neural
-   speech decoding methods. Include: problem statement, taxonomy of
+  "Create a 15-minute conference presentation on my survey of graph
+   neural network methods. Include: problem statement, taxonomy of
    approaches, comparison table, and future directions."
 ```
 

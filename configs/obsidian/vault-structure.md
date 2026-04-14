@@ -22,7 +22,7 @@ Papers and documents should follow this naming pattern:
 
 ```
 Format: AuthorYear_ShortTitle
-Example: Metzger2023_Neuroprosthesis_Speech_Avatar
+Example: Vaswani2017_Attention_Is_All_You_Need
 
 Forbidden: pure numbers, hashes, garbled characters, filenames with spaces
 ```
