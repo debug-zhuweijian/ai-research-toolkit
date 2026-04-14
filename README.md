@@ -1,10 +1,16 @@
-**[English](./README.md)** | **[中文](./README.zh-CN.md)**
-
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE) [![Ask DeepWiki](https://deepwiki.com/badge.svg)](https://deepwiki.com/debug-zhuweijian/ai-research-toolkit)
+<div align="center">
 
 # AI Research Toolkit
 
-> Full-pipeline AI-assisted academic research workflow powered by Claude Code
+**Full-pipeline AI-assisted academic research workflow powered by Claude Code**
+
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE) [![Ask DeepWiki](https://deepwiki.com/badge.svg)](https://deepwiki.com/debug-zhuweijian/ai-research-toolkit)
+
+**[English](./README.md)** | **[中文](./README.zh-CN.md)**
+
+</div>
+
+---
 
 An opinionated, end-to-end toolkit that takes you from *searching papers* to *building a navigable knowledge graph* -- all inside Claude Code. Designed for graduate students who want AI to handle the tedious parts of research so they can focus on thinking.
 

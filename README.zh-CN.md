@@ -1,10 +1,16 @@
-**[English](./README.md)** | **[中文](./README.zh-CN.md)**
-
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE) [![Ask DeepWiki](https://deepwiki.com/badge.svg)](https://deepwiki.com/debug-zhuweijian/ai-research-toolkit)
+<div align="center">
 
 # AI Research Toolkit
 
-> 基于 Claude Code 的全流程 AI 辅助学术研究工具链
+**基于 Claude Code 的全流程 AI 辅助学术研究工具链**
+
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE) [![Ask DeepWiki](https://deepwiki.com/badge.svg)](https://deepwiki.com/debug-zhuweijian/ai-research-toolkit)
+
+**[English](./README.md)** | **[中文](./README.zh-CN.md)**
+
+</div>
+
+---
 
 一套端到端的研究工具包，带你从*搜索论文*到*构建可导航的知识图谱*——全部在 Claude Code 中完成。专为希望用 AI 处理研究琐事、专注思考的研究生设计。
 
