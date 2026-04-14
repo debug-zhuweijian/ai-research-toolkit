@@ -194,7 +194,7 @@ export MINERU_API_KEY="your_openxlab_token"
 ```
 调用 mcp__mineru-mcp__parse_documents
 参数：
-  file_sources: "G:/obsidian/base/Vaswani2017_Attention/Vaswani2017_Attention_EN.pdf"
+  file_sources: "<OBSIDIAN_VAULT>/base/Vaswani2017_Attention/Vaswani2017_Attention_EN.pdf"
   language: "en"
   enable_ocr: false
 ```
@@ -202,7 +202,7 @@ export MINERU_API_KEY="your_openxlab_token"
 或通过 Skill 命令：
 
 ```bash
-/Geek-skills-mineru-pdf-parser G:/obsidian/base/Vaswani2017_Attention/Vaswani2017_Attention_EN.pdf
+/Geek-skills-mineru-pdf-parser <OBSIDIAN_VAULT>/base/Vaswani2017_Attention/Vaswani2017_Attention_EN.pdf
 ```
 
 **参数说明：**
@@ -245,7 +245,7 @@ mineru -p ./papers/ -o ./output/ -b hybrid-auto-engine --lang en
 
 ```
 mcp__pdf-mcp__pdf_info
-  file_path: "G:/obsidian/base/Author2024_Title/paper.pdf"
+  file_path: "<OBSIDIAN_VAULT>/base/Author2024_Title/paper.pdf"
 ```
 
 返回：页数、标题、作者、文件大小等元数据。
@@ -254,8 +254,8 @@ mcp__pdf-mcp__pdf_info
 
 ```
 mcp__pdf-mcp__pdf_split
-  input_path: "G:/obsidian/base/Author2024_Title/paper.pdf"
-  output_dir: "G:/obsidian/base/Author2024_Title/pages/"
+  input_path: "<OBSIDIAN_VAULT>/base/Author2024_Title/paper.pdf"
+  output_dir: "<OBSIDIAN_VAULT>/base/Author2024_Title/pages/"
 ```
 
 将每页拆分为独立 PDF 文件。
@@ -321,7 +321,7 @@ markitdown "scan.jpg" > scan.md
 
 ```
 mcp__markitdown__convert_to_markdown
-  uri: "file:///G:/obsidian/base/report.docx"
+  uri: "file:///<OBSIDIAN_VAULT>/base/report.docx"
 ```
 
 ---
@@ -333,7 +333,7 @@ mcp__markitdown__convert_to_markdown
 Phase 2 产出的 Markdown 文件严格按照 Obsidian vault 规范保存：
 
 ```
-G:\obsidian\base\
+<OBSIDIAN_VAULT>/base/
 └── <AuthorYear_ShortTitle>\
     ├── <name>_EN.pdf      ← Phase 1 下载的英文 PDF（原件）
     ├── <name>_ZH.pdf      ← 中文 PDF（如有）
@@ -356,7 +356,7 @@ Phase 1 PDF 下载
 重命名: <AuthorYear_ShortTitle>_EN.pdf
     │
     ▼
-保存到: G:\obsidian\base\<AuthorYear_ShortTitle>\
+保存到: <OBSIDIAN_VAULT>/base/<AuthorYear_ShortTitle>\
     │
     ▼
 Phase 2 MinerU 转换 → <AuthorYear_ShortTitle>_EN.md
@@ -390,7 +390,7 @@ Phase 2 产出的 Markdown 文件是 Phase 3 的输入：
 Phase 2 产出 .md 文件
     │
     ▼
-保存到: G:\obsidian\base\<AuthorYear_ShortTitle>\<name>.md
+保存到: <OBSIDIAN_VAULT>/base/<AuthorYear_ShortTitle>\<name>.md
     │
     ▼
 Phase 3: AI 分析
@@ -491,8 +491,8 @@ MinerU MCP 和 pdf-mcp 在 Windows 下均支持两种路径格式：
 
 ```bash
 # Windows 路径（反斜杠或正斜杠均可）
-"G:\\obsidian\\base\\Author2024_Title\\paper.pdf"
-"G:/obsidian/base/Author2024_Title/paper.pdf"
+"<OBSIDIAN_VAULT>/base/Author2024_Title/paper.pdf"
+"<OBSIDIAN_VAULT>/base/Author2024_Title/paper.pdf"
 
 # Git Bash 路径
 "/g/obsidian/base/Author2024_Title/paper.pdf"
@@ -506,7 +506,7 @@ chcp 65001  # CMD
 # Git Bash 通常无需额外设置
 
 # 在 Claude Code MCP 调用中，中文路径正常支持
-file_sources: "G:/obsidian/base/张三2024_深度学习/paper.pdf"
+file_sources: "<OBSIDIAN_VAULT>/base/张三2024_深度学习/paper.pdf"
 ```
 
 ### 本地 GPU 部署注意事项
@@ -530,7 +530,7 @@ mineru-models-download
 ```bash
 # Windows 文件系统对大文件（>4GB）需要 NTFS 格式
 # 检查磁盘格式
-fsutil fsinfo volumeinfo G:
+fsutil fsinfo volumeinfo C:
 
 # 如果遇到内存不足，减少并发
 # MinerU CLI 单文件处理，不会并发占用过多内存

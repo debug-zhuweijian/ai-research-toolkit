@@ -106,7 +106,7 @@
 
 ```
 请用 MinerU 的 parse_documents 将论文 PDF 转为 Markdown
-文件路径：G:\obsidian\base\Smith2024_Graph_Neural_Networks\Smith2024_Graph_Neural_Networks.pdf
+文件路径：<OBSIDIAN_VAULT>/base/Smith2024_Graph_Neural_Networks/Smith2024_Graph_Neural_Networks.pdf
 ```
 
 **执行审阅**：
@@ -291,7 +291,7 @@
 1. **精确的查询**：给出具体的时间范围、技术关键词、对比维度
 2. **逐步深入**：先做宽泛调研，再对感兴趣的方向做二次 deep-research
 3. **结合 paper-review**：对调研中发现的关键论文，用 `/paper-review` 做精读
-4. **保存结果**：调研报告建议保存到 `G:\obsidian\base\<主题名>\` 目录
+4. **保存结果**：调研报告建议保存到 `<OBSIDIAN_VAULT>/base/<主题名>/` 目录
 
 ---
 
@@ -301,10 +301,10 @@ Phase 3 产出的论文笔记、调研报告、写作草稿是 Phase 4 知识库
 
 | Phase 3 产出 | Phase 4 归档位置 |
 |---------------|------------------|
-| 论文审阅报告 | `G:\obsidian\base\<论文名>\*_review.md` |
-| 深度调研报告 | `G:\obsidian\base\<主题名>\research_report.md` |
-| 学术写作草稿 | `G:\obsidian\base\<项目名>\draft\` |
-| 组会 PPT | `I:\claude-docs\ppt\` |
+| 论文审阅报告 | `<OBSIDIAN_VAULT>/base/<论文名>/*_review.md` |
+| 深度调研报告 | `<OBSIDIAN_VAULT>/base/<主题名>/research_report.md` |
+| 学术写作草稿 | `<OBSIDIAN_VAULT>/base/<项目名>/draft/` |
+| 组会 PPT | `<CLAUDE_DOCS>/ppt/` |
 
 建议在每个 Phase 3 任务完成后，立即将产出同步到知识库（Phase 4 的 `/kb-scan` 会自动处理）。
 
@@ -349,9 +349,9 @@ Phase 3 产出的论文笔记、调研报告、写作草稿是 Phase 4 知识库
 
 ## 7. Windows 注意事项
 
-1. **路径格式**：在 Claude Code 中使用 Git Bash 路径格式（如 `/g/obsidian/base/` 而非 `G:\obsidian\base\`），但 MCP 工具接受 Windows 原生路径
+1. **路径格式**：在 Claude Code 中使用 Git Bash 路径格式（如 `/<drive>/obsidian/base/` 而非 `X:\obsidian\base\`），但 MCP 工具接受 Windows 原生路径
 2. **长路径问题**：Windows 默认路径长度限制为 260 字符，建议论文文件夹名控制在 50 字符以内
 3. **编码**：确保 PDF 转 Markdown 时使用 UTF-8 编码，MinerU MCP 默认输出 UTF-8
 4. **网络代理**：如果使用 Clash Verge 等代理工具，确保 MCP 服务器的 HTTP/HTTPS 请求走代理通道（通常设置 `HTTP_PROXY` 和 `HTTPS_PROXY` 环境变量即可）
 5. **内存占用**：`deep-research-v5` 会启动多个子代理，建议系统可用内存不低于 8GB
-6. **文件保存**：所有生成的文件按 CLAUDE.md 中的路由规则保存，PDF 转 MD 结果存到 `G:\obsidian\base\<文档名>\`，PPT 存到 `I:\claude-docs\ppt\`
+6. **文件保存**：所有生成的文件按 CLAUDE.md 中的路由规则保存，PDF 转 MD 结果存到 `<OBSIDIAN_VAULT>/base/<文档名>/`，PPT 存到 `<CLAUDE_DOCS>/ppt/`
