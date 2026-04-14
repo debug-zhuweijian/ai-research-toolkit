@@ -3,7 +3,7 @@
   "_usage": "Copy into ~/.claude.json under the 'mcpServers' key. Replace all <PLACEHOLDER> values with your actual credentials and paths. This is the minimum set needed to get started with PDF parsing and web search.",
   "_placeholders": {
     "<YOUR_MINERU_API_KEY>": "MinerU (OpenXLab) JWT token from https://mineru.openxlab.org.cn/ - sign up and generate an API key in your account settings",
-    "<YOUR_PDF_MCP_PATH>": "Absolute path to pdf-mcp server.js entry point. Install: git clone https://github.com/your-org/pdf-mcp.git into ~/.claude/mcp-servers/, then point to src/server.js, e.g. C:/Users/<you>/.claude/mcp-servers/pdf-mcp/src/server.js",
+    "<YOUR_PDF_MCP_PATH>": "Absolute path to pdf-mcp server.js entry point. Install: git clone https://github.com/angshuman/pdf-mcp.git into ~/.claude/mcp-servers/, then point to src/server.js, e.g. C:/Users/<you>/.claude/mcp-servers/pdf-mcp/src/server.js",
     "<YOUR_ZHIPU_API_KEY>": "ZhiPu (BigModel) API key from https://open.bigmodel.cn/ - register and create an API key in the console"
   },
   "_prerequisites": {

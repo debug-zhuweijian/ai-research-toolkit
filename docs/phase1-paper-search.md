@@ -397,7 +397,7 @@ Phase 1 下载 PDF
 按命名规范重命名: <AuthorYear_ShortTitle>.pdf
     │
     ▼
-保存到: G:\obsidian\base\<AuthorYear_ShortTitle>\<name>_EN.pdf
+保存到: <OBSIDIAN_VAULT>/base/<AuthorYear_ShortTitle>/<name>_EN.pdf
     │
     ▼
 Phase 2: PDF → Markdown 转换（MinerU）

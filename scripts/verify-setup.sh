@@ -21,7 +21,7 @@ echo "=== AI Research Toolkit — Setup Verification ==="
 echo ""
 
 echo "--- Core Dependencies ---"
-check "Python 3.10+" "python --version | grep -E '3\.1[0-9]|3\.[2-9]'"
+check "Python 3.10+" "python --version | grep -E '3\.1[0-9]|3\.[2-9][0-9]'"
 check "Node.js 18+" "node --version | grep -E 'v(1[8-9]|[2-9][0-9])'"
 check "Git" "git --version"
 check "uv" "uv --version"
@@ -35,7 +35,7 @@ check "npx available" "which npx"
 
 echo ""
 echo "--- Claude Code Skills ---"
-for skill in paper-search paper-review academic-writing deep-research-v5 knowledge-base graphify academic-pptx; do
+for skill in paper-search paper-review paper-proofread academic-writing deep-research-v5 knowledge-base graphify academic-pptx group-meeting-slides; do
   check "skill: $skill" "test -d ~/.claude/skills/$skill"
 done
 

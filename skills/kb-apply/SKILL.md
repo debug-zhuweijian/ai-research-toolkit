@@ -6,7 +6,7 @@ user_invocable: true
 
 # 知识库入库 (/kb-apply)
 
-将扫描发现的新资料从 `<CLAUDE_DOCS_PATH>` 同步到 `<KNOWLEDGE_BASE_PATH>raw\`。
+将扫描发现的新资料从 `<CLAUDE_DOCS_PATH>` 同步到 `<KNOWLEDGE_BASE_PATH>/raw/`。
 
 执行步骤：
 1. 先跑 scan 确认新文件：
