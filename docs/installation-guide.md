@@ -10,7 +10,7 @@
 
 ```
 第 1 步：基础环境（Python/Node/Git/uv）          ← 30 min
-第 2 步：Claude Code + API Key                    ← 15 min
+第 2 步：Claude Code + API Key（Anthropic 或兼容端点） ← 15 min
 第 3 步：Clone 本 repo + 复制 Skills/Agents       ← 5 min
 第 4 步：Phase 1 — paper-search-mcp 安装          ← 10 min
 第 5 步：Phase 2 — MinerU + pdf-mcp 安装          ← 20 min
@@ -89,7 +89,7 @@ uv --version       # 任意版本
 
 ---
 
-## 第 2 步：Claude Code + API Key
+## 第 2 步：Claude Code + API Key（Anthropic 或兼容端点）
 
 ### 2.1 安装 Claude Code
 
@@ -100,15 +100,29 @@ npm install -g @anthropic-ai/claude-code
 claude --version
 ```
 
-### 2.2 获取 Anthropic API Key
+### 2.2 配置 API Key
 
-Claude Code 的核心，没有它无法运行。
+Claude Code 需要一个 API Key 才能运行。有两种方式：
+
+**方式 A：使用 Anthropic 官方 API Key**
 
 1. 访问 [console.anthropic.com](https://console.anthropic.com)
 2. 注册账号（Google 登录或邮箱注册）
 3. 左侧菜单 → **API Keys** → **Create Key**
 4. 复制 Key（格式 `sk-ant-api03-...`），**只显示一次**
 5. 充值 $5（Settings → Billing → Add Credits，需要信用卡）
+
+**方式 B：使用 Anthropic 兼容端点（如智谱 BigModel）**
+
+如果你通过 Anthropic 兼容端点运行 Claude Code（例如智谱 BigModel 的 GLM 系列），无需 Anthropic API Key，只需配置对应平台的 API Key 和 `base_url`：
+
+```bash
+# 在 ~/.bashrc 或启动时设置环境变量
+export ANTHROPIC_API_KEY="你的兼容端点API密钥"
+export ANTHROPIC_BASE_URL="https://open.bigmodel.cn/api/paas/v4/"  # 以智谱为例
+```
+
+> 其他兼容端点（如 OpenRouter、AWS Bedrock 等）也支持类似配置，只需替换对应的 API Key 和 base_url。
 
 ### 2.3 启动 Claude Code
 
@@ -118,7 +132,7 @@ claude
 # 能正常对话即说明配置成功
 ```
 
-> 也可以用环境变量：`export ANTHROPIC_API_KEY="sk-ant-api03-..."`
+> 也可以用环境变量：`export ANTHROPIC_API_KEY="你的Key"`
 
 ---
 

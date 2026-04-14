@@ -88,9 +88,11 @@ Replace all `<YOUR_*>` placeholders with your actual keys and paths.
 
 | Key | Source | Required? | Registration |
 |-----|--------|-----------|-------------|
-| Anthropic | [console.anthropic.com](https://console.anthropic.com/) | **Yes** | $5 minimum |
+| Anthropic or compatible endpoint | [console.anthropic.com](https://console.anthropic.com/) or compatible (e.g. ZhiPu BigModel) | **Yes** (either works) | Anthropic: $5 minimum; Compatible: varies |
 | ZhiPu BigModel | [open.bigmodel.cn](https://open.bigmodel.cn/) | **Yes** | Free tier available |
 | MinerU OpenXLab | [openxlab.org.cn](https://openxlab.org.cn) | Recommended | Free |
+
+> **Anthropic-compatible endpoints**: If you run Claude Code through an Anthropic-compatible API (e.g. ZhiPu BigModel GLM series), use that platform's API Key and configure the `base_url` accordingly. An Anthropic API Key is not required in this case.
 
 See [docs/api-keys-guide.md](docs/api-keys-guide.md) for detailed registration walkthroughs.
 
@@ -362,6 +364,7 @@ See [docs/phase2-pdf-to-markdown.md](docs/phase2-pdf-to-markdown.md) for backend
 | Tool | GitHub / Source | Type |
 |------|----------------|------|
 | paper-review | This repo `skills/paper-review/` | Skill |
+| paper-proofread | [LimHyungTae/awesome-claudecode-paper-proofreading](https://github.com/LimHyungTae/awesome-claudecode-paper-proofreading) | Skill |
 | deep-research-v5 | This repo `skills/deep-research-v5/` | Skill (9 files) |
 | academic-writing | This repo `skills/academic-writing/` | Skill |
 | academic-pptx | This repo `skills/academic-pptx/` | Skill |
@@ -371,7 +374,9 @@ See [docs/phase2-pdf-to-markdown.md](docs/phase2-pdf-to-markdown.md) for backend
 | web-reader | [ZhiPu BigModel](https://open.bigmodel.cn) | MCP |
 | zai-mcp-server | [@z_ai/mcp-server](https://www.npmjs.com/package/@z_ai/mcp-server) | MCP |
 
-Single-paper review extracts research question, method, evidence quality, limitations, and what you can reuse. Multi-paper deep research dispatches parallel sub-agents that each investigate a facet, write structured notes, and return citations. Academic writing skill handles drafting, polishing, and reviewer responses.
+Single-paper review extracts research question, method, evidence quality, limitations, and what you can reuse. **Paper proofreading** provides two-phase LaTeX workspace audit and conference-level content review (ICRA/CVPR/NeurIPS standards), detecting issues first and fixing only after user approval. Multi-paper deep research dispatches parallel sub-agents. Academic writing skill handles drafting, polishing, and reviewer responses.
+
+**Usage**: `/paper-proofread main.tex` (workspace mode) or `/paper-proofread main.tex paper.pdf` (full mode)
 
 See [docs/phase3-ai-analysis-writing.md](docs/phase3-ai-analysis-writing.md) for analysis templates, writing workflows, and slide design patterns.
 
@@ -395,9 +400,11 @@ See [docs/phase4-knowledge-base.md](docs/phase4-knowledge-base.md) for knowledge
 
 | Key | Source | Free Tier | Required? | Purpose |
 |-----|--------|-----------|-----------|---------|
-| Anthropic | [console.anthropic.com](https://console.anthropic.com/) | $5 free credit | **Yes** | Claude Code core functionality |
+| Anthropic (or compatible endpoint) | [console.anthropic.com](https://console.anthropic.com/) or compatible (e.g. ZhiPu BigModel) | Anthropic: $5 free credit; Compatible: varies | **Yes** (either works) | Claude Code core functionality |
 | ZhiPu BigModel | [open.bigmodel.cn](https://open.bigmodel.cn/) | Yes (Generous free tier) | **Yes** | Web search, web reader, document analysis via MCP |
 | MinerU OpenXLab | [mineru.openxlab.org.cn](https://mineru.openxlab.org.cn/) | Yes (1000 pages/day) | **Yes** | PDF to Markdown conversion API |
+
+> **Using an Anthropic-compatible endpoint**: Claude Code supports Anthropic-compatible API endpoints (e.g. ZhiPu BigModel's GLM series). If you use a compatible endpoint, configure the corresponding API Key and `base_url` -- no Anthropic API Key is needed.
 
 Optional keys (unlock additional paper-search-mcp sources):
 
@@ -419,6 +426,7 @@ See [docs/api-keys-guide.md](docs/api-keys-guide.md) for detailed setup instruct
 | Tool | Source | License | Phase | Install |
 |------|--------|---------|-------|---------|
 | [paper-search-mcp](https://github.com/openags/paper-search-mcp) | openags | MIT | 1 | `pip install paper-search-mcp` |
+| [paper-proofread](https://github.com/LimHyungTae/awesome-claudecode-paper-proofreading) | LimHyungTae | MIT | 3 | Skill (copy to `~/.claude/skills/`) |
 | [MinerU](https://github.com/opendatalab/MinerU) | OpenDataLab | Apache-2.0 | 2 | `pip install mineru-mcp-server` |
 | [pdf-mcp](https://github.com/angshuman/pdf-mcp) | angshuman | MIT | 2 | `git clone` + `npm install` |
 | [MarkItDown](https://github.com/microsoft/markitdown) | Microsoft | MIT | 2 | `pip install markitdown-mcp` |
@@ -476,6 +484,7 @@ This toolkit stands on the shoulders of excellent open-source projects:
 
 - **[MinerU](https://github.com/opendatalab/MinerU)** by OpenDataLab -- High-accuracy PDF parsing with layout analysis and OCR
 - **[paper-search-mcp](https://github.com/openags/paper-search-mcp)** by openags -- Unified search across 20+ academic databases
+- **[awesome-claudecode-paper-proofreading](https://github.com/LimHyungTae/awesome-claudecode-paper-proofreading)** by Hyungtae Lim -- Two-phase LaTeX paper proofreading with conference-level review standards
 - **[Graphify](https://github.com/safishamsi/graphify)** by safishamsi -- Knowledge graph generation from any document collection
 - **[MemPalace](https://github.com/MemPalace/mempalace)** -- Persistent semantic memory with knowledge graph support
 - **[ChromaDB](https://github.com/chroma-core/chroma)** -- Open-source embedding database for semantic search
