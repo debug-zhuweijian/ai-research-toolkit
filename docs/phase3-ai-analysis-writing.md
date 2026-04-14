@@ -6,17 +6,19 @@
 
 ## 1. 本阶段工具
 
-| 工具 | 类型 | 用途 |
-|------|------|------|
-| `/paper-review` | Skill | 单篇论文结构化审阅，输出方法/实验/贡献/局限等报告 |
-| `/deep-research-v5` | Skill | 多子代理深度调研，支持横向对比、时间线梳理、综合报告 |
-| `/academic-writing` | Skill | 学术论文写作辅助，支持 Introduction/Method/Discussion 等各部分 |
-| `/group-meeting-slides` | Skill | 组会演示文稿生成，从论文内容到 PPT 一键完成 |
-| `sequential-thinking` MCP | MCP 服务器 | 结构化推理链，支持多步分析和假设验证 |
-| `web-search-prime` MCP | MCP 服务器 | 网络搜索，获取最新文献和资料 |
-| `web-reader` MCP | MCP 服务器 | 网页内容抓取与 Markdown 转换 |
-| `zai-mcp-server` MCP | MCP 服务器 | 图像/视频分析，支持图表解读、截图 OCR 等 |
-| `MinerU` MCP | MCP 服务器 | PDF/PPT/Word 转 Markdown，学术论文格式转换 |
+| 工具 | 类型 | 用途 | GitHub / 来源 |
+|------|------|------|---------------|
+| `/paper-review` | Skill | 单篇论文结构化审阅，输出方法/实验/贡献/局限等报告 | 本 repo `skills/paper-review/` |
+| `/deep-research-v5` | Skill | 多子代理深度调研，支持横向对比、时间线梳理、综合报告 | 本 repo `skills/deep-research-v5/` |
+| `/academic-writing` | Skill | 学术论文写作辅助，支持 Introduction/Method/Discussion 等各部分 | 本 repo `skills/academic-writing/` |
+| `/academic-pptx` | Skill | 学术演示文稿生成，15 页学术报告 PPT | 本 repo `skills/academic-pptx/` |
+| `/group-meeting-slides` | Skill | 组会演示文稿生成，从论文内容到 PPT 一键完成 | 本 repo `skills/group-meeting-slides/` |
+| `sequential-thinking` MCP | MCP 服务器 | 结构化推理链，支持多步分析和假设验证 | [modelcontextprotocol/servers](https://github.com/modelcontextprotocol/servers) |
+| `web-search-prime` MCP | MCP 服务器 | 网络搜索，获取最新文献和资料 | [智谱 BigModel](https://open.bigmodel.cn) |
+| `web-reader` MCP | MCP 服务器 | 网页内容抓取与 Markdown 转换 | [智谱 BigModel](https://open.bigmodel.cn) |
+| `zread` MCP | MCP 服务器 | GitHub 仓库结构和文件读取 | [智谱 BigModel](https://open.bigmodel.cn) |
+| `zai-mcp-server` MCP | MCP 服务器 | 图像/视频分析，支持图表解读、截图 OCR 等 | [@z_ai/mcp-server](https://www.npmjs.com/package/@z_ai/mcp-server) |
+| `MinerU` MCP | MCP 服务器 | PDF/PPT/Word 转 Markdown，学术论文格式转换 | [opendatalab/MinerU](https://github.com/opendatalab/MinerU) |
 
 ---
 

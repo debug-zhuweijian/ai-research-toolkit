@@ -6,16 +6,16 @@
 
 ## 1. 本阶段工具
 
-| 工具 | 类型 | 用途 |
-|------|------|------|
-| `/kb-scan` `/kb-apply` `/kb-lint` `/kb-stats` `/kb-sync` | Knowledge Base Skills | 知识库扫描、应用规则、检查、统计、同步 |
-| `/knowledge-base` | Skill | 知识库综合管理入口 |
-| `kb.js` 脚本 | 自定义脚本 | 知识库自动化处理脚本 |
-| `/graphify` | Skill | 为代码库/文档生成知识图谱 |
-| Graphify CLI | Python 包 | 知识图谱引擎（`graphifyy`） |
-| MemPalace MCP | MCP 服务器 | 语义记忆宫殿，支持知识图谱和语义搜索 |
-| ChromaDB | 向量数据库 | MemPalace 的后端存储引擎 |
-| Obsidian | 桌面应用 | Markdown 笔记管理、双向链接、图谱视图 |
+| 工具 | 类型 | 用途 | GitHub / 来源 |
+|------|------|------|---------------|
+| `/kb-scan` `/kb-apply` `/kb-lint` `/kb-stats` `/kb-sync` | Knowledge Base Skills | 知识库扫描、应用规则、检查、统计、同步 | 本 repo `skills/kb-*/` |
+| `/knowledge-base` | Skill | 知识库综合管理入口 | 本 repo `skills/knowledge-base/` |
+| `kb.js` 脚本 | 自定义脚本 | 知识库自动化处理脚本 | 见 `scripts/knowledge-base-README.md` |
+| `/graphify` | Skill | 为代码库/文档生成知识图谱 | 本 repo `skills/graphify/` |
+| Graphify CLI | Python 包 | 知识图谱引擎（`graphifyy`） | [safishamsi/graphify](https://github.com/safishamsi/graphify) |
+| MemPalace MCP | MCP 服务器 | 语义记忆宫殿，支持知识图谱和语义搜索（19 个工具） | [MemPalace/mempalace](https://github.com/MemPalace/mempalace) |
+| ChromaDB | 向量数据库 | MemPalace 的后端存储引擎 | [chroma-core/chroma](https://github.com/chroma-core/chroma) |
+| Obsidian | 桌面应用 | Markdown 笔记管理、双向链接、图谱视图 | [obsidian.md](https://obsidian.md) |
 
 ---
 

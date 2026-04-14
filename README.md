@@ -348,33 +348,59 @@ Prepare for group meeting:
 
 ### Phase 1: Paper Search & Download
 
-Search 20+ academic databases from a single CLI. Supports arXiv, PubMed, Semantic Scholar, CrossRef, OpenAlex, DBLP, DOAJ, CORE, and more. Optional IEEE and ACM with API keys. Batch download PDFs and manage your paper library.
+| Tool | GitHub | Install |
+|------|--------|---------|
+| paper-search-mcp | [openags/paper-search-mcp](https://github.com/openags/paper-search-mcp) | `pip install paper-search-mcp` |
+| Zotero | [zotero/zotero](https://github.com/zotero/zotero) | [zotero.org](https://www.zotero.org/) |
+| Jasminum (CNKI) | [l0o0/jasminum](https://github.com/l0o0/jasminum) | Zotero .xpi plugin |
+| translators_CN | [l0o0/translators_CN](https://github.com/l0o0/translators_CN) | Copy to Zotero translators |
+| Playwright MCP | [microsoft/playwright-mcp](https://github.com/microsoft/playwright-mcp) | `npx -y @playwright/mcp@latest` |
 
-**Key tools:** `paper-search-mcp` (20+ sources), Zotero + Jasminum (CNKI support)
+Search 20+ academic databases from a single CLI. Supports arXiv, PubMed, Semantic Scholar, CrossRef, OpenAlex, DBLP, DOAJ, CORE, and more. Optional IEEE/ACM with API keys. Batch download PDFs and manage your paper library.
 
 See [docs/phase1-paper-search.md](docs/phase1-paper-search.md) for detailed usage, source configuration, and batch workflows.
 
 ### Phase 2: PDF to Markdown
 
-Convert papers, technical reports, and slide decks into LLM-friendly Markdown. MinerU provides GPU-accelerated parsing with OCR support for scanned documents. pdf-mcp handles local operations (split, merge, extract pages, render to images). MarkItDown covers Office formats.
+| Tool | GitHub | Install |
+|------|--------|---------|
+| MinerU | [opendatalab/MinerU](https://github.com/opendatalab/MinerU) | `pip install mineru-mcp-server` |
+| pdf-mcp | [angshuman/pdf-mcp](https://github.com/angshuman/pdf-mcp) | `git clone` + `npm install` |
+| MarkItDown | [microsoft/markitdown](https://github.com/microsoft/markitdown) | `pip install markitdown-mcp` |
 
-**Key tools:** MinerU MCP, pdf-mcp, MarkItDown
+Convert papers, technical reports, and slide decks into LLM-friendly Markdown. MinerU provides GPU-accelerated parsing with OCR support for scanned documents. pdf-mcp handles local operations (split, merge, extract pages, render to images). MarkItDown covers Office formats.
 
 See [docs/phase2-pdf-to-markdown.md](docs/phase2-pdf-to-markdown.md) for backend selection, OCR configuration, and batch conversion.
 
 ### Phase 3: AI Analysis & Writing
 
-Single-paper review extracts research question, method, evidence quality, limitations, and what you can reuse. Multi-paper deep research dispatches parallel sub-agents that each investigate a facet, write structured notes, and return citations. The lead agent synthesizes everything into a traceable report. Academic writing skill handles drafting, polishing, and reviewer responses.
+| Tool | GitHub / Source | Type |
+|------|----------------|------|
+| paper-review | This repo `skills/paper-review/` | Skill |
+| deep-research-v5 | This repo `skills/deep-research-v5/` | Skill (9 files) |
+| academic-writing | This repo `skills/academic-writing/` | Skill |
+| academic-pptx | This repo `skills/academic-pptx/` | Skill |
+| group-meeting-slides | This repo `skills/group-meeting-slides/` | Skill |
+| Sequential Thinking | [modelcontextprotocol/servers](https://github.com/modelcontextprotocol/servers) | MCP |
+| web-search-prime | [ZhiPu BigModel](https://open.bigmodel.cn) | MCP |
+| web-reader | [ZhiPu BigModel](https://open.bigmodel.cn) | MCP |
+| zai-mcp-server | [@z_ai/mcp-server](https://www.npmjs.com/package/@z_ai/mcp-server) | MCP |
 
-**Key tools:** `paper-review`, `deep-research-v5`, `academic-writing`, `academic-pptx`, `group-meeting-slides`
+Single-paper review extracts research question, method, evidence quality, limitations, and what you can reuse. Multi-paper deep research dispatches parallel sub-agents that each investigate a facet, write structured notes, and return citations. Academic writing skill handles drafting, polishing, and reviewer responses.
 
 See [docs/phase3-ai-analysis-writing.md](docs/phase3-ai-analysis-writing.md) for analysis templates, writing workflows, and slide design patterns.
 
 ### Phase 4: Knowledge Base & Graph
 
-Build a structured, searchable knowledge base from your research materials. Scan for new files, ingest with automatic indexing, lint for quality, and track statistics. Transform the entire base into a navigable knowledge graph with community detection and interactive visualization.
+| Tool | GitHub | Install |
+|------|--------|---------|
+| Graphify | [safishamsi/graphify](https://github.com/safishamsi/graphify) | `pip install graphifyy` |
+| MemPalace | [MemPalace/mempalace](https://github.com/MemPalace/mempalace) | `pip install mempalace` |
+| ChromaDB | [chroma-core/chroma](https://github.com/chroma-core/chroma) | `pip install chromadb` |
+| Obsidian | [obsidian.md](https://obsidian.md) | Desktop app |
+| kb-* skills | This repo `skills/kb-*/` | Skill |
 
-**Key tools:** `kb-scan`, `kb-apply`, `kb-lint`, `kb-stats`, `graphify`, MemPalace, ChromaDB
+Build a structured, searchable knowledge base from your research materials. Scan for new files, ingest with automatic indexing, lint for quality, and track statistics. Transform the entire base into a navigable knowledge graph with community detection and interactive visualization.
 
 See [docs/phase4-knowledge-base.md](docs/phase4-knowledge-base.md) for knowledge base architecture, graph generation options, and query patterns.
 
@@ -388,13 +414,16 @@ See [docs/phase4-knowledge-base.md](docs/phase4-knowledge-base.md) for knowledge
 | ZhiPu BigModel | [open.bigmodel.cn](https://open.bigmodel.cn/) | Yes (Generous free tier) | **Yes** | Web search, web reader, document analysis via MCP |
 | MinerU OpenXLab | [mineru.openxlab.org.cn](https://mineru.openxlab.org.cn/) | Yes (1000 pages/day) | **Yes** | PDF to Markdown conversion API |
 
-Optional keys (unlock additional sources):
+Optional keys (unlock additional paper-search-mcp sources):
 
 | Key | Source | Free? | Purpose |
 |-----|--------|-------|---------|
-| IEEE API | [developer.ieee.org](https://developer.ieee.org/) | Limited | IEEE Xplore search |
-| ACM API | [dl.acm.org](https://dl.acm.org/) | Limited | ACM Digital Library search |
-| Semantic Scholar | [api.semanticscholar.org](https://api.semanticscholar.org/) | Yes (rate-limited) | Higher rate limits |
+| CORE API | [core.ac.uk/services/api](https://core.ac.uk/services/api) | Yes | 300M+ open access papers (recommended) |
+| Semantic Scholar API | [semanticscholar.org/product/api](https://www.semanticscholar.org/product/api) | Yes | Higher rate limits |
+| Unpaywall Email | Just set your email | Yes | Locate open access PDFs |
+| DOAJ API | [doaj.org/api](https://doaj.org/api/docs) | Yes | DOAJ batch access |
+| IEEE API | [developer.ieee.org](https://developer.ieee.org/) | Yes (review needed) | IEEE Xplore search |
+| ACM API | [dl.acm.org](https://dl.acm.org/) | Institutional | ACM Digital Library search |
 
 See [docs/api-keys-guide.md](docs/api-keys-guide.md) for detailed setup instructions for each key.
 
