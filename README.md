@@ -1,6 +1,6 @@
 **[English](./README.md)** | **[中文](./README.zh-CN.md)**
 
-[![Ask DeepWiki](https://deepwiki.com/badge.svg)](https://deepwiki.com/debug-zhuweijian/ai-research-toolkit)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE) [![Ask DeepWiki](https://deepwiki.com/badge.svg)](https://deepwiki.com/debug-zhuweijian/ai-research-toolkit)
 
 # AI Research Toolkit
 
