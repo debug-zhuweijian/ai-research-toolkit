@@ -144,29 +144,139 @@ cp translators_CN/*.js "%APPDATA%/Zotero/Zotero/Profiles/"*/translators/
 
 paper-search-mcp 采用 **FREE-FIRST** 设计：基础搜索和下载 **无需任何 API Key**。
 
-所有免费数据源（21 个）开箱即用：
+21 个免费数据源开箱即用：arXiv、PubMed、bioRxiv、medRxiv、Semantic Scholar、CrossRef、OpenAlex、PMC、CORE、Europe PMC、DBLP、OpenAIRE、CiteSeerX、DOAJ、BASE、Zenodo、HAL、SSRN、Unpaywall、Google Scholar、IACR。
 
-- arXiv、PubMed、bioRxiv、medRxiv、Semantic Scholar、CrossRef、OpenAlex、PMC、CORE、Europe PMC、DBLP、OpenAIRE、CiteSeerX、DOAJ、BASE、Zenodo、HAL、SSRN、Unpaywall、Google Scholar、IACR
+### 可选增强 Key（提升搜索质量与覆盖范围）
 
-### 可选增强 Key（扩大覆盖范围）
+配置以下 API Key 后，对应数据源将获得更高的请求速率、更完整的结果或额外的元数据。**推荐至少配置 CORE 和 Semantic Scholar。**
 
-| Key | 用途 | 获取方式 | 费用 |
-|-----|------|----------|------|
-| `IEEE_API_KEY` | IEEE Xplore 搜索 | [developer.ieee.org](https://developer.ieee.org/) 注册 | 免费额度 |
-| `ACM_API_KEY` | ACM Digital Library 搜索 | [dl.acm.org](https://dl.acm.org/) API 申请 | 需机构订阅 |
+#### 全部可配置 Key 一览
 
-**配置方式：**
+| 环境变量 | 数据源 | 推荐？ | 费用 | 获取地址 |
+|----------|--------|--------|------|----------|
+| `PAPER_SEARCH_MCP_CORE_API_KEY` | CORE | **推荐** | 免费 | [core.ac.uk/services/api](https://core.ac.uk/services/api) |
+| `PAPER_SEARCH_MCP_SEMANTIC_SCHOLAR_API_KEY` | Semantic Scholar | **推荐** | 免费 | [semanticscholar.org/product/api](https://www.semanticscholar.org/product/api) |
+| `PAPER_SEARCH_MCP_UNPAYWALL_EMAIL` | Unpaywall | 推荐 | 免费（仅需邮箱） | 直接设置你的邮箱即可 |
+| `PAPER_SEARCH_MCP_DOAJ_API_KEY` | DOAJ | 可选 | 免费 | [doaj.org/api](https://doaj.org/api/docs) |
+| `PAPER_SEARCH_MCP_IEEE_API_KEY` | IEEE Xplore | 可选 | 免费（需审核） | [developer.ieee.org](https://developer.ieee.org/) |
+| `PAPER_SEARCH_MCP_ACM_API_KEY` | ACM Digital Library | 可选 | 需机构订阅 | [dl.acm.org](https://dl.acm.org/) |
+
+#### 分步注册指南
+
+##### 1. CORE API Key（推荐）
+
+CORE 聚合了全球 3 亿+ 开放获取论文，配置 Key 后搜索结果显著增加。
+
+1. 访问 [core.ac.uk/services/api](https://core.ac.uk/services/api)
+2. 点击 "Register for API key"
+3. 填写姓名、邮箱、用途（选 Research 即可）
+4. 邮箱中收到 API Key（即时发放）
+
+##### 2. Semantic Scholar API Key（推荐）
+
+Semantic Scholar 拥有 2 亿+ 论文索引。免费用户有速率限制，配置 Key 后可提升到更高限额。
+
+1. 访问 [semanticscholar.org/product/api](https://www.semanticscholar.org/product/api)
+2. 点击 "Get API Key"
+3. 填写表单（用途选 Academic Research）
+4. 邮箱中收到 API Key
+
+##### 3. Unpaywall Email（推荐）
+
+Unpaywall 帮助定位 4700 万+ 论文的开放获取 PDF 版本，**无需注册，只需提供邮箱**（作为联系标识）。
 
 ```bash
-# 在 .bashrc 或 .zshrc 中添加
-export IEEE_API_KEY="your_ieee_key"
-export ACM_API_KEY="your_acm_key"
-
-# 或在 Claude Code 会话中临时设置
-export IEEE_API_KEY="your_ieee_key"
+# 直接使用你的学术邮箱
+export PAPER_SEARCH_MCP_UNPAYWALL_EMAIL="your_name@university.edu"
 ```
 
-> **注意：** IEEE API Key 需要审核激活，提交申请后通常 1-3 个工作日获批。ACM API 需要机构访问权限。
+##### 4. DOAJ API Key（可选）
+
+DOAJ（开放获取期刊目录）收录 800 万+ 论文。大部分功能无需 Key，Key 用于批量访问。
+
+1. 访问 [doaj.org/api](https://doaj.org/api/docs)
+2. 按文档说明申请 API Key
+3. DOAJ 的基础搜索无需 Key 即可使用
+
+##### 5. IEEE API Key（可选，需审核）
+
+IEEE Xplore 覆盖电气工程和计算机科学领域的优质期刊/会议论文。
+
+1. 访问 [developer.ieee.org](https://developer.ieee.org/)
+2. 注册开发者账号
+3. 创建应用，选择 "IEEE Metadata API"
+4. 提交后通常 1-3 个工作日审核通过
+5. 收到 API Key 后配置即可
+
+##### 6. ACM API Key（可选，需机构订阅）
+
+ACM Digital Library 需要所在机构订阅才能获取 API Key。
+
+1. 确认所在机构已订阅 ACM Digital Library
+2. 在机构网络内访问 [dl.acm.org](https://dl.acm.org/)
+3. 按照机构提供的 API 访问说明操作
+
+#### 配置方式
+
+**方式 A：写入 shell 配置文件（永久生效）**
+
+```bash
+# 编辑 ~/.bashrc（Git Bash）或 ~/.zshrc（macOS/Linux）
+# 添加以下内容：
+
+# --- Paper Search MCP API Keys ---
+export PAPER_SEARCH_MCP_CORE_API_KEY="your_core_key"
+export PAPER_SEARCH_MCP_SEMANTIC_SCHOLAR_API_KEY="your_s2_key"
+export PAPER_SEARCH_MCP_UNPAYWALL_EMAIL="your_name@university.edu"
+export PAPER_SEARCH_MCP_DOAJ_API_KEY="your_doaj_key"
+export PAPER_SEARCH_MCP_IEEE_API_KEY="your_ieee_key"
+export PAPER_SEARCH_MCP_ACM_API_KEY="your_acm_key"
+```
+
+保存后执行 `source ~/.bashrc` 生效。
+
+**方式 B：在 MCP 配置中设置（Claude Code 自动传递）**
+
+如果你使用 paper-search-mcp 作为 MCP 服务器运行，可以在 `~/.claude.json` 的 MCP 配置中添加环境变量：
+
+```json
+{
+  "mcpServers": {
+    "paper-search-mcp": {
+      "type": "stdio",
+      "command": "uvx",
+      "args": ["paper-search-mcp"],
+      "env": {
+        "PAPER_SEARCH_MCP_CORE_API_KEY": "your_core_key",
+        "PAPER_SEARCH_MCP_SEMANTIC_SCHOLAR_API_KEY": "your_s2_key",
+        "PAPER_SEARCH_MCP_UNPAYWALL_EMAIL": "your_name@university.edu"
+      }
+    }
+  }
+}
+```
+
+**方式 C：在 Claude Code 会话中临时设置**
+
+```bash
+# 仅当前会话生效
+export PAPER_SEARCH_MCP_CORE_API_KEY="your_core_key"
+```
+
+#### 验证 Key 是否生效
+
+```bash
+# 查看数据源状态（已配置 Key 的源会显示 "authenticated"）
+/paper-search sources
+
+# 测试 CORE 搜索
+/paper-search search "brain computer interface" -n 3 -s core
+
+# 测试 Semantic Scholar 搜索
+/paper-search search "brain computer interface" -n 3 -s semantic
+```
+
+> **推荐配置优先级：** CORE + Semantic Scholar + Unpaywall email（3 个免费，5 分钟配置完成）→ IEEE（需审核等待）→ DOAJ/ACM（视需求）
 
 ---
 
@@ -253,12 +363,16 @@ export IEEE_API_KEY="your_ieee_key"
 | **Unpaywall** | `unpaywall` | 开放获取 PDF 定位 | 4700 万+ |
 | **IACR** | `iacr` | 密码学 ePrint | 1.5 万+ |
 
-### 付费/需 Key 源
+### 需 Key 增强/付费源
 
-| 数据源 | ID | 所需环境变量 | 说明 |
-|--------|-----|-------------|------|
-| **IEEE Xplore** | `ieee` | `IEEE_API_KEY` | 电气工程/CS，需审核 |
-| **ACM Digital Library** | `acm` | `ACM_API_KEY` | CS 文献，需机构订阅 |
+| 数据源 | ID | 环境变量 | Key 类型 | 说明 |
+|--------|-----|----------|----------|------|
+| **CORE** | `core` | `PAPER_SEARCH_MCP_CORE_API_KEY` | 免费 | 推荐，显著提升结果数量 |
+| **Semantic Scholar** | `semantic` | `PAPER_SEARCH_MCP_SEMANTIC_SCHOLAR_API_KEY` | 免费 | 推荐，提升速率限额 |
+| **Unpaywall** | `unpaywall` | `PAPER_SEARCH_MCP_UNPAYWALL_EMAIL` | 邮箱 | 定位 OA 版 PDF |
+| **DOAJ** | `doaj` | `PAPER_SEARCH_MCP_DOAJ_API_KEY` | 免费 | 批量访问增强 |
+| **IEEE Xplore** | `ieee` | `PAPER_SEARCH_MCP_IEEE_API_KEY` | 免费（需审核） | 电气工程/CS 期刊会议 |
+| **ACM Digital Library** | `acm` | `PAPER_SEARCH_MCP_ACM_API_KEY` | 需机构订阅 | CS 核心文献 |
 
 ### 数据源选择建议
 
