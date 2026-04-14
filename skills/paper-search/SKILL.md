@@ -47,7 +47,7 @@ uv run --directory <PAPER_SEARCH_MCP_PATH> paper-search sources
 
 arxiv, pubmed, biorxiv, medrxiv, google_scholar, iacr, semantic, crossref, openalex, pmc, core, europepmc, dblp, openaire, citeseerx, doaj, base, zenodo, hal, ssrn, unpaywall
 
-Optional (env vars): ieee (`IEEE_API_KEY`), acm (`ACM_API_KEY`)
+Optional (env vars): core (`PAPER_SEARCH_MCP_CORE_API_KEY`), semantic (`PAPER_SEARCH_MCP_SEMANTIC_SCHOLAR_API_KEY`), unpaywall (`PAPER_SEARCH_MCP_UNPAYWALL_EMAIL`), doaj (`PAPER_SEARCH_MCP_DOAJ_API_KEY`), ieee (`PAPER_SEARCH_MCP_IEEE_API_KEY`), acm (`PAPER_SEARCH_MCP_ACM_API_KEY`)
 
 ## Workflow
 
