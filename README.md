@@ -1,5 +1,7 @@
 **[English](./README.md)** | **[中文](./README.zh-CN.md)**
 
+[![Ask DeepWiki](https://deepwiki.com/badge.svg)](https://deepwiki.com/debug-zhuweijian/ai-research-toolkit)
+
 # AI Research Toolkit
 
 > Full-pipeline AI-assisted academic research workflow powered by Claude Code
