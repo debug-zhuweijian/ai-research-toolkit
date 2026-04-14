@@ -46,74 +46,59 @@ Each phase maps to a skill or MCP server you invoke with a slash command or natu
 
 > **Note for Chinese users:** If you are behind a proxy, set `HTTPS_PROXY` and `NO_PROXY` environment variables before installing. MinerU's OpenXLab API needs to bypass proxy -- add `*.openxlab.org.cn` to `NO_PROXY`.
 
-## Quick Start (1-2 hours)
+## Quick Start
+
+> **完整安装教程（2-3 小时）**: [docs/installation-guide.md](docs/installation-guide.md) — 从零开始，8 步走完，每一步都有 GitHub 链接、安装命令、验证方法和排错指南。
+
+下面是快速概览。如果你是第一次搭建，**强烈建议先看完整教程**。
 
 ### 1. Clone & Install Skills
 
 ```bash
 git clone https://github.com/debug-zhuweijian/ai-research-toolkit.git
 cd ai-research-toolkit
-
-# Copy skills and agents into your Claude Code config
 cp -rn skills/* ~/.claude/skills/
 cp -rn agents/* ~/.claude/agents/
 ```
 
-The `-n` flag prevents overwriting any existing skills you may already have. Each skill is a folder with a `SKILL.md` that Claude Code reads automatically when you invoke the corresponding slash command.
+### 2. Install Upstream Tools (from their GitHub repos)
 
-### 2. Configure MCP Servers
+Each tool installs independently from its own repository:
 
-Merge the minimal MCP config into your Claude Code settings:
+| Phase | Tool | GitHub | Install |
+|-------|------|--------|---------|
+| 1 | paper-search-mcp | [openags/paper-search-mcp](https://github.com/openags/paper-search-mcp) | `pip install paper-search-mcp` |
+| 2 | MinerU | [opendatalab/MinerU](https://github.com/opendatalab/MinerU) | `pip install mineru-mcp-server` |
+| 2 | pdf-mcp | [angshuman/pdf-mcp](https://github.com/angshuman/pdf-mcp) | `git clone` + `npm install` |
+| 4 | Graphify | [safishamsi/graphify](https://github.com/safishamsi/graphify) | `pip install graphifyy` |
+| 4 | MemPalace | [MemPalace/mempalace](https://github.com/MemPalace/mempalace) | `conda create` + `pip install` |
 
-```bash
-# Open your Claude Code config
-# On Windows: C:\Users\<you>\.claude.json
-# On macOS/Linux: ~/.claude.json
+See [docs/installation-guide.md](docs/installation-guide.md) for exact commands and verification steps.
 
-# Copy the mcpServers block from:
-configs/mcp-servers-minimal.json
+### 3. Configure MCP Servers
 
-# Replace these placeholders with your actual values:
-#   <YOUR_MINERU_API_KEY>  → your OpenXLab JWT token
-#   <YOUR_PDF_MCP_PATH>    → e.g. C:/Users/you/.claude/mcp-servers/pdf-mcp/src/server.js
-#   <YOUR_ZHIPU_API_KEY>   → your ZhiPu BigModel API key
-```
+Edit `~/.claude.json` and merge the MCP config:
 
-For the full setup (11 servers including Draw.io, Playwright, sequential thinking, MemPalace), use `configs/mcp-servers-full.json`. See [docs/api-keys-guide.md](docs/api-keys-guide.md) for key acquisition details.
+- **Minimal (3 servers)**: `configs/mcp-servers-minimal.json` — covers Phase 1-2
+- **Full (11 servers)**: `configs/mcp-servers-full.json` — all phases
 
-### 3. Install Core Tools
-
-```bash
-# Paper search (CLI tool, runs via uvx)
-pip install paper-search-mcp
-
-# MinerU MCP server (PDF parsing via API)
-pip install mineru-mcp-server
-
-# pdf-mcp (local PDF operations: split, merge, extract, render)
-git clone https://github.com/angshuman/pdf-mcp.git ~/.claude/mcp-servers/pdf-mcp
-cd ~/.claude/mcp-servers/pdf-mcp && npm install
-
-# MarkItDown (Microsoft document converter)
-pip install markitdown-mcp
-```
+Replace all `<YOUR_*>` placeholders with your actual keys and paths.
 
 ### 4. Set Up API Keys
 
-See [docs/api-keys-guide.md](docs/api-keys-guide.md) for step-by-step instructions. You need at minimum:
+| Key | Source | Required? | Registration |
+|-----|--------|-----------|-------------|
+| Anthropic | [console.anthropic.com](https://console.anthropic.com/) | **Yes** | $5 minimum |
+| ZhiPu BigModel | [open.bigmodel.cn](https://open.bigmodel.cn/) | **Yes** | Free tier available |
+| MinerU OpenXLab | [openxlab.org.cn](https://openxlab.org.cn) | Recommended | Free |
 
-- **Anthropic API key** -- Claude Code's brain. [console.anthropic.com](https://console.anthropic.com/)
-- **ZhiPu BigModel API key** -- Web search and document reading. [open.bigmodel.cn](https://open.bigmodel.cn/)
-- **MinerU OpenXLab token** -- PDF parsing API. [mineru.openxlab.org.cn](https://mineru.openxlab.org.cn/)
+See [docs/api-keys-guide.md](docs/api-keys-guide.md) for detailed registration walkthroughs.
 
 ### 5. Verify
 
 ```bash
-# Run the verification script (checks all dependencies, MCP servers, and API connectivity)
 ./scripts/verify-setup.sh
 ```
-
-If everything passes, you are ready to go. If a step fails, the script tells you exactly what to fix.
 
 ---
 
