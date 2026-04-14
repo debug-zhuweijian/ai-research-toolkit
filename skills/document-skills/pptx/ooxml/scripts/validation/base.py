@@ -108,8 +108,8 @@ class BaseSchemaValidator:
         self.original_file = Path(original_file)
         self.verbose = verbose
 
-        # Set schemas directory
-        self.schemas_dir = Path(__file__).parent.parent.parent / "schemas"
+        # Set schemas directory (shared between docx and pptx)
+        self.schemas_dir = Path(__file__).parent.parent.parent.parent.parent / "shared-schemas"
 
         # Get all XML and .rels files
         patterns = ["*.xml", "*.rels"]
