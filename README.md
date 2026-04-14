@@ -18,7 +18,7 @@ flowchart LR
 
     A -.- A1["paper-search-mcp\n(20+ sources)"]
     B -.- B1["MinerU MCP\npdf-mcp\nMarkItDown"]
-    C -.- C1["paper-review\n.deep-research-v5"]
+    C -.- C1["paper-review\ndeep-research-v5"]
     D -.- D1["kb-scan/apply/lint\nMemPalace"]
     E -.- E1["graphify\nChromaDB"]
     F -.- F1["academic-writing\nacademic-pptx\ngroup-meeting-slides"]
