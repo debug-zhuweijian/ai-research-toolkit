@@ -17,6 +17,7 @@ An opinionated, end-to-end toolkit that takes you from *searching papers* to *bu
 ## Pipeline Overview
 
 ```mermaid
+%%{init: {'theme': 'neutral'}}%%
 flowchart LR
     A["Paper Search\n& Download"] --> B["PDF to\nMarkdown"]
     B --> C["AI Paper\nAnalysis"]
@@ -76,9 +77,9 @@ Each phase maps to a skill or MCP server you invoke with a slash command or natu
 
 ## Quick Start
 
-> **完整安装教程（2-3 小时）**: [docs/installation-guide.md](docs/installation-guide.md) — 从零开始，8 步走完，每一步都有 GitHub 链接、安装命令、验证方法和排错指南。
+> **Full installation tutorial (2-3 hours)**: [docs/installation-guide.md](docs/installation-guide.md) — Start from scratch in 8 steps, each with GitHub links, install commands, verification, and troubleshooting.
 
-下面是快速概览。如果你是第一次搭建，**强烈建议先看完整教程**。
+Below is a quick overview. If this is your first time setting up, **we strongly recommend reading the full tutorial first**.
 
 ### A. Clone & Install Skills
 

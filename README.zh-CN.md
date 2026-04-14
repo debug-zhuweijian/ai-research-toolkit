@@ -17,6 +17,7 @@
 ## 流水线总览
 
 ```mermaid
+%%{init: {'theme': 'neutral'}}%%
 flowchart LR
     A["论文搜索\n与下载"] --> B["PDF 转\nMarkdown"]
     B --> C["AI 论文\n分析"]
