@@ -1,3 +1,5 @@
+**[English](./README.md)** | **[中文](./README.zh-CN.md)**
+
 # AI Research Toolkit
 
 > Full-pipeline AI-assisted academic research workflow powered by Claude Code
