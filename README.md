@@ -24,6 +24,24 @@ flowchart LR
 
 Each phase maps to a skill or MCP server you invoke with a slash command or natural language in Claude Code. The pipeline is linear but iterative -- you can run any phase independently or loop back to earlier phases as your understanding deepens.
 
+## Table of Contents
+
+- [Features](#features)
+- [Prerequisites](#prerequisites)
+- [Quick Start](#quick-start)
+- [Usage Walkthrough: From Zero to Knowledge Base](#usage-walkthrough-from-zero-to-knowledge-base)
+- [Phase Details](#phase-details)
+  - [Phase 1: Paper Search & Download](#phase-1-paper-search--download)
+  - [Phase 2: PDF to Markdown](#phase-2-pdf-to-markdown)
+  - [Phase 3: AI Analysis & Writing](#phase-3-ai-analysis--writing)
+  - [Phase 4: Knowledge Base & Graph](#phase-4-knowledge-base--graph)
+- [API Keys Guide](#api-keys-guide)
+- [Tool Map](#tool-map)
+- [Recommended Resources](#recommended-resources)
+- [Acknowledgments](#acknowledgments)
+- [Contributing](#contributing)
+- [License](#license)
+
 ## Features
 
 - **Paper Search & Download** -- Query 20+ academic databases (arXiv, PubMed, Semantic Scholar, CrossRef, DOAJ, etc.) from a single command. Download PDFs with one line. Optional IEEE/ACM with API keys.
@@ -37,7 +55,7 @@ Each phase maps to a skill or MCP server you invoke with a slash command or natu
 
 | Dependency | Version | Install Command | Verify Command |
 |------------|---------|-----------------|----------------|
-| Python | 3.10+ | [Anaconda](https://www.anaconda.com/download) or `winget install Python.Python.3.12` | `python --version` |
+| Python | 3.10+ | `winget install Python.Python.3.12` (or install via Anaconda below) | `python --version` |
 | Node.js | 18+ | [nodejs.org](https://nodejs.org/) or `winget install OpenJS.NodeJS.LTS` | `node --version` |
 | Anaconda | Any | [anaconda.com/download](https://www.anaconda.com/download) | `conda --version` |
 | uv | Latest | `pip install uv` or `winget install astral-sh.uv` | `uv --version` |
@@ -52,7 +70,7 @@ Each phase maps to a skill or MCP server you invoke with a slash command or natu
 
 下面是快速概览。如果你是第一次搭建，**强烈建议先看完整教程**。
 
-### 1. Clone & Install Skills
+### A. Clone & Install Skills
 
 ```bash
 git clone https://github.com/debug-zhuweijian/ai-research-toolkit.git
@@ -61,7 +79,7 @@ cp -rn skills/* ~/.claude/skills/
 cp -rn agents/* ~/.claude/agents/
 ```
 
-### 2. Install Upstream Tools (from their GitHub repos)
+### B. Install Upstream Tools (from their GitHub repos)
 
 Each tool installs independently from its own repository:
 
@@ -70,12 +88,14 @@ Each tool installs independently from its own repository:
 | 1 | paper-search-mcp | [openags/paper-search-mcp](https://github.com/openags/paper-search-mcp) | `pip install paper-search-mcp` |
 | 2 | MinerU | [opendatalab/MinerU](https://github.com/opendatalab/MinerU) | `pip install mineru-mcp-server` |
 | 2 | pdf-mcp | [angshuman/pdf-mcp](https://github.com/angshuman/pdf-mcp) | `git clone` + `npm install` |
+| 2 | MarkItDown | [microsoft/markitdown](https://github.com/microsoft/markitdown) | `pip install markitdown-mcp` |
+| 3 | Sequential Thinking | [modelcontextprotocol/servers](https://github.com/modelcontextprotocol/servers) | `npx @modelcontextprotocol/server-sequential-thinking` |
 | 4 | Graphify | [safishamsi/graphify](https://github.com/safishamsi/graphify) | `pip install graphifyy` |
 | 4 | MemPalace | [MemPalace/mempalace](https://github.com/MemPalace/mempalace) | `conda create` + `pip install` |
 
 See [docs/installation-guide.md](docs/installation-guide.md) for exact commands and verification steps.
 
-### 3. Configure MCP Servers
+### C. Configure MCP Servers
 
 Edit `~/.claude.json` and merge the MCP config:
 
@@ -84,7 +104,7 @@ Edit `~/.claude.json` and merge the MCP config:
 
 Replace all `<YOUR_*>` placeholders with your actual keys and paths.
 
-### 4. Set Up API Keys
+### D. Set Up API Keys
 
 | Key | Source | Required? | Registration |
 |-----|--------|-----------|-------------|
@@ -96,11 +116,16 @@ Replace all `<YOUR_*>` placeholders with your actual keys and paths.
 
 See [docs/api-keys-guide.md](docs/api-keys-guide.md) for detailed registration walkthroughs.
 
-### 5. Verify
+### E. Verify
 
 ```bash
+# macOS / Linux / Git Bash
 ./scripts/verify-setup.sh
 ```
+
+> **Windows users:** Run this script in Git Bash. If `bash` is not available, run the individual verification commands listed in [docs/installation-guide.md](docs/installation-guide.md) manually.
+
+> Stuck? See [docs/troubleshooting.md](docs/troubleshooting.md) for common issues.
 
 ---
 
@@ -115,6 +140,8 @@ You are a new graduate student. Your advisor said "look into graph neural networ
 ```
 > /paper-search search "graph neural networks knowledge distillation" -n 20 -s arxiv,semanticscholar,pubmed
 ```
+
+> **Note:** The arXiv IDs and search results shown below are illustrative. Your actual results will vary.
 
 Expected output (condensed):
 
@@ -166,13 +193,13 @@ The skill invokes MinerU's MCP server, which sends the PDF to OpenXLab for parsi
 Input:  ./downloads/2401.12345.pdf
 Output: Markdown text (below)
 
-Save to: G:\obsidian\base\Zhang2024_Graph_Neural_Networks\Zhang2024_EN.md
+Save to: <OBSIDIAN_VAULT>/base/Zhang2024_Graph_Neural_Networks/Zhang2024_EN.md
 ```
 
 Save the output to a structured directory. The naming convention is `FirstAuthorYear_ShortTitle`:
 
 ```
-G:\obsidian\base\Zhang2024_Graph_Neural_Networks\
+<OBSIDIAN_VAULT>/base/Zhang2024_Graph_Neural_Networks/
 ├── Zhang2024_EN.pdf      ← original PDF
 └── Zhang2024_EN.md       ← converted Markdown
 ```
@@ -181,7 +208,7 @@ For batch conversion of many PDFs:
 
 ```
 > Convert all PDFs in ./downloads/ to Markdown using MinerU.
-  Save results to G:\obsidian\base\<AuthorYear_Title>\<name>.md
+  Save results to <OBSIDIAN_VAULT>/base/<AuthorYear_Title>/<name>.md
 ```
 
 #### Step 4: AI Paper Analysis
@@ -229,7 +256,7 @@ This dispatches parallel sub-agents that each search, read, and write structured
 Output:
 
 ```
-Scanning I:\claude-docs\ for new files...
+Scanning <CLAUDE_DOCS>/ for new files...
   NEW:      3 files
   CHANGED:  0 files
   DUPE:     0 files
@@ -256,7 +283,7 @@ This copies files into the knowledge base, indexes them for semantic search, and
 Example `kb-stats` output:
 
 ```
-Knowledge Base: I:\knowledge\
+Knowledge Base: <KNOWLEDGE_BASE_PATH>
   Documents:    47
   Total nodes:  1384
   Total edges:  1842
@@ -266,7 +293,7 @@ Knowledge Base: I:\knowledge\
 #### Step 6: Generate Knowledge Graph
 
 ```
-> /graphify I:\knowledge\
+> /graphify <KNOWLEDGE_BASE_PATH>
 ```
 
 This builds a navigable knowledge graph with community detection. Output:
@@ -325,7 +352,7 @@ Prepare for group meeting:
 | Synthesize multiple papers | `/deep-research-v5 "research question"` | Long-form report with citations |
 | Scan for new files | `/kb-scan` | New/changed/duplicate file report |
 | Ingest into knowledge base | `/kb-apply` | Indexed documents in knowledge base |
-| Build knowledge graph | `/graphify I:\knowledge\` | Interactive HTML + JSON + audit report |
+| Build knowledge graph | `/graphify <KNOWLEDGE_BASE_PATH>` | Interactive HTML + JSON + audit report |
 | Draft a paper section | `/academic-writing` | Publication-ready prose |
 | Make presentation slides | `/academic-pptx` or `/group-meeting-slides` | `.pptx` slide deck |
 
@@ -400,7 +427,7 @@ See [docs/phase4-knowledge-base.md](docs/phase4-knowledge-base.md) for knowledge
 
 | Key | Source | Free Tier | Required? | Purpose |
 |-----|--------|-----------|-----------|---------|
-| Anthropic (or compatible endpoint) | [console.anthropic.com](https://console.anthropic.com/) or compatible (e.g. ZhiPu BigModel) | Anthropic: $5 free credit; Compatible: varies | **Yes** (either works) | Claude Code core functionality |
+| Anthropic (or compatible endpoint) | [console.anthropic.com](https://console.anthropic.com/) or compatible (e.g. ZhiPu BigModel) | Anthropic: $5 minimum (check site for current pricing); Compatible: varies | **Yes** (either works) | Claude Code core functionality |
 | ZhiPu BigModel | [open.bigmodel.cn](https://open.bigmodel.cn/) | Yes (Generous free tier) | **Yes** | Web search, web reader, document analysis via MCP |
 | MinerU OpenXLab | [mineru.openxlab.org.cn](https://mineru.openxlab.org.cn/) | Yes (1000 pages/day) | **Yes** | PDF to Markdown conversion API |
 
@@ -427,11 +454,12 @@ See [docs/api-keys-guide.md](docs/api-keys-guide.md) for detailed setup instruct
 |------|--------|---------|-------|---------|
 | [paper-search-mcp](https://github.com/openags/paper-search-mcp) | openags | MIT | 1 | `pip install paper-search-mcp` |
 | [paper-proofread](https://github.com/LimHyungTae/awesome-claudecode-paper-proofreading) | LimHyungTae | MIT | 3 | Skill (copy to `~/.claude/skills/`) |
+| [paper-review](skills/paper-review/) | This repo | MIT | 3 | Skill (copy to `~/.claude/skills/`) |
 | [MinerU](https://github.com/opendatalab/MinerU) | OpenDataLab | Apache-2.0 | 2 | `pip install mineru-mcp-server` |
 | [pdf-mcp](https://github.com/angshuman/pdf-mcp) | angshuman | MIT | 2 | `git clone` + `npm install` |
 | [MarkItDown](https://github.com/microsoft/markitdown) | Microsoft | MIT | 2 | `pip install markitdown-mcp` |
 | [Claude Code](https://docs.anthropic.com/en/docs/claude-code) | Anthropic | Commercial | All | `npm i -g @anthropic-ai/claude-code` |
-| [Graphify](https://github.com/safishamsi/graphify) | safishamsi | MIT | 4 | `pip install graphify` |
+| [Graphify](https://github.com/safishamsi/graphify) | safishamsi | MIT | 4 | `pip install graphifyy` |
 | [MemPalace](https://github.com/MemPalace/mempalace) | MemPalace | MIT | 4 | `pip install mempalace` (separate conda env) |
 | [ChromaDB](https://github.com/chroma-core/chroma) | Chroma | Apache-2.0 | 4 | `pip install chromadb` |
 | [Playwright MCP](https://github.com/microsoft/playwright-mcp) | Microsoft | Apache-2.0 | All | `npx @playwright/mcp@latest` |
