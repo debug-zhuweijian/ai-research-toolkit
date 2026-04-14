@@ -1,0 +1,44 @@
+{
+  "_comment": "MCP Server Configuration Template - Minimal (Phase 1-2 core: 3 servers)",
+  "_usage": "Copy into ~/.claude.json under the 'mcpServers' key. Replace all <PLACEHOLDER> values with your actual credentials and paths. This is the minimum set needed to get started with PDF parsing and web search.",
+  "_placeholders": {
+    "<YOUR_MINERU_API_KEY>": "MinerU (OpenXLab) JWT token from https://mineru.openxlab.org.cn/ - sign up and generate an API key in your account settings",
+    "<YOUR_PDF_MCP_PATH>": "Absolute path to pdf-mcp server.js entry point. Install: git clone https://github.com/your-org/pdf-mcp.git into ~/.claude/mcp-servers/, then point to src/server.js, e.g. C:/Users/<you>/.claude/mcp-servers/pdf-mcp/src/server.js",
+    "<YOUR_ZHIPU_API_KEY>": "ZhiPu (BigModel) API key from https://open.bigmodel.cn/ - register and create an API key in the console"
+  },
+  "_prerequisites": {
+    "mineru-mcp": "pip install mineru-mcp-server (or: pipx install mineru-mcp-server). The 'mineru-mcp-server' command must be on PATH.",
+    "pdf-mcp": "Requires Node.js 18+. Clone the pdf-mcp repo and run 'npm install' in its directory. The path in args must point to the built server.js.",
+    "web-search-prime": "No local install needed - this is a remote HTTP MCP server hosted by ZhiPu. Only requires a valid API key."
+  },
+
+  "mcpServers": {
+    "mineru-mcp": {
+      "command": "mineru-mcp-server",
+      "env": {
+        "MINERU_API_KEY": "<YOUR_MINERU_API_KEY>",
+        "NO_PROXY": "cdn-mineru.openxlab.org.cn,*.openxlab.org.cn"
+      },
+      "type": "stdio"
+    },
+
+    "pdf-mcp": {
+      "args": [
+        "/c",
+        "node",
+        "<YOUR_PDF_MCP_PATH>"
+      ],
+      "command": "cmd",
+      "env": {},
+      "type": "stdio"
+    },
+
+    "web-search-prime": {
+      "headers": {
+        "Authorization": "Bearer <YOUR_ZHIPU_API_KEY>"
+      },
+      "type": "http",
+      "url": "https://open.bigmodel.cn/api/mcp/web_search_prime/mcp"
+    }
+  }
+}

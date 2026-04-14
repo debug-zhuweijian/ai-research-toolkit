@@ -1,0 +1,126 @@
+{
+  "_comment": "MCP Server Configuration Template - Full (11 servers: 7 global + 4 project-scoped)",
+  "_usage": "Copy into ~/.claude.json under 'mcpServers' key (global) and projects[\"<path>\"].mcpServers (project-scoped). Replace all <PLACEHOLDER> values with your actual credentials and paths.",
+  "_placeholders": {
+    "<YOUR_ZHIPU_API_KEY>": "ZhiPu (BigModel) API key from https://open.bigmodel.cn/ - used for web-reader, web-search-prime, zread, zai-mcp-server",
+    "<YOUR_MINERU_API_KEY>": "MinerU (OpenXLab) JWT token from https://mineru.openxlab.org.cn/ - used for mineru-mcp",
+    "<YOUR_PDF_MCP_PATH>": "Absolute path to pdf-mcp server.js entry point, e.g. C:/Users/<you>/.claude/mcp-servers/pdf-mcp/src/server.js",
+    "<YOUR_MEMPALACE_PYTHON>": "Absolute path to Python executable in the mempalace conda env, e.g. F:/anaconda/envs/mempalace/python.exe"
+  },
+
+  "mcpServers": {
+    "web-reader": {
+      "headers": {
+        "Authorization": "Bearer <YOUR_ZHIPU_API_KEY>"
+      },
+      "type": "http",
+      "url": "https://open.bigmodel.cn/api/mcp/web_reader/mcp"
+    },
+
+    "web-search-prime": {
+      "headers": {
+        "Authorization": "Bearer <YOUR_ZHIPU_API_KEY>"
+      },
+      "type": "http",
+      "url": "https://open.bigmodel.cn/api/mcp/web_search_prime/mcp"
+    },
+
+    "mempalace": {
+      "args": [
+        "-m",
+        "mempalace.mcp_server"
+      ],
+      "command": "<YOUR_MEMPALACE_PYTHON>",
+      "env": {},
+      "type": "stdio"
+    },
+
+    "zread": {
+      "headers": {
+        "Authorization": "Bearer <YOUR_ZHIPU_API_KEY>"
+      },
+      "type": "http",
+      "url": "https://open.bigmodel.cn/api/mcp/zread/mcp"
+    },
+
+    "pdf-mcp": {
+      "args": [
+        "/c",
+        "node",
+        "<YOUR_PDF_MCP_PATH>"
+      ],
+      "command": "cmd",
+      "env": {},
+      "type": "stdio"
+    },
+
+    "zai-mcp-server": {
+      "args": [
+        "/c",
+        "npx",
+        "-y",
+        "@z_ai/mcp-server"
+      ],
+      "command": "cmd",
+      "env": {
+        "Z_AI_API_KEY": "<YOUR_ZHIPU_API_KEY>",
+        "Z_AI_MODE": "ZHIPU"
+      },
+      "type": "stdio"
+    },
+
+    "mineru-mcp": {
+      "command": "mineru-mcp-server",
+      "env": {
+        "MINERU_API_KEY": "<YOUR_MINERU_API_KEY>",
+        "NO_PROXY": "cdn-mineru.openxlab.org.cn,*.openxlab.org.cn"
+      },
+      "type": "stdio"
+    }
+  },
+
+  "projectMcpServers": {
+    "_comment": "These go under projects[\"<your-project-path>\"] in .claude.json, not at the top level.",
+
+    "drawio": {
+      "args": [
+        "-y",
+        "@drawio/mcp"
+      ],
+      "command": "npx",
+      "env": {},
+      "type": "stdio"
+    },
+
+    "markitdown": {
+      "args": [],
+      "command": "markitdown-mcp",
+      "env": {},
+      "type": "stdio"
+    },
+
+    "playwright": {
+      "args": [
+        "/c",
+        "npx",
+        "-y",
+        "@playwright/mcp@latest"
+      ],
+      "command": "cmd",
+      "env": {},
+      "type": "stdio"
+    },
+
+    "sequential-thinking": {
+      "args": [
+        "/c",
+        "npx",
+        "-y",
+        "@modelcontextprotocol/server-sequential-thinking"
+      ],
+      "command": "cmd",
+      "env": {},
+      "type": "stdio"
+    }
+  }
+}
