@@ -9,6 +9,19 @@ Two-phase LaTeX paper proofreading system based on real conference review standa
 
 Source: [awesome-claudecode-paper-proofreading](https://github.com/LimHyungTae/awesome-claudecode-paper-proofreading) by Hyungtae Lim (ICRA 2025 Outstanding Reviewer).
 
+## CRITICAL: Read Reference Files Before Execution
+
+This skill has TWO reference files containing the detailed review rules with ✅/❌ judgment examples.
+**You MUST read both files before running any checks.** The bullet points below are summaries only — the reference files contain the actual judgment criteria.
+
+```
+Read these files FIRST:
+- references/01_latex_workspace_review.md  (for workspace/full mode)
+- references/02_paper_proofreading.md      (for content/full mode)
+```
+
+If the reference files are missing, tell the user that the full review instructions are unavailable rather than proceeding with only the summaries in this file.
+
 ## When To Use
 
 Invoke when the user asks to:
@@ -18,15 +31,21 @@ Invoke when the user asks to:
 - audit LaTeX preamble, references, labels, figures
 - find grammar/notation/claim issues in a paper
 
+## Mode Selection
+
+Ask the user for mode if not specified:
+
+| Mode | Scope | When |
+|------|-------|------|
+| `workspace` | LaTeX infrastructure audit (C1-C9) | Preamble, packages, macros, refs, labels, figures |
+| `content` | Paper content proofreading (A-I) | Grammar, claims, structure, notation, captions |
+| `full` | Workspace first, then content | **Recommended before submission** |
+
 ## Required Input
 
-Ask the user for:
 1. **Root `.tex` file** (e.g., `main.tex`) — mandatory
-2. **Compiled PDF** (optional, for content proofreading pass)
-3. **Mode selection** (ask if unclear):
-   - `workspace` — LaTeX infrastructure audit only
-   - `content` — paper content proofreading only
-   - `full` — workspace audit first, then content proofreading (recommended before submission)
+2. **Compiled PDF** (optional, for content mode — enables figure placement + leftover annotation checks)
+3. If mode is unclear, **ask**.
 
 ## File Reading Protocol
 
@@ -35,9 +54,11 @@ Before running any checks, **silently** read the full workspace:
 1. Read the root `.tex` file
 2. Resolve every `\input{...}` and `\include{...}` recursively
 3. Read shared preamble/macro files: `shortcuts.tex`, `macros.tex`, `commands.tex`, `preamble.tex`
-4. Read every referenced `.bib` file
-5. Check referenced figures for missing assets (workspace mode)
-6. If PDF is provided, use it for figure placement and leftover annotations (content mode)
+4. Read shared symbol files: `preamble_symbols.tex`, `preamble_packages.tex` (in `../references/` if workspace uses shared folder)
+5. Read every referenced `.bib` file
+6. Check `figures/` directory for missing assets (workspace mode)
+7. Distinguish `figures/` (final manuscript figures) from `pics/` (raw sources — do NOT flag for missing .tex references)
+8. If PDF is provided, use it for figure placement and leftover annotations (content mode)
 
 **Never review only the top-level file** unless the user explicitly narrows scope.
 
@@ -45,175 +66,108 @@ Before running any checks, **silently** read the full workspace:
 
 ### Phase 1: Detection Only
 
-**CRITICAL: Do NOT modify any files in Phase 1.**
+**CRITICAL: Do NOT modify any files in Phase 1. Do NOT rewrite paragraphs. Do NOT apply style changes proactively.**
 
 - Report all findings with unique IDs: `[1]`, `[2]`, `[3]`...
-- For each finding include: severity, location (file + line), diagnosis, impact, fix direction
+- For each finding include: severity, location (file + line), diagnosis, why it matters, actionable fix direction
 - Severity levels: `CRITICAL` | `MAJOR` | `MINOR` | `STYLE`
-- If nothing is wrong, say so clearly
+- If nothing is wrong, say so clearly and mention remaining limits (missing PDF, missing bib files, etc.)
 
 After Phase 1 output, **stop and wait** for user decision.
 
 ### Phase 2: Approved Fixes Only
 
-Only edit files after explicit user approval such as:
-- `fix safe` — typos, duplicate words, clear grammar errors only
-- `fix all critical` — CRITICAL issues only
-- `fix 1, 3, 5` — specific issue numbers
-- `fix all` — everything
-- `discard 3, 7` — skip specific issues
+Only edit files after explicit user approval:
+
+| Command | Action |
+|---------|--------|
+| `fix safe` | Only definite typos, duplicate words, clear grammar errors |
+| `fix all critical` | Only CRITICAL issues |
+| `fix 1, 3, 5` | Specific issue numbers |
+| `fix all` | All issues |
+| `discard 3, 7` | Skip specific issues |
 
 When fixing:
-- Apply only approved fixes
+- Apply **only** approved fixes
 - Keep edits minimal and localized
 - Preserve meaning, notation, and LaTeX structure
 - Do NOT silently fix unapproved neighboring issues
+- After edits, summarize what changed and note anything intentionally left untouched
 
-## Workspace Audit Checklist
+## Editing Constraints
 
-Run these checks in `workspace` or `full` mode:
+When applying fixes in Phase 2:
+- **No em dashes** (`—`) in rewritten prose — use comma, colon, semicolon, or restructure
+- Prefer precise, concrete wording over vague intensifiers
+- Do not change scientific claims unless user explicitly asks
+- Preserve LaTeX structure, labels, and macros where possible
+- Avoid introducing new terminology unless required for consistency
+
+## Workspace Audit Checklist (C1-C9)
+
+> These are summaries. **Read `references/01_latex_workspace_review.md` for full rules with examples.**
 
 ### C1 — Preamble Configuration
-- Duplicate/conflicting/unused/missing packages
-- `cleveref` setup: `[nameinlink,capitalize]` options
-- `hyperref` setup: `colorlinks=true, allcolors=blue`
-- `caption` setup: consistent `font=footnotesize` and label format
-- Math packages: `amsmath`, `mathtools`, `bm`
-- Algorithm environment conflicts
+Duplicate/conflicting/unused/missing packages. cleveref `[nameinlink,capitalize]` options. hyperref colorlinks. caption font consistency. Math packages (`amsmath`, `mathtools`, `bm`). Algorithm environment conflicts.
 
-### C2 — Package Load Order
-- `hyperref` before `cleveref`
-- `amsmath` before `mathtools`
-- `xcolor` before `tikz`
-- `caption` before `subcaption`
-- Flag `subfig` + `subcaption` conflict, `epsfig` redundancy
+### C2 — Package Load Order & Conflicts
+`hyperref`→`cleveref`. `amsmath`→`mathtools`. `xcolor`→`tikz`. `caption`→`subcaption`. Flag `subfig`+`subcaption` conflict, `epsfig` redundancy, `\usepackage{times}/pslatex`.
 
 ### C3 — Macro Safety & Naming Consistency
-- `\methodname`, `\ours` defined exactly once, used consistently
-- No hardcoded method names alongside macros
-- `\xspace` on text-mode macros
-- `\etalcite` defined and used correctly
-- Subscript consistency: `_{\text{pred}}` appearing 3+ times should be a macro
+`\methodname` defined once, used consistently, no hardcoded strings. `\xspace` on text-mode macros. `\etalcite` defined and used with `~` + plural verb. Subscript macros for repeated patterns. Shared symbol conflicts between local and shared preamble files. `\renewcommand` flagged as intentional or accidental.
 
 ### C4 — Cross-Reference Consistency
-- `\Cref{}` vs `\ref{}` vs hardcoded `Fig.` — standardize
-- Multi-reference grouping: `\Cref{fig:a,fig:b}` not `\Cref{fig:a} and \Cref{fig:b}`
-- Subfigure format: `Fig. 1(a)` not `Fig. 1a`
-- `\renewcommand\thesubfigure{(\alph{subfigure})}` present
+`\Cref{}` standardization. Multi-reference grouping. Subfigure format `5(a)` with `\renewcommand\thesubfigure`. Forward references minimized. `~` spacing before `\Cref{}`.
 
 ### C5 — Label Naming Convention
-- Consistent prefixes: `fig:`, `tab:`, `eq:`, `sec:`, `alg:`, `app:`
-- No duplicate labels
-- No unreferenced labels
-- No dangling `\ref{}` calls
+Prefixes: `fig:`, `tab:`, `eq:`, `sec:`, `alg:`, `app:`. No duplicate labels. No unreferenced labels. No dangling `\ref{}` calls.
 
 ### C6 — Citation & Bibliography
-- Cited keys missing from `.bib`
-- Unused `.bib` entries
-- Duplicate BibTeX keys across files
-- arXiv formatting inconsistency
-- Missing required fields
-- Non-breaking space `~` before `\cite{}`
+Cited keys in bib. Unused bib entries. Duplicate BibTeX keys across files. arXiv formatting. Missing required fields. Venue abbreviation consistency. `~` before `\cite{}`.
 
 ### C7 — Figure & Table Safety
-- Missing figure files referenced in `\includegraphics{}`
-- Dummy/placeholder figures
-- Absolute paths in `\includegraphics`
-- Label placement (inside `\caption{}` or before it, not after)
-- Unreferenced figures/tables
-- Missing size specifications
+Missing figure files. Dummy/placeholder figures. Absolute paths. Label placement (inside `\caption{}` or before, NOT after). Unreferenced figures/tables. Missing size specs. `\hline` vs booktabs. Decimal alignment (`siunitx` S columns).
 
 ### C8 — Hidden Human Errors
-- `TODO`, `XXX`, `FIXME`, `TBD`, `???`, `[CITE]`, `[REF]`, `[FILL]`
-- Inconsistent method/dataset/metric naming capitalization
-- Default template content not replaced
-- Double spaces, missing `~` before `\cite`/`\ref`
-- Excessive `\vspace{-Xmm}` hacks
+`TODO`, `XXX`, `FIXME`, `TBD`, `???`, `[CITE]`, `[REF]`, `[FILL]`, `\tobeupdated`. Inconsistent method/dataset/metric naming. Default template content. `\journalVersion{}` non-empty. `deprecated/` folder still `\input`-ted. Double spaces. Missing `~`. Hard-coded `\\` in prose. `\vspace{-Xmm}` accumulated total.
 
 ### C9 — Academic Writing (LaTeX-Detectable)
-- Unit formatting: `10\,cm` not `10cm`
-- Number formatting: `10,000` not `10000`
-- `\ie`/`\eg` macros used instead of bare `i.e.`/`e.g.`
-- `state-of-the-art` hyphenation consistency
-- Acronym first-use expansion
-- Sentence-level patterns: starting with "And", "But", "Or"
+Unit formatting (`\,`). Thousand separators. `\ie`/`\eg` macros (define if missing). `state-of-the-art` noun vs adjective. Acronym first-use in abstract AND body separately. Sentences starting with "And", "But", "Or". "etc." in formal prose. Figure reference order vs document position.
 
-## Content Proofreading Checklist
+## Content Proofreading Checklist (A-I)
 
-Run these checks in `content` or `full` mode:
+> These are summaries. **Read `references/02_paper_proofreading.md` for full rules with examples.**
 
 ### A — Language & Grammar
-- Grammar errors (subject-verb agreement, articles, prepositions)
-- Tense inconsistency (present for facts, past for experiments)
-- Related Work tense: present preferred, flag mixing
-- Coordinating conjunction sentence starters
-- Missing Oxford comma, comma splices
+Subject-verb agreement. Articles. Prepositions. Tense consistency (present for facts/contributions, past for experiments). Related Work tense (present preferred; flag only mixing). Oxford comma. Comma splices.
 
-### B — Language Quality
-- Typos and spelling errors → **CRITICAL**
-- Duplicate words ("the the") → **CRITICAL**
-- Nominalization: prefer direct verbs over noun-heavy phrasing
-- Redundant expressions: "In order to" → "To", "due to the fact that" → "because"
-- Citation-as-noun: use `Author~\etalcite{#}` not bare `[3]` as subject
-- Circular descriptions
+### B — Language Quality & Awkward Expression
+Typos/spelling → **CRITICAL**. Duplicate words → **CRITICAL**. Nominalization (prefer direct verbs). Redundant expressions ("In order to"→"To"). Citation-as-noun (use `Author~\etalcite{#}`). Circular descriptions. Verb choice ("suggest"→"propose"/"investigate"/"present").
 
 ### C — Scientific Clarity & Claims
-- Overclaiming: every "significantly" needs a statistical test
-- "outperform"/"superior"/"state-of-the-art" — verify across all metrics
-- Causal logic gaps
-- Variables used before definition
-- Claims in figure captions
-- "Only a few works..." contradicted by long citation list
+Every "significantly" needs statistical test or quantitative alternative. "outperform"/"superior"/"state-of-the-art" verified across all metrics. Causal logic gaps. Variables used before definition. Claims in figure captions. "Only a few works..." contradicted by citation list. Scope-limiting language without justification.
 
 ### D — Structure & Flow
-- Introduction has dedicated contribution paragraph
-- Related Work is standalone section (not merged into intro)
-- Related Work cites 15-25 papers for 6-8 page conference paper
-- Related Work includes at least one comparison to this work
-- Equations not re-explained in ablation (use cross-reference)
-- Every experiment opens with WHY/WHAT/HOW statement
-- No verbatim copy of contribution list from intro to conclusion
+**Introduction**: dedicated contribution paragraph. **Related Work**: standalone section (CRITICAL if merged into intro), 15-25 papers for 6-8 page paper, at least one comparison to this work (MAJOR if none). **Method**: equation references with narrative context. **Experiments**: each opens with WHY/WHAT/HOW statement, claim coverage verified, most impressive first. **General**: no repetition across sections, no verbatim intro→conclusion copy, ablation cross-references method section.
 
 ### E — Figure, Table & Caption Review
-- Captions are self-contained (abbreviations defined, baselines cited)
-- Caption grammatical completeness
-- Font size consistency in figures vs caption
-- Thousand separators in axis tick labels
-- Bold/underline convention for best values defined in caption
-- Quantitative consistency: text numbers match table/figure data → **CRITICAL if mismatch**
-- Figure/table reference order is sequential
+**Captions**: grammatically complete, self-contained (abbreviations defined, baselines cited with `\cite{}`, datasets named), no body text duplication, period at end. **Figures**: font size consistent with caption (`\footnotesize`), tick labels legible, thousand separators in axis ticks, no excessive whitespace. **Tables**: bold/underline convention defined in caption, consistent metric names, units in headers. **Reference order**: sequential ascending. **Quantitative consistency**: text numbers match table/figure data exactly → **CRITICAL if mismatch**.
 
 ### F — LaTeX Formatting
-- Thin space before units: `5\,m`
-- Thousand separators for integers ≥ 1000
-- Consistent figure reference style
-- `\ie`/`\eg` macros, not bare text
-- `et al.` with period
-- Non-breaking space before `\cite`/`\ref`
+Thin space before units (`\,`). Thousand separators for integers ≥1000 (NOT decimals). Consistent figure reference style. `\ie`/`\eg` macros. `et al.` with period. `~` before `\cite`/`\ref`. `state-of-the-art` consistency.
 
-### G — Abstract & Conclusion
-- Abstract follows WHY → PROBLEM → HOW → RESULTS
-- Acronyms expanded in abstract
-- No citations in abstract → **CRITICAL**
-- Single paragraph abstract
-- Conclusion not verbatim restatement of abstract
-- Future work is specific, not vague
+### G — Abstract & Conclusion Quality
+**Abstract**: WHY(1-2 sentences)→PROBLEM(1 sentence)→HOW&WHAT(~3 sentences)→RESULTS(1 sentence). Acronyms expanded within abstract. Zero `\cite{}` → **CRITICAL**. Single paragraph → **CRITICAL if broken**. **Conclusion**: not verbatim abstract restatement. Limitations acknowledged. Future work specific with grounding sentence.
 
 ### H — Notation Consistency
-- Symbol overload detection (same letter, different meanings)
-- Different symbols for same concept across sections
-- Vector/matrix boldface consistency (`\mathbf{}`)
-- Coordinate frame notation consistency
-- Term capitalization consistency
+Symbol overload detection (build symbol table across all equations). Different symbols for same concept. Vector/matrix boldface (`\mathbf{}`). Greek vectors (`\boldsymbol{}`). Coordinate frame notation consistent subscript order. Superscript semantic consistency. Term capitalization consistency.
 
-### I — Hyphenation
-- Compound adjective before noun: hyphenate ("real-time system")
-- Adverb (-ly) + adjective: NEVER hyphenate ("tightly coupled" not "tightly-coupled")
-- Common errors: "end-to-end", "state-of-the-art" as adjective
+### I — Hyphenation Consistency
+**Rule 1**: Compound adjective before noun → hyphenate (real-time system). **Rule 2**: -ly adverb + adjective → NEVER hyphenate (tightly coupled, NOT tightly-coupled). Common robotics/CV patterns: "end-to-end", "state-of-the-art", "deep learning" (noun phrase, not hyphenated as adjective).
 
 ## Output Format
 
-### Workspace Audit Output
+### For Workspace Audit
 
 ```
 ## LaTeX Workspace Audit Results
@@ -224,27 +178,30 @@ Run these checks in `content` or `full` mode:
 ### Issues by File
 
 **`main.tex`**
-[1]  L.53   Description | Fix direction
+[1]  L.53   Description | Impact / Suggested fix
 
 **`shortcuts.tex`**
-[2]  L.14   Description | Fix direction
+[2]  L.14   Description | Impact / Suggested fix
 
 ### Issues by Severity
 
 CRITICAL
-  [N]  File — summary
+  [N]  File — brief summary
 
 MAJOR
-  [N]  File — summary
+  [N]  File — brief summary
 
 MINOR
-  [N]  File — summary
+  [N]  File — brief summary
 
 STYLE
-  [N]  File — summary
+  [N]  File — brief summary
+
+### Infrastructure Suggestions
+[Workspace-level recommendations not tied to a specific file]
 ```
 
-### Content Proofreading Output
+### For Content Proofreading
 
 ```
 ## Paper Proofreading Results
@@ -267,13 +224,16 @@ Most common problems:
 ### Caption Review
 | # | Figure/Table | Issue | Suggestion |
 
-### Formatting Patterns
-| # | Pattern | Example | Fix |
+### LaTeX Formatting Patterns
+| # | Pattern | Example Found | Suggested Fix |
+
+### Optional Polishing Suggestions
+[High-level structural improvements only]
 ```
 
 ### Phase 1 Complete Message
 
-After outputting all findings, always end with:
+After outputting ALL findings, always end with:
 
 ```
 ---
@@ -288,11 +248,3 @@ Reply with one of:
 
 **No files will be modified until you confirm.**
 ```
-
-## Editing Constraints
-
-When applying fixes in Phase 2:
-- No em dashes in rewritten prose
-- Prefer precise wording over vague intensifiers
-- Do not change scientific claims unless user explicitly asks
-- Preserve LaTeX structure, labels, and macros
