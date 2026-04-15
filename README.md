@@ -402,7 +402,7 @@ See [docs/phase2-pdf-to-markdown.md](docs/phase2-pdf-to-markdown.md) for backend
 | Tool | GitHub / Source | Type |
 |------|----------------|------|
 | paper-review | This repo `skills/paper-review/` | Skill |
-| paper-proofread | [LimHyungTae/awesome-claudecode-paper-proofreading](https://github.com/LimHyungTae/awesome-claudecode-paper-proofreading) | Skill |
+| paper-proofread | This repo `skills/paper-proofread/` + [upstream](https://github.com/LimHyungTae/awesome-claudecode-paper-proofreading) | Skill (3 files) |
 | deep-research-v5 | This repo `skills/deep-research-v5/` | Skill (9 files) |
 | academic-writing | This repo `skills/academic-writing/` | Skill |
 | academic-pptx | This repo `skills/academic-pptx/` | Skill |
@@ -412,9 +412,9 @@ See [docs/phase2-pdf-to-markdown.md](docs/phase2-pdf-to-markdown.md) for backend
 | web-reader | [ZhiPu BigModel](https://open.bigmodel.cn) | MCP |
 | zai-mcp-server | [@z_ai/mcp-server](https://www.npmjs.com/package/@z_ai/mcp-server) | MCP |
 
-Single-paper review extracts research question, method, evidence quality, limitations, and what you can reuse. **Paper proofreading** provides two-phase LaTeX workspace audit and conference-level content review (ICRA/CVPR/NeurIPS standards), detecting issues first and fixing only after user approval. Multi-paper deep research dispatches parallel sub-agents. Academic writing skill handles drafting, polishing, and reviewer responses.
+Single-paper review extracts research question, method, evidence quality, limitations, and what you can reuse. **Paper proofreading** provides two-phase LaTeX workspace audit (9 checks: preamble, macros, labels, citations, figures) and conference-level content review (9 categories: grammar, claims, structure, notation, hyphenation) based on ICRA 2025 Outstanding Reviewer standards. Includes 1105 lines of detailed ✅/❌ judgment criteria in reference files. Detects issues first, fixes only after user approval. Multi-paper deep research dispatches parallel sub-agents. Academic writing skill handles drafting, polishing, and reviewer responses.
 
-**Usage**: `/paper-proofread main.tex` (workspace mode) or `/paper-proofread main.tex paper.pdf` (full mode)
+**Usage**: `/paper-proofread` then specify mode (`workspace` / `content` / `full`) and root `.tex` file
 
 See [docs/phase3-ai-analysis-writing.md](docs/phase3-ai-analysis-writing.md) for analysis templates, writing workflows, and slide design patterns.
 
@@ -464,7 +464,7 @@ See [docs/api-keys-guide.md](docs/api-keys-guide.md) for detailed setup instruct
 | Tool | Source | License | Phase | Install |
 |------|--------|---------|-------|---------|
 | [paper-search-mcp](https://github.com/openags/paper-search-mcp) | openags | MIT | 1 | `pip install paper-search-mcp` |
-| [paper-proofread](https://github.com/LimHyungTae/awesome-claudecode-paper-proofreading) | LimHyungTae | MIT | 3 | Skill (copy to `~/.claude/skills/`) |
+| [paper-proofread](skills/paper-proofread/) | This repo + [LimHyungTae](https://github.com/LimHyungTae/awesome-claudecode-paper-proofreading) | MIT | 3 | Skill (copy to `~/.claude/skills/`) |
 | [paper-review](skills/paper-review/) | This repo | MIT | 3 | Skill (copy to `~/.claude/skills/`) |
 | [MinerU](https://github.com/opendatalab/MinerU) | OpenDataLab | Apache-2.0 | 2 | `pip install mineru-mcp-server` |
 | [pdf-mcp](https://github.com/angshuman/pdf-mcp) | angshuman | MIT | 2 | `git clone` + `npm install` |

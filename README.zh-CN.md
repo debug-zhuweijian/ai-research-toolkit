@@ -402,7 +402,7 @@ graphify-out/
 | 工具 | GitHub / 来源 | 类型 |
 |------|---------------|------|
 | paper-review | 本仓库 `skills/paper-review/` | Skill |
-| paper-proofread | [LimHyungTae/awesome-claudecode-paper-proofreading](https://github.com/LimHyungTae/awesome-claudecode-paper-proofreading) | Skill |
+| paper-proofread | 本仓库 `skills/paper-proofread/` + [上游](https://github.com/LimHyungTae/awesome-claudecode-paper-proofreading) | Skill（3 个文件） |
 | deep-research-v5 | 本仓库 `skills/deep-research-v5/` | Skill（9 个文件） |
 | academic-writing | 本仓库 `skills/academic-writing/` | Skill |
 | academic-pptx | 本仓库 `skills/academic-pptx/` | Skill |
@@ -412,9 +412,9 @@ graphify-out/
 | web-reader | [智谱 BigModel](https://open.bigmodel.cn) | MCP |
 | zai-mcp-server | [@z_ai/mcp-server](https://www.npmjs.com/package/@z_ai/mcp-server) | MCP |
 
-单篇论文审阅提取研究问题、方法、证据质量、局限性和可复用内容。**论文校对**提供两阶段 LaTeX 工作空间审计和会议级内容审查（ICRA/CVPR/NeurIPS 标准），先检测问题，用户确认后再修复。多论文深度调研派发并行子代理。学术写作 Skill 处理起草、润色和审稿回复。
+单篇论文审阅提取研究问题、方法、证据质量、局限性和可复用内容。**论文校对**提供两阶段 LaTeX 工作空间审计（9 项检查：preamble、宏、标签、引用、图表）和会议级内容审查（9 大类：语法、声明、结构、符号、连字符），基于 ICRA 2025 Outstanding Reviewer 审稿标准。包含 1105 行详细 ✅/❌ 判定规则。先检测问题，用户确认后再修复。多论文深度调研派发并行子代理。学术写作 Skill 处理起草、润色和审稿回复。
 
-**用法**：`/paper-proofread main.tex`（workspace 模式）或 `/paper-proofread main.tex paper.pdf`（full 模式）
+**用法**：`/paper-proofread`，然后指定模式（`workspace` / `content` / `full`）和根 `.tex` 文件
 
 分析模板、写作工作流和幻灯片设计模式见 [docs/phase3-ai-analysis-writing.md](docs/phase3-ai-analysis-writing.md)。
 
@@ -464,7 +464,7 @@ graphify-out/
 | 工具 | 来源 | 许可证 | 阶段 | 安装 |
 |------|------|--------|------|------|
 | [paper-search-mcp](https://github.com/openags/paper-search-mcp) | openags | MIT | 1 | `pip install paper-search-mcp` |
-| [paper-proofread](https://github.com/LimHyungTae/awesome-claudecode-paper-proofreading) | LimHyungTae | MIT | 3 | Skill（复制到 `~/.claude/skills/`） |
+| [paper-proofread](skills/paper-proofread/) | 本仓库 + [LimHyungTae](https://github.com/LimHyungTae/awesome-claudecode-paper-proofreading) | MIT | 3 | Skill（复制到 `~/.claude/skills/`） |
 | [paper-review](skills/paper-review/) | 本仓库 | MIT | 3 | Skill（复制到 `~/.claude/skills/`） |
 | [MinerU](https://github.com/opendatalab/MinerU) | OpenDataLab | Apache-2.0 | 2 | `pip install mineru-mcp-server` |
 | [pdf-mcp](https://github.com/angshuman/pdf-mcp) | angshuman | MIT | 2 | `git clone` + `npm install` |
