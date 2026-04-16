@@ -2,12 +2,24 @@
 
 All notable changes to this project will be documented in this file.
 
+## [unreleased]
+
+### Added
+
+- Restructured Acknowledgments into 4 categories (Skill Sources, MCP Servers, Zotero Ecosystem, Special Thanks)
+- Added 9 missing upstream project credits (AI-Research-SKILLs, academic-research-skills, anthropics/skills, a-evolve, writing-anti-ai, DeerFlow, drawio-mcp, Context7, langsmith-fetch-skill)
+- Full audit of 26 git-project repos against README credits (10 credited, 1 missing fixed, 15 unrelated)
+
+### Fixed
+
+- Reordered CHANGELOG to follow Keep a Changelog convention (`[unreleased]` at top)
+
 ## [0.2.0-beta] - 2026-04-17
 
 ### Added
 
 - Japanese (README.ja.md) and Korean (README.ko.md) README translations
-- Complete README rewrite with detailed usage walkthrough, tool map, API keys guide
+- Complete README rewrite (EN + ZH) with detailed usage walkthrough, tool map, API keys guide
 - Mermaid 7-phase pipeline diagram
 - LibreOffice and Poppler to prerequisites
 - International alternatives for non-Chinese users (Tavily, Brave Search, etc.)
@@ -44,41 +56,31 @@ All notable changes to this project will be documented in this file.
 - 14 DeepScientist agents → `experimental/deepscientist/`
 - Old `deep-research.md` agent → `experimental/`
 
-## [unreleased]
-
-### 🚀 Features
+### Added
 
 - Initial release of ai-research-toolkit
 - Add paper-proofread skill + remove Anthropic key requirement
 - Upgrade paper-proofread skill with full reference checklists
+- Complete paper-search-mcp API key configuration guide
+- Add GitHub links to all phase tool tables
+- Replace domain-specific examples with generic ones
+- Add comprehensive installation guide (8-step, 2-3 hours)
+- Add bilingual README with language toggle (EN + 中文)
+- Add DeepWiki, MIT license, Zread badges to bilingual READMEs
+- Center title with badges and language toggle
+- Add version control design spec (git-cliff + SemVer)
+- Add version control implementation plan (6 tasks)
+- Add git-cliff configuration for CHANGELOG generation
 
-### 🐛 Bug Fixes
+### Fixed
 
 - Replace all hardcoded local paths with placeholders in docs
 - Remove spurious dot in Mermaid diagram (.deep-research-v5 → deep-research-v5)
 - Translate Chinese text in EN README + dark mode Mermaid theme
 - Correct Python version check regex, update stale env var names and paths
+- Fix README quality issues (hardcoded paths, missing tools, TOC)
+- Update paper-proofread description in bilingual READMEs
 
-### ♻️ Refactor
+### Changed
 
 - Deduplicate XSD schemas into shared-schemas/
-
-### 📚 Documentation
-
-- Complete paper-search-mcp API key configuration guide
-- Add GitHub links to all phase tool tables
-- Replace domain-specific examples with generic ones
-- Add comprehensive installation guide (8-step, 2-3 hours)
-- Fix README quality issues (hardcoded paths, missing tools, TOC)
-- Add bilingual README with language toggle (EN + 中文)
-- Add DeepWiki badge to bilingual READMEs
-- Add MIT license badge to bilingual READMEs
-- Center title with badges and language toggle
-- Add Zread badge to bilingual READMEs
-- Update paper-proofread description in bilingual READMEs
-- Add version control design spec (git-cliff + SemVer)
-- Add version control implementation plan (6 tasks)
-
-### 🔧 Miscellaneous
-
-- Add git-cliff configuration for CHANGELOG generation
