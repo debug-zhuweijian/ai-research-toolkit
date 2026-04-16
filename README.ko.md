@@ -679,21 +679,40 @@ graphify-out/
 
 본 툴킷은 다음의 우수한 오픈소스 프로젝트를 기반으로 구축되었습니다:
 
+### 스킬 및 에이전트 출처
+
+- **[AI-Research-SKILLs](https://github.com/orchestra-research/AI-Research-SKILLs)** by orchestra-research -- 문헌 리뷰, 실험 설계, 데이터 분석, 논문 작성을 아우르는 93개 이상의 연구 스킬 출처
+- **[academic-research-skills](https://github.com/Imbad0202/academic-research-skills)** by Imbad0202 -- deep-research, academic-paper, academic-paper-reviewer, academic-pipeline 스킬의 출처
+- **[anthropics/skills](https://github.com/anthropics/skills)** by Anthropic -- 문서 처리 스킬(pdf, docx, xlsx, pptx)의 출처
+- **[a-evolve](https://github.com/A-EVO-Lab/a-evolve)** by A-EVO-Lab -- 진화 최적화 스킬 a-evolve의 출처
+- **[writing-anti-ai](https://github.com/gaoruizhang/writing-anti-ai)** by gaoruizhang -- 학술 작문을 위한 AI 감지 회피 스킬
+
+### MCP 서버 및 인프라
+
 - **[MinerU](https://github.com/opendatalab/MinerU)** by OpenDataLab -- 레이아웃 분석 및 OCR이 포함된 고정밀 PDF 파싱
 - **[paper-search-mcp](https://github.com/openags/paper-search-mcp)** by openags -- 20개 이상의 학술 데이터베이스 통합 검색
-- **[awesome-claudecode-paper-proofreading](https://github.com/LimHyungTae/awesome-claudecode-paper-proofreading)** by Hyungtae Lim -- 학회 수준 리뷰 기준을 적용한 2단계 LaTeX 논문 교정
 - **[Graphify](https://github.com/safishamsi/graphify)** by safishamsi -- 문서 컬렉션에서 지식 그래프 생성
 - **[MemPalace](https://github.com/MemPalace/mempalace)** -- 지식 그래프 지원이 포함된 영구 시맨틱 메모리
 - **[ChromaDB](https://github.com/chroma-core/chroma)** -- 시맨틱 검색을 위한 오픈소스 임베딩 데이터베이스
 - **[pdf-mcp](https://github.com/angshuman/pdf-mcp)** by angshuman -- PDF 조작 작업을 위한 MCP 서버
 - **[MarkItDown](https://github.com/microsoft/markitdown)** by Microsoft -- Office 형식의 문서를 Markdown으로 변환
 - **[Playwright MCP](https://github.com/microsoft/playwright-mcp)** by Microsoft -- 웹 기반 연구를 위한 브라우저 자동화
+- **[drawio-mcp](https://github.com/nicholaschenai/drawio-mcp)** by nicholaschenai -- Draw.io 다이어그램 생성용 MCP 서버
+- **[Context7](https://github.com/nicholaschenai/context7)** by nicholaschenai -- 모든 라이브러리의 최신 문서 검색
+- **[langsmith-fetch-skill](https://github.com/OthmanAdi/langsmith-fetch-skill)** by OthmanAdi -- 추적 및 평가를 위한 LangSmith 통합
 - **[Sequential Thinking MCP](https://github.com/modelcontextprotocol/servers)** -- 복잡한 분석을 위한 구조화된 다단계 추론
+
+### Zotero 생태계
+
 - **[Zotero](https://github.com/zotero/zotero)** -- 무료 오픈소스 참고문헌 관리자
 - **[Jasminum](https://github.com/l0o0/jasminum)** by l0o0 -- 중국 학술 데이터베이스를 위한 Zotero 플러그인
 - **[translators_CN](https://github.com/l0o0/translators_CN)** by l0o0 -- Zotero용 중국어 번역기 플러그인
 - **[zotero-mcp](https://github.com/MushroomCatKinsh/zotero-mcp)** by MushroomCatKinsh -- Zotero 통합을 위한 MCP 서버
 - **[arxiv-latex-mcp](https://github.com/dvai-lab/arxiv-latex-mcp)** by dvai-lab -- 정확한 수식 해석을 위한 arXiv LaTeX 소스 검색
+
+### 특별 감사
+
+- **[awesome-claudecode-paper-proofreading](https://github.com/LimHyungTae/awesome-claudecode-paper-proofreading)** by Hyungtae Lim -- 학회 수준 리뷰 기준을 적용한 2단계 LaTeX 논문 교정
 
 ---
 

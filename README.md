@@ -679,21 +679,40 @@ See [CHANGELOG.md](CHANGELOG.md) for full details.
 
 This toolkit stands on the shoulders of excellent open-source projects:
 
+### Skill & Agent Sources
+
+- **[AI-Research-SKILLs](https://github.com/orchestra-research/AI-Research-SKILLs)** by orchestra-research -- Origin of 93+ research skills covering literature review, experiment design, data analysis, and paper writing
+- **[academic-research-skills](https://github.com/Imbad0202/academic-research-skills)** by Imbad0202 -- Origin of deep-research, academic-paper, academic-paper-reviewer, and academic-pipeline skills
+- **[anthropics/skills](https://github.com/anthropics/skills)** by Anthropic -- Origin of document-skills (pdf, docx, xlsx, pptx) for format conversion
+- **[a-evolve](https://github.com/A-EVO-Lab/a-evolve)** by A-EVO-Lab -- Origin of the a-evolve skill for evolutionary optimization
+- **[writing-anti-ai](https://github.com/gaoruizhang/writing-anti-ai)** by gaoruizhang -- Anti-AI-detection writing skill for academic drafts
+
+### MCP Servers & Infrastructure
+
 - **[MinerU](https://github.com/opendatalab/MinerU)** by OpenDataLab -- High-accuracy PDF parsing with layout analysis and OCR
 - **[paper-search-mcp](https://github.com/openags/paper-search-mcp)** by openags -- Unified search across 20+ academic databases
-- **[awesome-claudecode-paper-proofreading](https://github.com/LimHyungTae/awesome-claudecode-paper-proofreading)** by Hyungtae Lim -- Two-phase LaTeX paper proofreading with conference-level review standards
 - **[Graphify](https://github.com/safishamsi/graphify)** by safishamsi -- Knowledge graph generation from any document collection
 - **[MemPalace](https://github.com/MemPalace/mempalace)** -- Persistent semantic memory with knowledge graph support
 - **[ChromaDB](https://github.com/chroma-core/chroma)** -- Open-source embedding database for semantic search
 - **[pdf-mcp](https://github.com/angshuman/pdf-mcp)** by angshuman -- MCP server for PDF manipulation operations
 - **[MarkItDown](https://github.com/microsoft/markitdown)** by Microsoft -- Document-to-Markdown conversion for Office formats
 - **[Playwright MCP](https://github.com/microsoft/playwright-mcp)** by Microsoft -- Browser automation for web-based research
+- **[drawio-mcp](https://github.com/nicholaschenai/drawio-mcp)** by nicholaschenai -- MCP server for Draw.io diagram creation
+- **[Context7](https://github.com/nicholaschenai/context7)** by nicholaschenai -- Up-to-date documentation retrieval for any library
+- **[langsmith-fetch-skill](https://github.com/OthmanAdi/langsmith-fetch-skill)** by OthmanAdi -- LangSmith integration for tracing and evaluation
 - **[Sequential Thinking MCP](https://github.com/modelcontextprotocol/servers)** -- Structured multi-step reasoning for complex analysis
+
+### Zotero Ecosystem
+
 - **[Zotero](https://github.com/zotero/zotero)** -- Free, open-source reference manager
 - **[Jasminum](https://github.com/l0o0/jasminum)** by l0o0 -- Zotero plugin for Chinese academic databases
 - **[translators_CN](https://github.com/l0o0/translators_CN)** by l0o0 -- Chinese translator plugins for Zotero
 - **[zotero-mcp](https://github.com/MushroomCatKinsh/zotero-mcp)** by MushroomCatKinsh -- MCP server for Zotero integration
 - **[arxiv-latex-mcp](https://github.com/dvai-lab/arxiv-latex-mcp)** by dvai-lab -- arXiv LaTeX source retrieval for precise formula interpretation
+
+### Special Thanks
+
+- **[awesome-claudecode-paper-proofreading](https://github.com/LimHyungTae/awesome-claudecode-paper-proofreading)** by Hyungtae Lim -- Two-phase LaTeX paper proofreading with conference-level review standards
 
 ---
 

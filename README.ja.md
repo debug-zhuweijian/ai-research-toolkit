@@ -679,21 +679,40 @@ graphify-out/
 
 本ツールキットは、以下の優れたオープンソースプロジェクトの肩の上に立っています:
 
+### スキル・エージェントのソース
+
+- **[AI-Research-SKILLs](https://github.com/orchestra-research/AI-Research-SKILLs)** by orchestra-research -- 文献レビュー、実験設計、データ分析、論文執筆をカバーする 93 以上の研究スキルの由来
+- **[academic-research-skills](https://github.com/Imbad0202/academic-research-skills)** by Imbad0202 -- deep-research、academic-paper、academic-paper-reviewer、academic-pipeline スキルの由来
+- **[anthropics/skills](https://github.com/anthropics/skills)** by Anthropic -- ドキュメント処理スキル（pdf、docx、xlsx、pptx）の由来
+- **[a-evolve](https://github.com/A-EVO-Lab/a-evolve)** by A-EVO-Lab -- 進化的最適化スキル a-evolve の由来
+- **[writing-anti-ai](https://github.com/gaoruizhang/writing-anti-ai)** by gaoruizhang -- 学術執筆向け AI 検出回避スキル
+
+### MCP サーバー・インフラ
+
 - **[MinerU](https://github.com/opendatalab/MinerU)** by OpenDataLab -- レイアウト解析と OCR を備えた高精度 PDF 解析
 - **[paper-search-mcp](https://github.com/openags/paper-search-mcp)** by openags -- 20 以上の学術データベースの統一検索
-- **[awesome-claudecode-paper-proofreading](https://github.com/LimHyungTae/awesome-claudecode-paper-proofreading)** by Hyungtae Lim -- カンファレンスレベルのレビュー基準による 2 段階 LaTeX 論文校正
 - **[Graphify](https://github.com/safishamsi/graphify)** by safishamsi -- 任意のドキュメントコレクションからのナレッジグラフ生成
 - **[MemPalace](https://github.com/MemPalace/mempalace)** -- ナレッジグラフサポート付きの永続的セマンティックメモリ
 - **[ChromaDB](https://github.com/chroma-core/chroma)** -- セマンティック検索のためのオープンソース埋め込みデータベース
 - **[pdf-mcp](https://github.com/angshuman/pdf-mcp)** by angshuman -- PDF 操作のための MCP サーバー
 - **[MarkItDown](https://github.com/microsoft/markitdown)** by Microsoft -- Office 形式のドキュメント→Markdown 変換
 - **[Playwright MCP](https://github.com/microsoft/playwright-mcp)** by Microsoft -- ウェブベースの研究のためのブラウザ自動化
+- **[drawio-mcp](https://github.com/nicholaschenai/drawio-mcp)** by nicholaschenai -- Draw.io 図表作成用 MCP サーバー
+- **[Context7](https://github.com/nicholaschenai/context7)** by nicholaschenai -- あらゆるライブラリの最新ドキュメント検索
+- **[langsmith-fetch-skill](https://github.com/OthmanAdi/langsmith-fetch-skill)** by OthmanAdi -- トレーシングと評価のための LangSmith 連携
 - **[Sequential Thinking MCP](https://github.com/modelcontextprotocol/servers)** -- 複雑な分析のための構造化多段推論
+
+### Zotero エコシステム
+
 - **[Zotero](https://github.com/zotero/zotero)** -- 無料のオープンソース文献管理ツール
 - **[Jasminum](https://github.com/l0o0/jasminum)** by l0o0 -- 中国語学術データベース向け Zotero プラグイン
 - **[translators_CN](https://github.com/l0o0/translators_CN)** by l0o0 -- Zotero 向け中国語翻訳プラグイン
 - **[zotero-mcp](https://github.com/MushroomCatKinsh/zotero-mcp)** by MushroomCatKinsh -- Zotero 連携用 MCP サーバー
 - **[arxiv-latex-mcp](https://github.com/dvai-lab/arxiv-latex-mcp)** by dvai-lab -- 数式の精密な解釈のための arXiv LaTeX ソース取得
+
+### スペシャルサンクス
+
+- **[awesome-claudecode-paper-proofreading](https://github.com/LimHyungTae/awesome-claudecode-paper-proofreading)** by Hyungtae Lim -- カンファレンスレベルのレビュー基準による 2 段階 LaTeX 論文校正
 
 ---
 

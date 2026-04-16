@@ -679,21 +679,40 @@ graphify-out/
 
 本工具集建立在这些优秀的开源项目之上：
 
+### 技能与 Agent 来源
+
+- **[AI-Research-SKILLs](https://github.com/orchestra-research/AI-Research-SKILLs)** by orchestra-research -- 93+ 研究技能的来源，涵盖文献综述、实验设计、数据分析和论文写作
+- **[academic-research-skills](https://github.com/Imbad0202/academic-research-skills)** by Imbad0202 -- deep-research、academic-paper、academic-paper-reviewer、academic-pipeline 技能的来源
+- **[anthropics/skills](https://github.com/anthropics/skills)** by Anthropic -- 文档处理技能（pdf、docx、xlsx、pptx）的来源
+- **[a-evolve](https://github.com/A-EVO-Lab/a-evolve)** by A-EVO-Lab -- 演化优化技能 a-evolve 的来源
+- **[writing-anti-ai](https://github.com/gaoruizhang/writing-anti-ai)** by gaoruizhang -- 学术写作中的反 AI 检测技能
+
+### MCP 服务器与基础设施
+
 - **[MinerU](https://github.com/opendatalab/MinerU)** by OpenDataLab -- 高精度 PDF 解析，带版面分析和 OCR
 - **[paper-search-mcp](https://github.com/openags/paper-search-mcp)** by openags -- 统一搜索 20+ 学术数据库
-- **[awesome-claudecode-paper-proofreading](https://github.com/LimHyungTae/awesome-claudecode-paper-proofreading)** by Hyungtae Lim -- 两阶段 LaTeX 论文校对，基于会议级审稿标准
 - **[Graphify](https://github.com/safishamsi/graphify)** by safishamsi -- 从任意文档集合生成知识图谱
 - **[MemPalace](https://github.com/MemPalace/mempalace)** -- 带知识图谱支持的持久化语义记忆
 - **[ChromaDB](https://github.com/chroma-core/chroma)** -- 开源嵌入数据库，用于语义搜索
 - **[pdf-mcp](https://github.com/angshuman/pdf-mcp)** by angshuman -- PDF 操作 MCP 服务器
 - **[MarkItDown](https://github.com/microsoft/markitdown)** by Microsoft -- Office 格式的文档转 Markdown 工具
 - **[Playwright MCP](https://github.com/microsoft/playwright-mcp)** by Microsoft -- 用于网页研究的浏览器自动化
+- **[drawio-mcp](https://github.com/nicholaschenai/drawio-mcp)** by nicholaschenai -- Draw.io 图表创建的 MCP 服务器
+- **[Context7](https://github.com/nicholaschenai/context7)** by nicholaschenai -- 任意库的最新文档检索
+- **[langsmith-fetch-skill](https://github.com/OthmanAdi/langsmith-fetch-skill)** by OthmanAdi -- LangSmith 集成，用于追踪和评估
 - **[Sequential Thinking MCP](https://github.com/modelcontextprotocol/servers)** -- 用于复杂分析的结构化多步推理
+
+### Zotero 生态
+
 - **[Zotero](https://github.com/zotero/zotero)** -- 免费开源的文献管理器
 - **[Jasminum](https://github.com/l0o0/jasminum)** by l0o0 -- 中文数据库的 Zotero 插件
 - **[translators_CN](https://github.com/l0o0/translators_CN)** by l0o0 -- Zotero 的中文翻译器插件
 - **[zotero-mcp](https://github.com/MushroomCatKinsh/zotero-mcp)** by MushroomCatKinsh -- Zotero 集成的 MCP 服务器
 - **[arxiv-latex-mcp](https://github.com/dvai-lab/arxiv-latex-mcp)** by dvai-lab -- arXiv LaTeX 源码获取，精确解读公式
+
+### 特别鸣谢
+
+- **[awesome-claudecode-paper-proofreading](https://github.com/LimHyungTae/awesome-claudecode-paper-proofreading)** by Hyungtae Lim -- 两阶段 LaTeX 论文校对，基于会议级审稿标准
 
 ---
 
