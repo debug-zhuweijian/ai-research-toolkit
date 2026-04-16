@@ -462,6 +462,7 @@ graphify-out/
 | 도구 | GitHub | 설치 |
 |------|--------|---------|
 | Graphify | [safishamsi/graphify](https://github.com/safishamsi/graphify) | `pip install graphifyy` |
+| rebuild_graph.py | 이 저장소 | 스크립트 (아래 참조) |
 | knowledge-base | 이 저장소 | 스킬 |
 | knowledge-distillation | 이 저장소 | 스킬 |
 | obsidian-markdown | 이 저장소 | 스킬 |
@@ -474,7 +475,7 @@ graphify-out/
 | MemPalace | [MemPalace/mempalace](https://github.com/MemPalace/mempalace) | `pip install mempalace` (별도 conda 환경) |
 | ChromaDB | [chroma-core/chroma](https://github.com/chroma-core/chroma) | `pip install chromadb` |
 
-연구 자료로부터 구조화되고 검색 가능한 지식 베이스를 구축합니다. Knowledge-base 스킬은 기존 kb-* 셸 스크립트를 통합 인터페이스로 대체합니다. Graphify는 문서 폴더를 커뮤니티 탐지, 대화형 HTML 시각화 및 감사 보고서가 포함된 탐색 가능한 그래프로 변환합니다. 7개의 Obsidian 스킬은 문헌 노트, 연구 로그, 종합 지도, 실험 로그, 링크 그래프, 프로젝트 메모리 및 Markdown 포맷팅을 위한 전문 워크플로우를 제공합니다. MemPalace은 지식 그래프 지원이 포함된 영구 시맨틱 메모리를 추가합니다.
+연구 자료로부터 구조화되고 검색 가능한 지식 베이스를 구축합니다. Knowledge-base 스킬은 기존 kb-* 셸 스크립트를 통합 인터페이스로 대체합니다. Graphify는 문서 폴더를 커뮤니티 탐지, 대화형 HTML 시각화 및 감사 보고서가 포함된 탐색 가능한 그래프로 변환합니다. **rebuild_graph.py**는 GraphRAG에서 영감받은 확장 파이프라인으로, graphify의 코드 분석 위에 LLM 기반 시맨틱 엔티티 추출, 증분 캐싱, Louvain 커뮤니티 감지 및 다중 라운드 추출(Gleaning)을 통한 누락 엔티티 복구를 추가합니다. 7개의 Obsidian 스킬은 문헌 노트, 연구 로그, 종합 지도, 실험 로그, 링크 그래프, 프로젝트 메모리 및 Markdown 포맷팅을 위한 전문 워크플로우를 제공합니다. MemPalace은 지식 그래프 지원이 포함된 영구 시맨틱 메모리를 추가합니다.
 
 지식 베이스 아키텍처, Obsidian 설정 및 그래프 생성 옵션에 대해서는 [modules/05-knowledge/README.md](modules/05-knowledge/README.md)를 참조하십시오.
 
@@ -665,6 +666,7 @@ graphify-out/
 - **5개 설치 프리셋** -- 필요한 것만 설치(minimal, writer, researcher, knowledge, full)
 - **7개 Obsidian 스킬** -- 문헌 워크플로우, 연구 로그, 종합 지도, 실험 로그, 링크 그래프, 프로젝트 메모리, Markdown 포맷팅
 - **Knowledge-base 통합 스킬** -- 기존 kb-scan/kb-apply/kb-lint/kb-stats 셸 스크립트를 대체
+- **rebuild_graph.py** -- GraphRAG에서 영감받은 시맨틱 추출 파이프라인 (LLM 엔티티 추출, 증분 캐싱, Louvain 커뮤니티 감지, 다중 라운드 추출)
 - **6개 프레젠테이션 스킬** -- 학술 PPTX, 연구실 미팅 슬라이드, 학술 플로팅, draw.io, 인포그래픽, 학회 발표
 - **14개 DeepScientist 에이전트**가 experimental/로 이동(별도 플랫폼 필요)
 - **5개 kb-* 빈 셸** 제거, knowledge-base 스킬로 대체

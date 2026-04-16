@@ -462,6 +462,7 @@ graphify-out/
 | 工具 | GitHub | 安装方式 |
 |------|--------|----------|
 | Graphify | [safishamsi/graphify](https://github.com/safishamsi/graphify) | `pip install graphifyy` |
+| rebuild_graph.py | 本仓库 | 脚本（见下方说明） |
 | knowledge-base | 本仓库 | Skill |
 | knowledge-distillation | 本仓库 | Skill |
 | obsidian-markdown | 本仓库 | Skill |
@@ -474,7 +475,7 @@ graphify-out/
 | MemPalace | [MemPalace/mempalace](https://github.com/MemPalace/mempalace) | `pip install mempalace`（独立 conda 环境） |
 | ChromaDB | [chroma-core/chroma](https://github.com/chroma-core/chroma) | `pip install chromadb` |
 
-从研究材料构建结构化的、可搜索的知识库。knowledge-base Skill 用统一接口替代了旧的 kb-* 脚本。Graphify 将任意文档文件夹转换为可导航的图谱，带社区检测、交互式 HTML 可视化和审计报告。7 个 Obsidian Skill 提供专门的工作流：文献笔记、研究日志、综合图谱、实验日志、链接图、项目记忆和 Markdown 格式化。MemPalace 增加了带知识图谱支持的持久化语义记忆。
+从研究材料构建结构化的、可搜索的知识库。knowledge-base Skill 用统一接口替代了旧的 kb-* 脚本。Graphify 将任意文档文件夹转换为可导航的图谱，带社区检测、交互式 HTML 可视化和审计报告。**rebuild_graph.py** 是 GraphRAG 启发的增强管线，在 graphify 代码分析之上增加了基于 LLM 的语义实体提取、增量缓存、Louvain 社区检测和多轮清洗（Gleaning）以回收遗漏实体。7 个 Obsidian Skill 提供专门的工作流：文献笔记、研究日志、综合图谱、实验日志、链接图、项目记忆和 Markdown 格式化。MemPalace 增加了带知识图谱支持的持久化语义记忆。
 
 知识库架构、Obsidian 设置和图谱生成选项请参考 [modules/05-knowledge/README.md](modules/05-knowledge/README.md)。
 
@@ -665,6 +666,7 @@ graphify-out/
 - **5 个安装预设** -- 只安装你需要的（minimal、writer、researcher、knowledge、full）
 - **7 个 Obsidian Skill** -- 文献工作流、研究日志、综合图谱、实验日志、链接图、项目记忆、Markdown 格式化
 - **knowledge-base 统一 Skill** -- 替代旧的 kb-scan/kb-apply/kb-lint/kb-stats 脚本
+- **rebuild_graph.py** -- GraphRAG 启发的语义提取管线，支持 LLM 实体提取、增量缓存、Louvain 社区检测和多轮清洗
 - **6 个演示 Skill** -- 学术 PPTX、组会幻灯片、学术绘图、draw.io、信息图、会议演讲
 - **14 个 DeepScientist Agent** 移至 experimental/（需要独立平台）
 - **5 个 kb-* 空壳** 已移除，由 knowledge-base Skill 替代

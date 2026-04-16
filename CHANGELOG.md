@@ -6,6 +6,8 @@ All notable changes to this project will be documented in this file.
 
 ### Added
 
+- rebuild_graph.py: GraphRAG-inspired semantic extraction pipeline (LLM entity extraction, incremental caching, Louvain community detection, gleaning)
+- Updated all 4 READMEs with rebuild_graph.py in Phase 05 table, description, and What's New section
 - Restructured Acknowledgments into 4 categories (Skill Sources, MCP Servers, Zotero Ecosystem, Special Thanks)
 - Added 9 missing upstream project credits (AI-Research-SKILLs, academic-research-skills, anthropics/skills, a-evolve, writing-anti-ai, DeerFlow, drawio-mcp, Context7, langsmith-fetch-skill)
 - Full audit of 26 git-project repos against README credits (10 credited, 1 missing fixed, 15 unrelated)

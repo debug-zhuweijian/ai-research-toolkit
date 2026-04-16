@@ -462,6 +462,7 @@ See [modules/04-writing/README.md](modules/04-writing/README.md) for writing wor
 | Tool | GitHub | Install |
 |------|--------|---------|
 | Graphify | [safishamsi/graphify](https://github.com/safishamsi/graphify) | `pip install graphifyy` |
+| rebuild_graph.py | This repo | Script (see below) |
 | knowledge-base | This repo | Skill |
 | knowledge-distillation | This repo | Skill |
 | obsidian-markdown | This repo | Skill |
@@ -474,7 +475,7 @@ See [modules/04-writing/README.md](modules/04-writing/README.md) for writing wor
 | MemPalace | [MemPalace/mempalace](https://github.com/MemPalace/mempalace) | `pip install mempalace` (separate conda env) |
 | ChromaDB | [chroma-core/chroma](https://github.com/chroma-core/chroma) | `pip install chromadb` |
 
-Build a structured, searchable knowledge base from your research materials. Knowledge-base skill replaces the old kb-* shells with a unified interface. Graphify transforms any folder of documents into a navigable graph with community detection, interactive HTML visualization, and audit reports. Seven Obsidian skills provide specialized workflows for literature notes, research logs, synthesis maps, experiment logs, link graphs, project memory, and Markdown formatting. MemPalace adds persistent semantic memory with knowledge graph support.
+Build a structured, searchable knowledge base from your research materials. Knowledge-base skill replaces the old kb-* shells with a unified interface. Graphify transforms any folder of documents into a navigable graph with community detection, interactive HTML visualization, and audit reports. **rebuild_graph.py** is a GraphRAG-inspired pipeline that adds LLM-based semantic extraction, incremental caching, Louvain community detection, and gleaning (multi-round extraction to recover missed entities) on top of graphify's code analysis. Seven Obsidian skills provide specialized workflows for literature notes, research logs, synthesis maps, experiment logs, link graphs, project memory, and Markdown formatting. MemPalace adds persistent semantic memory with knowledge graph support.
 
 See [modules/05-knowledge/README.md](modules/05-knowledge/README.md) for knowledge base architecture, Obsidian setup, and graph generation options.
 
@@ -665,6 +666,7 @@ The [experimental/](experimental/) directory contains advanced components that r
 - **5 profile presets** -- install only what you need (minimal, writer, researcher, knowledge, full)
 - **7 Obsidian skills** -- literature workflow, research log, synthesis map, experiment log, link graph, project memory, Markdown formatting
 - **Knowledge-base unified skill** -- replaces old kb-scan/kb-apply/kb-lint/kb-stats shell scripts
+- **rebuild_graph.py** -- GraphRAG-inspired semantic extraction pipeline with LLM entity extraction, incremental caching, Louvain community detection, and gleaning
 - **6 presentation skills** -- academic PPTX, group meeting slides, academic plotting, draw.io, infographics, conference talks
 - **14 DeepScientist agents** moved to experimental/ (require separate platform)
 - **5 kb-* empty shells** removed, replaced by knowledge-base skill

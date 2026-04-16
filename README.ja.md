@@ -462,6 +462,7 @@ graphify-out/
 | ツール | GitHub | インストール |
 |------|--------|-------------|
 | Graphify | [safishamsi/graphify](https://github.com/safishamsi/graphify) | `pip install graphifyy` |
+| rebuild_graph.py | 本リポジトリ | スクリプト（下記参照） |
 | knowledge-base | 本リポジトリ | スキル |
 | knowledge-distillation | 本リポジトリ | スキル |
 | obsidian-markdown | 本リポジトリ | スキル |
@@ -474,7 +475,7 @@ graphify-out/
 | MemPalace | [MemPalace/mempalace](https://github.com/MemPalace/mempalace) | `pip install mempalace`（別 conda 環境） |
 | ChromaDB | [chroma-core/chroma](https://github.com/chroma-core/chroma) | `pip install chromadb` |
 
-研究資料から構造化された検索可能なナレッジベースを構築します。knowledge-base スキルは旧 kb-* シェルを統一インターフェースに置き換えます。Graphify はドキュメントフォルダをコミュニティ検出、インタラクティブ HTML 可視化、監査レポート付きのナビゲーション可能なグラフに変換します。7 つの Obsidian スキルが文献ノート、研究ログ、シンセシスマップ、実験ログ、リンクグラフ、プロジェクトメモリ、Markdown フォーマットのための特化したワークフローを提供します。MemPalace はナレッジグラフサポート付きの永続的セマンティックメモリを追加します。
+研究資料から構造化された検索可能なナレッジベースを構築します。knowledge-base スキルは旧 kb-* シェルを統一インターフェースに置き換えます。Graphify はドキュメントフォルダをコミュニティ検出、インタラクティブ HTML 可視化、監査レポート付きのナビゲーション可能なグラフに変換します。**rebuild_graph.py** は GraphRAG にインスパイアされた拡張パイプラインで、graphify のコード分析に加えて LLM ベースのセマンティックエンティティ抽出、増分キャッシュ、Louvain コミュニティ検出、複数ラウンド抽出（Gleaning）による見逃しエンティティの回収を追加します。7 つの Obsidian スキルが文献ノート、研究ログ、シンセシスマップ、実験ログ、リンクグラフ、プロジェクトメモリ、Markdown フォーマットのための特化したワークフローを提供します。MemPalace はナレッジグラフサポート付きの永続的セマンティックメモリを追加します。
 
 ナレッジベースアーキテクチャ、Obsidian 設定、グラフ生成オプションについては [modules/05-knowledge/README.md](modules/05-knowledge/README.md) をご覧ください。
 
@@ -665,6 +666,7 @@ graphify-out/
 - **5 インストールプリセット** -- 必要なものだけインストール（minimal、writer、researcher、knowledge、full）
 - **7 Obsidian スキル** -- 文献ワークフロー、研究ログ、シンセシスマップ、実験ログ、リンクグラフ、プロジェクトメモリ、Markdown フォーマット
 - **knowledge-base 統一スキル** -- 旧 kb-scan/kb-apply/kb-lint/kb-stats シェルスクリプトを置き換え
+- **rebuild_graph.py** -- GraphRAG にインスパイアされたセマンティック抽出パイプライン（LLM エンティティ抽出、増分キャッシュ、Louvain コミュニティ検出、複数ラウンド抽出）
 - **6 プレゼンテーションスキル** -- 学術 PPTX、グループミーティングスライド、学術プロット、draw.io、インフォグラフィック、カンファレンストーク
 - **14 DeepScientist エージェント** を experimental/ に移動（別プラットフォームが必要）
 - **5 つの空 kb-* シェル** を削除、knowledge-base スキルに置き換え
