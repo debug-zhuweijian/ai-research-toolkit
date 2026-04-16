@@ -686,6 +686,7 @@ graphify-out/
 - **[anthropics/skills](https://github.com/anthropics/skills)** by Anthropic -- ドキュメント処理スキル（pdf、docx、xlsx、pptx）の由来
 - **[a-evolve](https://github.com/A-EVO-Lab/a-evolve)** by A-EVO-Lab -- 進化的最適化スキル a-evolve の由来
 - **[writing-anti-ai](https://github.com/gaoruizhang/writing-anti-ai)** by gaoruizhang -- 学術執筆向け AI 検出回避スキル
+- **[DeerFlow](https://github.com/bytedance/deer-flow)** by ByteDance -- deep-research-v5 スキルで参照されているサブエージェント並行モデルとタスクディスパッチパターン
 
 ### MCP サーバー・インフラ
 

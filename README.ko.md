@@ -686,6 +686,7 @@ graphify-out/
 - **[anthropics/skills](https://github.com/anthropics/skills)** by Anthropic -- 문서 처리 스킬(pdf, docx, xlsx, pptx)의 출처
 - **[a-evolve](https://github.com/A-EVO-Lab/a-evolve)** by A-EVO-Lab -- 진화 최적화 스킬 a-evolve의 출처
 - **[writing-anti-ai](https://github.com/gaoruizhang/writing-anti-ai)** by gaoruizhang -- 학술 작문을 위한 AI 감지 회피 스킬
+- **[DeerFlow](https://github.com/bytedance/deer-flow)** by ByteDance -- deep-research-v5 스킬에서 참조한 서브에이전트 동시성 모델 및 작업 디스패치 패턴
 
 ### MCP 서버 및 인프라
 

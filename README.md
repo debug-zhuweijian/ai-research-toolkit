@@ -686,6 +686,7 @@ This toolkit stands on the shoulders of excellent open-source projects:
 - **[anthropics/skills](https://github.com/anthropics/skills)** by Anthropic -- Origin of document-skills (pdf, docx, xlsx, pptx) for format conversion
 - **[a-evolve](https://github.com/A-EVO-Lab/a-evolve)** by A-EVO-Lab -- Origin of the a-evolve skill for evolutionary optimization
 - **[writing-anti-ai](https://github.com/gaoruizhang/writing-anti-ai)** by gaoruizhang -- Anti-AI-detection writing skill for academic drafts
+- **[DeerFlow](https://github.com/bytedance/deer-flow)** by ByteDance -- Subagent concurrency model and task dispatch patterns referenced in deep-research-v5 skill
 
 ### MCP Servers & Infrastructure
 

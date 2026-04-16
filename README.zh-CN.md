@@ -686,6 +686,7 @@ graphify-out/
 - **[anthropics/skills](https://github.com/anthropics/skills)** by Anthropic -- 文档处理技能（pdf、docx、xlsx、pptx）的来源
 - **[a-evolve](https://github.com/A-EVO-Lab/a-evolve)** by A-EVO-Lab -- 演化优化技能 a-evolve 的来源
 - **[writing-anti-ai](https://github.com/gaoruizhang/writing-anti-ai)** by gaoruizhang -- 学术写作中的反 AI 检测技能
+- **[DeerFlow](https://github.com/bytedance/deer-flow)** by ByteDance -- deep-research-v5 技能引用的子代理并发模型和任务调度模式
 
 ### MCP 服务器与基础设施
 
