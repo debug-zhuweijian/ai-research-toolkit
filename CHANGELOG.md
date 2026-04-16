@@ -2,6 +2,22 @@
 
 All notable changes to this project will be documented in this file.
 
+## [0.2.0-beta] - 2026-04-17
+
+### Added
+
+- Japanese (README.ja.md) and Korean (README.ko.md) README translations
+- Complete README rewrite with detailed usage walkthrough, tool map, API keys guide
+- Mermaid 7-phase pipeline diagram
+- LibreOffice and Poppler to prerequisites
+- International alternatives for non-Chinese users (Tavily, Brave Search, etc.)
+- `uvx paper-search-mcp` recommendation for dependency isolation
+
+### Fixed
+
+- Restored missing badges (GitHub Release, DeepWiki, Zread)
+- Restored detailed sections lost in alpha rewrite (Acknowledgments, Contributing, Recommended Resources)
+
 ## [0.2.0-alpha] - 2026-04-17
 
 ### Added
