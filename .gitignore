@@ -1,8 +1,37 @@
+# === 私密内容 — 永不提交 ===
+
+# AI 对话 & 记忆
+.claude/
+sessions/
+memories/
+*.session.json
+*.memory.md
+
+# 设计过程（superpowers 规格和计划）
+docs/superpowers/
+docs/brainstorm-*
+docs/research-*
+
+# 密钥 & 凭证
 *.env
 *.key
 *.token
-node_modules/
+*.secret
+**/api-keys-local.json
+**/*-local.*
+**/*-private.*
+
+# 个人数据 & 缓存
+downloads/
+*.log
+Thumbs.db
+.DS_Store
 __pycache__/
 *.pyc
-.DS_Store
-Thumbs.db
+node_modules/
+
+# 编辑器
+.vscode/
+.idea/
+*.swp
+*.swo
