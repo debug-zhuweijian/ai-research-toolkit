@@ -1,0 +1,7 @@
+{
+  "name": "writer",
+  "description": "学术写作与演示",
+  "modules": ["04-writing", "06-presentation"],
+  "skills_count": 16,
+  "suitable_for": "主要需求是论文写作和做 PPT 的用户"
+}

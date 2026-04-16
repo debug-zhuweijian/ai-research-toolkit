@@ -1,6 +1,33 @@
 # Changelog
 
 All notable changes to this project will be documented in this file.
+
+## [0.2.0-alpha] - 2026-04-17
+
+### Added
+
+- Phase-based module structure (`modules/01-discovery/` through `modules/07-pipeline/`)
+- 29 NEW skills across all phases
+- 15 NEW agents for analysis, writing, and knowledge management
+- 5 profile presets (minimal, writer, researcher, knowledge, full)
+- Module READMEs for all 7 phases
+- Experimental directory for DeepScientist agents
+
+### Changed
+
+- Restructured from flat `skills/` and `agents/` to phase-based `modules/` layout
+- README completely rewritten for v0.2
+
+### Removed
+
+- 5 kb-* empty shells (kb-scan, kb-apply, kb-lint, kb-stats, kb-sync)
+- Flat `skills/` and `agents/` directories (replaced by modules/)
+
+### Moved
+
+- 14 DeepScientist agents → `experimental/deepscientist/`
+- Old `deep-research.md` agent → `experimental/`
+
 ## [unreleased]
 
 ### 🚀 Features

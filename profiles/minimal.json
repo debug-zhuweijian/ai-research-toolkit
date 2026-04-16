@@ -1,0 +1,7 @@
+{
+  "name": "minimal",
+  "description": "核心文献搜索和文档处理",
+  "modules": ["01-discovery", "02-processing"],
+  "skills_count": 7,
+  "suitable_for": "只需要搜索论文和解析文档的用户"
+}

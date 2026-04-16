@@ -1,0 +1,7 @@
+{
+  "name": "full",
+  "description": "全链路安装（不含 experimental）",
+  "modules": ["01-discovery", "02-processing", "03-analysis", "04-writing", "05-knowledge", "06-presentation"],
+  "skills_count": 42,
+  "suitable_for": "需要完整科研工具链的用户"
+}

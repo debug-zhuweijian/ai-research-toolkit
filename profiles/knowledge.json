@@ -1,0 +1,7 @@
+{
+  "name": "knowledge",
+  "description": "知识管理与图谱，含 Obsidian 工作流",
+  "modules": ["05-knowledge", "06-presentation"],
+  "skills_count": 17,
+  "suitable_for": "使用 Obsidian 进行知识管理的用户"
+}

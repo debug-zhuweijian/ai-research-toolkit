@@ -1,0 +1,7 @@
+{
+  "name": "researcher",
+  "description": "完整研究流程：文献搜索、分析、写作",
+  "modules": ["01-discovery", "02-processing", "03-analysis", "04-writing"],
+  "skills_count": 25,
+  "suitable_for": "活跃的学术研究者，覆盖从搜索到投稿的完整链路"
+}
