@@ -25,18 +25,9 @@ from concurrent.futures import ThreadPoolExecutor, as_completed
 
 # ── Configuration (all overridable via environment variables) ────────────────
 
-API_URL = os.environ.get("GRAPHIFY_API_URL", "")
-if not API_URL:
-    print("ERROR: GRAPHIFY_API_URL environment variable required", file=sys.stderr)
-    sys.exit(1)
-API_KEY = os.environ.get("GRAPHIFY_API_KEY", "")
-if not API_KEY:
-    print("ERROR: GRAPHIFY_API_KEY environment variable required", file=sys.stderr)
-    sys.exit(1)
-API_MODEL = os.environ.get("GRAPHIFY_API_MODEL", "")
-if not API_MODEL:
-    print("ERROR: GRAPHIFY_API_MODEL environment variable required", file=sys.stderr)
-    sys.exit(1)
+API_URL_ENV = "GRAPHIFY_API_URL"
+API_KEY_ENV = "GRAPHIFY_API_KEY"
+API_MODEL_ENV = "GRAPHIFY_API_MODEL"
 
 RAW_DIR = Path("raw")
 OUT_DIR = Path(".graphify-data")
@@ -56,12 +47,6 @@ GLEANING_EXISTING_MAX_CHARS = 3000
 GLEANING_DOCUMENTS_MAX_CHARS = 12000
 SAFE_NODE_ATTRS = {"label", "type", "source_file"}
 SAFE_EDGE_ATTRS = {"relation", "edge_type", "confidence_score"}
-
-CACHE_DIR.mkdir(parents=True, exist_ok=True)
-
-for f in CACHE_DIR.rglob("*.tmp"):
-    if f.is_file():
-        f.unlink(missing_ok=True)
 
 EXTRACTION_PROMPT = """You are a knowledge graph extraction engine. Read the following documents and extract entities (nodes) and relationships (edges).
 
@@ -105,6 +90,35 @@ Previous extraction:
 
 Source documents:
 {documents}"""
+
+
+def get_api_settings():
+    """Read required API settings lazily so the module remains import-safe."""
+    api_url = os.environ.get(API_URL_ENV, "").strip()
+    api_key = os.environ.get(API_KEY_ENV, "").strip()
+    api_model = os.environ.get(API_MODEL_ENV, "").strip()
+
+    missing = []
+    if not api_url:
+        missing.append(API_URL_ENV)
+    if not api_key:
+        missing.append(API_KEY_ENV)
+    if not api_model:
+        missing.append(API_MODEL_ENV)
+    if missing:
+        raise RuntimeError(f"Missing required environment variables: {', '.join(missing)}")
+
+    return api_url, api_key, api_model
+
+
+def prepare_output_dirs():
+    """Create output directories and clean incomplete cache files before a run."""
+    OUT_DIR.mkdir(parents=True, exist_ok=True)
+    CACHE_DIR.mkdir(parents=True, exist_ok=True)
+
+    for f in CACHE_DIR.rglob("*.tmp"):
+        if f.is_file():
+            f.unlink(missing_ok=True)
 
 
 def source_id(p: Path) -> str:
@@ -193,17 +207,18 @@ def call_api(prompt_content, prompt_prefix=EXTRACTION_PROMPT):
     """Call the API with exponential backoff and full jitter retry."""
     import urllib.error
     import urllib.request
+    api_url, api_key, api_model = get_api_settings()
 
     user_prompt = f"{prompt_prefix}{prompt_content}" if prompt_prefix else prompt_content
     payload = json.dumps({
-        "model": API_MODEL,
+        "model": api_model,
         "messages": [{"role": "user", "content": user_prompt}],
         "temperature": 0.1,
         "max_tokens": 4096
     }).encode("utf-8")
-    req = urllib.request.Request(API_URL, data=payload, headers={
+    req = urllib.request.Request(api_url, data=payload, headers={
         "Content-Type": "application/json",
-        "Authorization": f"Bearer {API_KEY}"
+        "Authorization": f"Bearer {api_key}"
     })
     last_error = None
     for attempt in range(MAX_RETRIES + 1):
@@ -309,6 +324,7 @@ def merge_extractions(*extractions):
 
 def write_extraction(extraction):
     """Persist the canonical merged extraction used for graph rebuilds."""
+    OUT_DIR.mkdir(parents=True, exist_ok=True)
     (OUT_DIR / "semantic_extraction.json").write_text(
         json.dumps(extraction, ensure_ascii=False), encoding="utf-8"
     )
@@ -516,6 +532,17 @@ def process_batch(batch_files, batch_num, total_batches):
 
 
 def main():
+    try:
+        get_api_settings()
+    except RuntimeError as exc:
+        print(f"ERROR: {exc}", file=sys.stderr)
+        return 1
+
+    if not RAW_DIR.is_dir():
+        print(f"ERROR: raw directory not found at {RAW_DIR.resolve()}", file=sys.stderr)
+        return 1
+
+    prepare_output_dirs()
     all_files = get_source_files()
     warn_legacy_cache_files(all_files)
     cached_extraction, files_to_process, cached_hits = load_cached_extraction(all_files)
@@ -529,7 +556,8 @@ def main():
         extraction = merge_extractions(cached_extraction)
         print(f"All files cached. Rebuilding from merged cache ({len(extraction['nodes'])} nodes, {len(extraction['edges'])} edges).")
         write_extraction(extraction)
-        return build_graph(extraction)
+        build_graph(extraction)
+        return 0
 
     batches = []
     for i in range(0, total, BATCH_SIZE):
@@ -574,6 +602,7 @@ def main():
     )
     write_extraction(extraction)
     build_graph(extraction)
+    return 0
 
 
 def build_graph(extraction=None):
@@ -592,6 +621,8 @@ def build_graph(extraction=None):
         else:
             print("No extraction data found")
             return
+
+    OUT_DIR.mkdir(parents=True, exist_ok=True)
 
     node_records = []
     node_index = {}
@@ -721,4 +752,4 @@ def build_graph(extraction=None):
 
 
 if __name__ == "__main__":
-    main()
+    raise SystemExit(main())

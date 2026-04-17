@@ -10,7 +10,7 @@ Generate draw.io diagrams as native `.drawio` files. Optionally export to PNG, S
 ## How to create a diagram
 
 1. **Generate draw.io XML** in mxGraphModel format for the requested diagram
-2. **Create a subfolder** `I:\claude-docs\draw.io\<diagram-name>\` and **write the XML** to `I:\claude-docs\draw.io\<diagram-name>\<diagram-name>.drawio` using the Write tool (NOT the current working directory)
+2. **Create a subfolder** `<DRAWIO_OUTPUT_DIR>/<diagram-name>/` and **write the XML** to `<DRAWIO_OUTPUT_DIR>/<diagram-name>/<diagram-name>.drawio` using the Write tool (NOT the current working directory)
 3. **If the user requested an export format** (png, svg, pdf), export using the draw.io CLI with `--embed-diagram` to the same subfolder, then delete the source `.drawio` file
 4. **Open the result** -- the exported file if exported, or the `.drawio` file otherwise
 
@@ -18,10 +18,10 @@ Generate draw.io diagrams as native `.drawio` files. Optionally export to PNG, S
 
 Check the user's request for a format preference. Examples:
 
-- `/drawio create a flowchart` -> `I:\claude-docs\draw.io\flowchart\flowchart.drawio`
-- `/drawio png flowchart for login` -> `I:\claude-docs\draw.io\login-flow\login-flow.drawio.png`
-- `/drawio svg: ER diagram` -> `I:\claude-docs\draw.io\er-diagram\er-diagram.drawio.svg`
-- `/drawio pdf architecture overview` -> `I:\claude-docs\draw.io\architecture-overview\architecture-overview.drawio.pdf`
+- `/drawio create a flowchart` -> `<DRAWIO_OUTPUT_DIR>/flowchart/flowchart.drawio`
+- `/drawio png flowchart for login` -> `<DRAWIO_OUTPUT_DIR>/login-flow/login-flow.drawio.png`
+- `/drawio svg: ER diagram` -> `<DRAWIO_OUTPUT_DIR>/er-diagram/er-diagram.drawio.svg`
+- `/drawio pdf architecture overview` -> `<DRAWIO_OUTPUT_DIR>/architecture-overview/architecture-overview.drawio.pdf`
 
 If no format is mentioned, just write the `.drawio` file and open it in draw.io. The user can always ask to export later.
 
@@ -46,14 +46,14 @@ Try `drawio` first (works if on PATH), then fall back to the platform-specific p
 
 - **macOS**: `/Applications/draw.io.app/Contents/MacOS/draw.io`
 - **Linux**: `drawio` (typically on PATH via snap/apt/flatpak)
-- **Windows**: `"E:\draw.io\draw.io.exe"`
+- **Windows**: `"C:\Program Files\draw.io\draw.io.exe"` (or the path reported by `where drawio`)
 
 Use `which drawio` (or `where drawio` on Windows) to check if it's on PATH before falling back.
 
 ### Export command
 
 ```bash
-drawio -x -f <format> -e -b 10 -o "I:\claude-docs\draw.io\<name>\<name>.drawio.<format>" <input.drawio>
+drawio -x -f <format> -e -b 10 -o "<DRAWIO_OUTPUT_DIR>/<name>/<name>.drawio.<format>" <input.drawio>
 ```
 
 Key flags:
@@ -76,12 +76,16 @@ Key flags:
 
 ## File naming
 
-- Each diagram gets its own subfolder: `I:\claude-docs\draw.io\<diagram-name>\`
+- Each diagram gets its own subfolder: `<DRAWIO_OUTPUT_DIR>/<diagram-name>/`
 - All related files (`.drawio`, `.drawio.png`, `.drawio.pdf`) go in the same subfolder
 - Use a descriptive name based on the diagram content (e.g., `login-flow`, `database-schema`)
 - Use lowercase with hyphens for multi-word names
 - For export, use double extensions: `name.drawio.png`, `name.drawio.svg`, `name.drawio.pdf` -- this signals the file contains embedded diagram XML
 - After a successful export, delete the intermediate `.drawio` file -- the exported file contains the full diagram
+
+## Path placeholder
+
+- `<DRAWIO_OUTPUT_DIR>`: base directory where generated `.drawio` and exported files should be written
 
 ## XML format
 

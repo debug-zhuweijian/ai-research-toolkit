@@ -103,10 +103,10 @@ git clone https://github.com/debug-zhuweijian/ai-research-toolkit.git
 cd ai-research-toolkit
 
 # プロファイルプリセットでインストール
-./scripts/install.sh --profile researcher    # 研究者向け（推奨）
-./scripts/install.sh --profile writer        # 論文執筆重視
-./scripts/install.sh --profile full          # すべて
 ./scripts/install.sh --profile minimal       # 検索 + PDF 処理のみ
+./scripts/install.sh --profile knowledge     # ナレッジ管理 + プレゼン
+./scripts/install.sh --profile full          # すべて
+./scripts/install.sh --list                  # プリセットとモジュールを表示
 
 # または個別モジュールをインストール
 ./scripts/install.sh --module 03-analysis    # フェーズ 03 のみ
@@ -466,16 +466,16 @@ graphify-out/
 | knowledge-base | 本リポジトリ | スキル |
 | knowledge-distillation | 本リポジトリ | スキル |
 | obsidian-markdown | 本リポジトリ | スキル |
+| obsidian-bases | 本リポジトリ | スキル |
+| obsidian-cli | 本リポジトリ | スキル |
 | obsidian-literature-workflow | 本リポジトリ | スキル |
-| obsidian-research-log | 本リポジトリ | スキル |
-| obsidian-synthesis-map | 本リポジトリ | スキル |
 | obsidian-experiment-log | 本リポジトリ | スキル |
-| obsidian-link-graph | 本リポジトリ | スキル |
+| obsidian-project-bootstrap | 本リポジトリ | スキル |
 | obsidian-project-memory | 本リポジトリ | スキル |
 | MemPalace | [MemPalace/mempalace](https://github.com/MemPalace/mempalace) | `pip install mempalace`（別 conda 環境） |
 | ChromaDB | [chroma-core/chroma](https://github.com/chroma-core/chroma) | `pip install chromadb` |
 
-研究資料から構造化された検索可能なナレッジベースを構築します。knowledge-base スキルは旧 kb-* シェルを統一インターフェースに置き換えます。Graphify はドキュメントフォルダをコミュニティ検出、インタラクティブ HTML 可視化、監査レポート付きのナビゲーション可能なグラフに変換します。**rebuild_graph.py** は GraphRAG にインスパイアされた拡張パイプラインで、graphify のコード分析に加えて LLM ベースのセマンティックエンティティ抽出、増分キャッシュ、Louvain コミュニティ検出、複数ラウンド抽出（Gleaning）による見逃しエンティティの回収を追加します。7 つの Obsidian スキルが文献ノート、研究ログ、シンセシスマップ、実験ログ、リンクグラフ、プロジェクトメモリ、Markdown フォーマットのための特化したワークフローを提供します。MemPalace はナレッジグラフサポート付きの永続的セマンティックメモリを追加します。
+研究資料から構造化された検索可能なナレッジベースを構築します。knowledge-base スキルは旧 kb-* シェルを統一インターフェースに置き換えます。Graphify はドキュメントフォルダをコミュニティ検出、インタラクティブ HTML 可視化、監査レポート付きのナビゲーション可能なグラフに変換します。**rebuild_graph.py** は GraphRAG にインスパイアされた拡張パイプラインで、graphify のコード分析に加えて LLM ベースのセマンティックエンティティ抽出、増分キャッシュ、Louvain コミュニティ検出、複数ラウンド抽出（Gleaning）による見逃しエンティティの回収を追加します。7 つの Obsidian スキルは Bases クエリ、CLI 自動化、文献ワークフロー、実験ログ、プロジェクト初期化、プロジェクトメモリ、Markdown 整形をカバーします。MemPalace はナレッジグラフサポート付きの永続的セマンティックメモリを追加します。
 
 ナレッジベースアーキテクチャ、Obsidian 設定、グラフ生成オプションについては [modules/05-knowledge/README.md](modules/05-knowledge/README.md) をご覧ください。
 
@@ -512,8 +512,6 @@ graphify-out/
 | プロファイル | モジュール | スキル | エージェント | 向いている用途 |
 |------------|-----------|--------|-------------|--------------|
 | `minimal` | 01, 02 | 7 | 2 | 文献検索とドキュメント処理 |
-| `writer` | 04, 06 | 16 | 7 | 学術執筆とプレゼンテーション |
-| `researcher` | 01-04 | 25 | 14 | フル研究ワークフロー（推奨） |
 | `knowledge` | 05, 06 | 17 | 2 | ナレッジ管理と Obsidian |
 | `full` | 01-06 | 42 | 16 | 完全ツールキット |
 
@@ -589,32 +587,32 @@ graphify-out/
 | [MinerU](https://github.com/opendatalab/MinerU) | OpenDataLab | Apache-2.0 | 02 | `pip install mineru-mcp-server` |
 | [pdf-mcp](https://github.com/angshuman/pdf-mcp) | angshuman | MIT | 02 | `git clone` + `npm install` |
 | [MarkItDown](https://github.com/microsoft/markitdown) | Microsoft | MIT | 02 | `pip install markitdown-mcp` |
-| [paper-review](skills/paper-review/) | 本リポジトリ | MIT | 03 | スキル（`~/.claude/skills/` にコピー） |
-| [paper-proofread](skills/paper-proofread/) | 本リポジトリ + [LimHyungTae](https://github.com/LimHyungTae/awesome-claudecode-paper-proofreading) | MIT | 03 | スキル（`~/.claude/skills/` にコピー） |
-| [deep-research-v5](skills/deep-research-v5/) | 本リポジトリ | MIT | 03 | スキル（9 ファイル） |
+| [paper-review](modules/03-analysis/skills/paper-review/) | 本リポジトリ | MIT | 03 | スキル（`~/.claude/skills/` にコピー） |
+| [paper-proofread](modules/03-analysis/skills/paper-proofread/) | 本リポジトリ + [LimHyungTae](https://github.com/LimHyungTae/awesome-claudecode-paper-proofreading) | MIT | 03 | スキル（`~/.claude/skills/` にコピー） |
+| [deep-research-v5](modules/03-analysis/skills/deep-research-v5/) | 本リポジトリ | MIT | 03 | スキル（9 ファイル） |
 | [Sequential Thinking](https://github.com/modelcontextprotocol/servers) | MCP | MIT | 03 | `npx @modelcontextprotocol/server-sequential-thinking` |
 | [Claude Code](https://docs.anthropic.com/en/docs/claude-code) | Anthropic | 商用 | 全 | `npm i -g @anthropic-ai/claude-code` |
-| [academic-writing](skills/academic-writing/) | 本リポジトリ | MIT | 04 | スキル（`~/.claude/skills/` にコピー） |
-| [ml-paper-writing](skills/ml-paper-writing/) | 本リポジトリ | MIT | 04 | スキル（`~/.claude/skills/` にコピー） |
-| [systems-paper-writing](skills/systems-paper-writing/) | 本リポジトリ | MIT | 04 | スキル（`~/.claude/skills/` にコピー） |
-| [writing-anti-ai](skills/writing-anti-ai/) | 本リポジトリ | MIT | 04 | スキル（`~/.claude/skills/` にコピー） |
-| [review-response](skills/review-response/) | 本リポジトリ | MIT | 04 | スキル（`~/.claude/skills/` にコピー） |
-| [post-acceptance](skills/post-acceptance/) | 本リポジトリ | MIT | 04 | スキル（`~/.claude/skills/` にコピー） |
-| [results-analysis](skills/results-analysis/) | 本リポジトリ | MIT | 04 | スキル（`~/.claude/skills/` にコピー） |
-| [results-report](skills/results-report/) | 本リポジトリ | MIT | 04 | スキル（`~/.claude/skills/` にコピー） |
+| [academic-writing](modules/04-writing/skills/academic-writing/) | 本リポジトリ | MIT | 04 | スキル（`~/.claude/skills/` にコピー） |
+| [ml-paper-writing](modules/04-writing/skills/ml-paper-writing/) | 本リポジトリ | MIT | 04 | スキル（`~/.claude/skills/` にコピー） |
+| [systems-paper-writing](modules/04-writing/skills/systems-paper-writing/) | 本リポジトリ | MIT | 04 | スキル（`~/.claude/skills/` にコピー） |
+| [writing-anti-ai](modules/04-writing/skills/writing-anti-ai/) | 本リポジトリ | MIT | 04 | スキル（`~/.claude/skills/` にコピー） |
+| [review-response](modules/04-writing/skills/review-response/) | 本リポジトリ | MIT | 04 | スキル（`~/.claude/skills/` にコピー） |
+| [post-acceptance](modules/04-writing/skills/post-acceptance/) | 本リポジトリ | MIT | 04 | スキル（`~/.claude/skills/` にコピー） |
+| [results-analysis](modules/04-writing/skills/results-analysis/) | 本リポジトリ | MIT | 04 | スキル（`~/.claude/skills/` にコピー） |
+| [results-report](modules/04-writing/skills/results-report/) | 本リポジトリ | MIT | 04 | スキル（`~/.claude/skills/` にコピー） |
 | [Graphify](https://github.com/safishamsi/graphify) | safishamsi | MIT | 05 | `pip install graphifyy` |
-| [knowledge-base](skills/knowledge-base/) | 本リポジトリ | MIT | 05 | スキル（`~/.claude/skills/` にコピー） |
-| [knowledge-distillation](skills/knowledge-distillation/) | 本リポジトリ | MIT | 05 | スキル（`~/.claude/skills/` にコピー） |
-| [obsidian-*](skills/)（7 スキル） | 本リポジトリ | MIT | 05 | スキル（`~/.claude/skills/` にコピー） |
+| [knowledge-base](modules/05-knowledge/skills/knowledge-base/) | 本リポジトリ | MIT | 05 | スキル（`~/.claude/skills/` にコピー） |
+| [knowledge-distillation](modules/05-knowledge/skills/knowledge-distillation/) | 本リポジトリ | MIT | 05 | スキル（`~/.claude/skills/` にコピー） |
+| [obsidian-*](modules/05-knowledge/skills/)（7 スキル） | 本リポジトリ | MIT | 05 | スキル（`~/.claude/skills/` にコピー） |
 | [MemPalace](https://github.com/MemPalace/mempalace) | MemPalace | MIT | 05 | `pip install mempalace`（別 conda 環境） |
 | [ChromaDB](https://github.com/chroma-core/chroma) | Chroma | Apache-2.0 | 05 | `pip install chromadb` |
-| [academic-pptx](skills/academic-pptx/) | 本リポジトリ | MIT | 06 | スキル（`~/.claude/skills/` にコピー） |
-| [group-meeting-slides](skills/group-meeting-slides/) | 本リポジトリ | MIT | 06 | スキル（`~/.claude/skills/` にコピー） |
-| [academic-plotting](skills/academic-plotting/) | 本リポジトリ | MIT | 06 | スキル（`~/.claude/skills/` にコピー） |
+| [academic-pptx](modules/06-presentation/skills/academic-pptx/) | 本リポジトリ | MIT | 06 | スキル（`~/.claude/skills/` にコピー） |
+| [group-meeting-slides](modules/06-presentation/skills/group-meeting-slides/) | 本リポジトリ | MIT | 06 | スキル（`~/.claude/skills/` にコピー） |
+| [academic-plotting](modules/06-presentation/skills/academic-plotting/) | 本リポジトリ | MIT | 06 | スキル（`~/.claude/skills/` にコピー） |
 | [draw.io MCP](https://github.com/nicholaschenai/drawio-mcp) | nicholaschenai | MIT | 06 | `npx @drawio/mcp` |
-| [notion-infographic](skills/notion-infographic/) | 本リポジトリ | MIT | 06 | スキル（`~/.claude/skills/` にコピー） |
-| [publication-chart-skill](skills/publication-chart-skill/) | 本リポジトリ | MIT | 06 | スキル（`~/.claude/skills/` にコピー） |
-| [presenting-conference-talks](skills/presenting-conference-talks/) | 本リポジトリ | MIT | 06 | スキル（`~/.claude/skills/` にコピー） |
+| [notion-infographic](modules/06-presentation/skills/notion-infographic/) | 本リポジトリ | MIT | 06 | スキル（`~/.claude/skills/` にコピー） |
+| [publication-chart-skill](modules/06-presentation/skills/publication-chart-skill/) | 本リポジトリ | MIT | 06 | スキル（`~/.claude/skills/` にコピー） |
+| [presenting-conference-talks](modules/06-presentation/skills/presenting-conference-talks/) | 本リポジトリ | MIT | 06 | スキル（`~/.claude/skills/` にコピー） |
 | [Playwright MCP](https://github.com/microsoft/playwright-mcp) | Microsoft | Apache-2.0 | 全 | `npx @playwright/mcp@latest` |
 | [Context7](https://github.com/nicholaschenai/context7) | Context7 | MIT | 全 | プラグイン（compound-engineering 経由） |
 
@@ -663,8 +661,8 @@ graphify-out/
 - **7 フェーズモジュール構造** -- 文献検索、ドキュメント処理、論文分析、学術執筆、ナレッジ管理、プレゼンテーション、パイプラインに整理（旧 4 フェーズから）
 - **42 スキル**（旧 17）-- 全フェーズに 25 の新スキルを追加
 - **16 エージェント** -- 文献レビューアー、LaTeX スペシャリスト、リバタルライターなど
-- **5 インストールプリセット** -- 必要なものだけインストール（minimal、writer、researcher、knowledge、full）
-- **7 Obsidian スキル** -- 文献ワークフロー、研究ログ、シンセシスマップ、実験ログ、リンクグラフ、プロジェクトメモリ、Markdown フォーマット
+- **3 インストールプリセット** -- 必要なものだけインストール（minimal、knowledge、full）
+- **7 Obsidian スキル** -- Bases、CLI 自動化、文献ワークフロー、実験ログ、プロジェクト初期化、プロジェクトメモリ、Markdown 整形
 - **knowledge-base 統一スキル** -- 旧 kb-scan/kb-apply/kb-lint/kb-stats シェルスクリプトを置き換え
 - **rebuild_graph.py** -- GraphRAG にインスパイアされたセマンティック抽出パイプライン（LLM エンティティ抽出、増分キャッシュ、Louvain コミュニティ検出、複数ラウンド抽出）
 - **6 プレゼンテーションスキル** -- 学術 PPTX、グループミーティングスライド、学術プロット、draw.io、インフォグラフィック、カンファレンストーク

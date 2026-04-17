@@ -8,11 +8,11 @@
 
 | 工具 | 类型 | 用途 | GitHub / 来源 |
 |------|------|------|---------------|
-| `/paper-review` | Skill | 单篇论文结构化审阅，输出方法/实验/贡献/局限等报告 | 本 repo `skills/paper-review/` |
-| `/deep-research-v5` | Skill | 多子代理深度调研，支持横向对比、时间线梳理、综合报告 | 本 repo `skills/deep-research-v5/` |
-| `/academic-writing` | Skill | 学术论文写作辅助，支持 Introduction/Method/Discussion 等各部分 | 本 repo `skills/academic-writing/` |
-| `/academic-pptx` | Skill | 学术演示文稿生成，15 页学术报告 PPT | 本 repo `skills/academic-pptx/` |
-| `/group-meeting-slides` | Skill | 组会演示文稿生成，从论文内容到 PPT 一键完成 | 本 repo `skills/group-meeting-slides/` |
+| `/paper-review` | Skill | 单篇论文结构化审阅，输出方法/实验/贡献/局限等报告 | 本 repo `modules/03-analysis/skills/paper-review/` |
+| `/deep-research-v5` | Skill | 多子代理深度调研，支持横向对比、时间线梳理、综合报告 | 本 repo `modules/03-analysis/skills/deep-research-v5/` |
+| `/academic-writing` | Skill | 学术论文写作辅助，支持 Introduction/Method/Discussion 等各部分 | 本 repo `modules/04-writing/skills/academic-writing/` |
+| `/academic-pptx` | Skill | 学术演示文稿生成，15 页学术报告 PPT | 本 repo `modules/06-presentation/skills/academic-pptx/` |
+| `/group-meeting-slides` | Skill | 组会演示文稿生成，从论文内容到 PPT 一键完成 | 本 repo `modules/06-presentation/skills/group-meeting-slides/` |
 | `sequential-thinking` MCP | MCP 服务器 | 结构化推理链，支持多步分析和假设验证 | [modelcontextprotocol/servers](https://github.com/modelcontextprotocol/servers) |
 | `web-search-prime` MCP | MCP 服务器 | 网络搜索，获取最新文献和资料 | [智谱 BigModel](https://open.bigmodel.cn) |
 | `web-reader` MCP | MCP 服务器 | 网页内容抓取与 Markdown 转换 | [智谱 BigModel](https://open.bigmodel.cn) |
@@ -306,7 +306,7 @@ Phase 3 产出的论文笔记、调研报告、写作草稿是 Phase 4 知识库
 | 学术写作草稿 | `<OBSIDIAN_VAULT>/base/<项目名>/draft/` |
 | 组会 PPT | `<CLAUDE_DOCS>/ppt/` |
 
-建议在每个 Phase 3 任务完成后，立即将产出同步到知识库（Phase 4 的 `/kb-scan` 会自动处理）。
+建议在每个 Phase 3 任务完成后，立即将产出同步到知识库，可在 Phase 4 中使用统一的 `/knowledge-base`（或 `/kb`）入口执行 `scan` / `apply` / `sync`。
 
 ---
 

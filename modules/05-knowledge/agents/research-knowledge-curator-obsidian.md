@@ -34,7 +34,7 @@ Update `00-Hub.md` only when top-level project status really changes. Only when 
 ## Working rules
 
 - Follow `$obsidian-project-memory` as the main workflow authority.
-- Use `$obsidian-project-bootstrap`, `$obsidian-research-log`, and `$obsidian-experiment-log` as supporting skills when helpful.
+- Use `$obsidian-project-bootstrap`, `$obsidian-literature-workflow`, and `$obsidian-experiment-log` as supporting skills when helpful.
 - Use `$obsidian-markdown` and `$obsidian-cli` as auxiliary helpers, not as the core integration layer.
 - Treat raw material as input, not durable knowledge.
 - Prefer updating the existing canonical note over creating a sibling note.

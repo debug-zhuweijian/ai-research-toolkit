@@ -49,20 +49,20 @@ python -m mempalace.mcp_server --help
 # Verify skills directory
 ls ~/.claude/skills/
 
-# Should see: paper-search, paper-review, academic-writing, etc.
+# Should see installed skills such as paper-search, knowledge-base, drawio, etc.
 
-# If missing, re-copy from this repo:
-cp -rn skills/* ~/.claude/skills/
+# Reinstall with the repo installer:
+./scripts/install.sh --profile full
 ```
 
 #### Agents not appearing
 
 ```bash
 # Verify agents directory
-ls ~/.claude/agents/deep*
+ls ~/.claude/agents/
 
-# If missing:
-cp -rn agents/* ~/.claude/agents/
+# Reinstall with the repo installer:
+./scripts/install.sh --profile full
 ```
 
 ### paper-search-mcp Issues
@@ -121,16 +121,16 @@ Git Bash uses Unix-style paths. In MCP config, use forward slashes:
 - Correct: `C:/Users/yourname/.claude/mcp-servers/pdf-mcp/src/server.js`
 - Wrong: `C:\Users\yourname\.claude\mcp-servers\pdf-mcp\src\server.js`
 
-#### "cmd /c npx" not working
+#### "npx" not working
 
 Make sure Node.js and npm are in your system PATH (not just Git Bash PATH).
 Restart Claude Code after adding Node.js to PATH.
 
 #### `cp -rn` not supported
 
-On older Git Bash versions, use `cp -r --no-clobber` instead:
+Use the installer instead of manual copy:
 ```bash
-cp -r --no-clobber skills/* ~/.claude/skills/
+./scripts/install.sh --profile full
 ```
 
 ## Still Stuck?

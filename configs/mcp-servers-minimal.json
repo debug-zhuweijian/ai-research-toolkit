@@ -24,11 +24,9 @@
 
     "pdf-mcp": {
       "args": [
-        "/c",
-        "node",
         "<YOUR_PDF_MCP_PATH>"
       ],
-      "command": "cmd",
+      "command": "node",
       "env": {},
       "type": "stdio"
     },

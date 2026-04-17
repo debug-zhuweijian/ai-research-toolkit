@@ -56,7 +56,7 @@ paper-search → PDF files → MinerU → Markdown files
                     /deep-research-v5 → Cited Survey
                     /academic-writing → Draft Text
                               ↓
-                    Knowledge Base (/kb-scan → /kb-apply)
+                    Knowledge Base (/knowledge-base sync)
                               ↓
                     Graphify → Interactive Knowledge Graph
                               ↓

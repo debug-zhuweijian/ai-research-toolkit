@@ -45,23 +45,19 @@
 
     "pdf-mcp": {
       "args": [
-        "/c",
-        "node",
         "<YOUR_PDF_MCP_PATH>"
       ],
-      "command": "cmd",
+      "command": "node",
       "env": {},
       "type": "stdio"
     },
 
     "zai-mcp-server": {
       "args": [
-        "/c",
-        "npx",
         "-y",
         "@z_ai/mcp-server"
       ],
-      "command": "cmd",
+      "command": "npx",
       "env": {
         "Z_AI_API_KEY": "<YOUR_ZHIPU_API_KEY>",
         "Z_AI_MODE": "ZHIPU"
@@ -101,24 +97,20 @@
 
     "playwright": {
       "args": [
-        "/c",
-        "npx",
         "-y",
         "@playwright/mcp@latest"
       ],
-      "command": "cmd",
+      "command": "npx",
       "env": {},
       "type": "stdio"
     },
 
     "sequential-thinking": {
       "args": [
-        "/c",
-        "npx",
         "-y",
         "@modelcontextprotocol/server-sequential-thinking"
       ],
-      "command": "cmd",
+      "command": "npx",
       "env": {},
       "type": "stdio"
     }

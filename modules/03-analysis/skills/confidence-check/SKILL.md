@@ -10,11 +10,6 @@ Prevents wrong-direction execution by assessing confidence **BEFORE** starting i
 
 **Requirement**: ≥90% confidence to proceed with implementation.
 
-**Test Results** (2025-10-21):
-- Precision: 1.000 (no false positives)
-- Recall: 1.000 (no false negatives)
-- 8/8 test cases passed
-
 ## When to Use
 
 Use this skill BEFORE implementing any task to ensure:
@@ -108,16 +103,6 @@ If Total < 0.70:   ❌ STOP - Request more context
 ✅ High confidence - Proceeding to implementation
 ```
 
-## Implementation Details
-
-The TypeScript implementation is available in `confidence.ts` for reference, containing:
-
-- `confidenceCheck(context)` - Main assessment function
-- Detailed check implementations
-- Context interface definitions
-
 ## ROI
 
 **Token Savings**: Spend 100-200 tokens on confidence check to save 5,000-50,000 tokens on wrong-direction work.
-
-**Success Rate**: 100% precision and recall in production testing.

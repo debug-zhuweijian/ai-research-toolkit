@@ -6,7 +6,7 @@ user_invocable: true
 
 # 知识库维护 (/kb)
 
-知识库根目录 `I:\knowledge\`，脚本在 `I:\claude-docs\scripts\knowledge-base\kb.js`。
+知识库根目录 `<KNOWLEDGE_BASE_PATH>`，脚本在 `<KB_SCRIPTS_PATH>/kb.js`。
 
 根据用户参数 `$ARGUMENTS` 选择操作：
 
@@ -14,15 +14,15 @@ user_invocable: true
 
 | 参数 | 操作 | 命令 |
 |------|------|------|
-| `scan` | 扫描 claude-docs 有无新资料 | `node kb.js scan` |
-| `apply` | 入库新资料（draft-mode none） | `node kb.js apply --draft-mode none` |
-| `lint` | 8 项健康检查 | `node kb.js lint` |
-| `index` | 重新生成 wiki/index.md | `node kb.js index` |
-| `stats` | 打印当前统计 | `node kb.js stats` |
+| `scan` | 扫描 claude-docs 有无新资料 | `node <KB_SCRIPTS_PATH>/kb.js scan` |
+| `apply` | 入库新资料（draft-mode none） | `node <KB_SCRIPTS_PATH>/kb.js apply --draft-mode none` |
+| `lint` | 8 项健康检查 | `node <KB_SCRIPTS_PATH>/kb.js lint` |
+| `index` | 重新生成 wiki/index.md | `node <KB_SCRIPTS_PATH>/kb.js index` |
+| `stats` | 打印当前统计 | `node <KB_SCRIPTS_PATH>/kb.js stats` |
 | `sync` | 全量同步（scan → apply → lint → index） | 依次执行上述 4 步 |
-| `status` | 状态总览（stats + lint 摘要） | `node kb.js stats` + `node kb.js lint` |
+| `status` | 状态总览（stats + lint 摘要） | `node <KB_SCRIPTS_PATH>/kb.js stats` + `node <KB_SCRIPTS_PATH>/kb.js lint` |
 
-所有命令在 `I:\claude-docs\scripts\knowledge-base\` 目录下执行。
+所有命令默认在 `<KB_SCRIPTS_PATH>` 目录下执行，知识库内容写入 `<KNOWLEDGE_BASE_PATH>`。
 
 ## 执行规则
 
@@ -38,3 +38,8 @@ user_invocable: true
 - "检查有没有新文件" → `/kb scan`
 - "看知识库状态" → `/kb stats`
 - "跑健康检查" → `/kb lint`
+
+## 路径占位符
+
+- `<KB_SCRIPTS_PATH>`：`kb.js` 所在目录
+- `<KNOWLEDGE_BASE_PATH>`：你的知识库根目录

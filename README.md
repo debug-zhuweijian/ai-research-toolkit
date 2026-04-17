@@ -103,10 +103,10 @@ git clone https://github.com/debug-zhuweijian/ai-research-toolkit.git
 cd ai-research-toolkit
 
 # Install with a profile preset
-./scripts/install.sh --profile researcher    # Recommended for researchers
-./scripts/install.sh --profile writer        # For paper writing focus
-./scripts/install.sh --profile full          # Everything
 ./scripts/install.sh --profile minimal       # Just search + PDF processing
+./scripts/install.sh --profile knowledge     # Knowledge management + presentation
+./scripts/install.sh --profile full          # Everything
+./scripts/install.sh --list                  # Show profiles and modules
 
 # Or install individual modules
 ./scripts/install.sh --module 03-analysis    # Only Phase 03
@@ -466,16 +466,16 @@ See [modules/04-writing/README.md](modules/04-writing/README.md) for writing wor
 | knowledge-base | This repo | Skill |
 | knowledge-distillation | This repo | Skill |
 | obsidian-markdown | This repo | Skill |
+| obsidian-bases | This repo | Skill |
+| obsidian-cli | This repo | Skill |
 | obsidian-literature-workflow | This repo | Skill |
-| obsidian-research-log | This repo | Skill |
-| obsidian-synthesis-map | This repo | Skill |
 | obsidian-experiment-log | This repo | Skill |
-| obsidian-link-graph | This repo | Skill |
+| obsidian-project-bootstrap | This repo | Skill |
 | obsidian-project-memory | This repo | Skill |
 | MemPalace | [MemPalace/mempalace](https://github.com/MemPalace/mempalace) | `pip install mempalace` (separate conda env) |
 | ChromaDB | [chroma-core/chroma](https://github.com/chroma-core/chroma) | `pip install chromadb` |
 
-Build a structured, searchable knowledge base from your research materials. Knowledge-base skill replaces the old kb-* shells with a unified interface. Graphify transforms any folder of documents into a navigable graph with community detection, interactive HTML visualization, and audit reports. **rebuild_graph.py** is a GraphRAG-inspired pipeline that adds LLM-based semantic extraction, incremental caching, Louvain community detection, and gleaning (multi-round extraction to recover missed entities) on top of graphify's code analysis. Seven Obsidian skills provide specialized workflows for literature notes, research logs, synthesis maps, experiment logs, link graphs, project memory, and Markdown formatting. MemPalace adds persistent semantic memory with knowledge graph support.
+Build a structured, searchable knowledge base from your research materials. Knowledge-base skill replaces the old kb-* shells with a unified interface. Graphify transforms any folder of documents into a navigable graph with community detection, interactive HTML visualization, and audit reports. **rebuild_graph.py** is a GraphRAG-inspired pipeline that adds LLM-based semantic extraction, incremental caching, Louvain community detection, and gleaning (multi-round extraction to recover missed entities) on top of graphify's code analysis. Seven Obsidian skills now cover Bases queries, CLI automation, literature workflow, experiment logs, project bootstrap, project memory, and Markdown formatting. MemPalace adds persistent semantic memory with knowledge graph support.
 
 See [modules/05-knowledge/README.md](modules/05-knowledge/README.md) for knowledge base architecture, Obsidian setup, and graph generation options.
 
@@ -512,8 +512,6 @@ See [modules/07-pipeline/README.md](modules/07-pipeline/README.md) for design pr
 | Profile | Modules | Skills | Agents | Best For |
 |---------|---------|--------|--------|----------|
 | `minimal` | 01, 02 | 7 | 2 | Literature search and document processing |
-| `writer` | 04, 06 | 16 | 7 | Academic writing and presentations |
-| `researcher` | 01-04 | 25 | 14 | Full research workflow (recommended) |
 | `knowledge` | 05, 06 | 17 | 2 | Knowledge management and Obsidian |
 | `full` | 01-06 | 42 | 16 | Complete toolkit |
 
@@ -589,32 +587,32 @@ Global servers are configured via `configs/mcp-servers-full.json`. Replace `<YOU
 | [MinerU](https://github.com/opendatalab/MinerU) | OpenDataLab | Apache-2.0 | 02 | `pip install mineru-mcp-server` |
 | [pdf-mcp](https://github.com/angshuman/pdf-mcp) | angshuman | MIT | 02 | `git clone` + `npm install` |
 | [MarkItDown](https://github.com/microsoft/markitdown) | Microsoft | MIT | 02 | `pip install markitdown-mcp` |
-| [paper-review](skills/paper-review/) | This repo | MIT | 03 | Skill (copy to `~/.claude/skills/`) |
-| [paper-proofread](skills/paper-proofread/) | This repo + [LimHyungTae](https://github.com/LimHyungTae/awesome-claudecode-paper-proofreading) | MIT | 03 | Skill (copy to `~/.claude/skills/`) |
-| [deep-research-v5](skills/deep-research-v5/) | This repo | MIT | 03 | Skill (9 files) |
+| [paper-review](modules/03-analysis/skills/paper-review/) | This repo | MIT | 03 | Skill (copy to `~/.claude/skills/`) |
+| [paper-proofread](modules/03-analysis/skills/paper-proofread/) | This repo + [LimHyungTae](https://github.com/LimHyungTae/awesome-claudecode-paper-proofreading) | MIT | 03 | Skill (copy to `~/.claude/skills/`) |
+| [deep-research-v5](modules/03-analysis/skills/deep-research-v5/) | This repo | MIT | 03 | Skill (9 files) |
 | [Sequential Thinking](https://github.com/modelcontextprotocol/servers) | MCP | MIT | 03 | `npx @modelcontextprotocol/server-sequential-thinking` |
 | [Claude Code](https://docs.anthropic.com/en/docs/claude-code) | Anthropic | Commercial | All | `npm i -g @anthropic-ai/claude-code` |
-| [academic-writing](skills/academic-writing/) | This repo | MIT | 04 | Skill (copy to `~/.claude/skills/`) |
-| [ml-paper-writing](skills/ml-paper-writing/) | This repo | MIT | 04 | Skill (copy to `~/.claude/skills/`) |
-| [systems-paper-writing](skills/systems-paper-writing/) | This repo | MIT | 04 | Skill (copy to `~/.claude/skills/`) |
-| [writing-anti-ai](skills/writing-anti-ai/) | This repo | MIT | 04 | Skill (copy to `~/.claude/skills/`) |
-| [review-response](skills/review-response/) | This repo | MIT | 04 | Skill (copy to `~/.claude/skills/`) |
-| [post-acceptance](skills/post-acceptance/) | This repo | MIT | 04 | Skill (copy to `~/.claude/skills/`) |
-| [results-analysis](skills/results-analysis/) | This repo | MIT | 04 | Skill (copy to `~/.claude/skills/`) |
-| [results-report](skills/results-report/) | This repo | MIT | 04 | Skill (copy to `~/.claude/skills/`) |
+| [academic-writing](modules/04-writing/skills/academic-writing/) | This repo | MIT | 04 | Skill (copy to `~/.claude/skills/`) |
+| [ml-paper-writing](modules/04-writing/skills/ml-paper-writing/) | This repo | MIT | 04 | Skill (copy to `~/.claude/skills/`) |
+| [systems-paper-writing](modules/04-writing/skills/systems-paper-writing/) | This repo | MIT | 04 | Skill (copy to `~/.claude/skills/`) |
+| [writing-anti-ai](modules/04-writing/skills/writing-anti-ai/) | This repo | MIT | 04 | Skill (copy to `~/.claude/skills/`) |
+| [review-response](modules/04-writing/skills/review-response/) | This repo | MIT | 04 | Skill (copy to `~/.claude/skills/`) |
+| [post-acceptance](modules/04-writing/skills/post-acceptance/) | This repo | MIT | 04 | Skill (copy to `~/.claude/skills/`) |
+| [results-analysis](modules/04-writing/skills/results-analysis/) | This repo | MIT | 04 | Skill (copy to `~/.claude/skills/`) |
+| [results-report](modules/04-writing/skills/results-report/) | This repo | MIT | 04 | Skill (copy to `~/.claude/skills/`) |
 | [Graphify](https://github.com/safishamsi/graphify) | safishamsi | MIT | 05 | `pip install graphifyy` |
-| [knowledge-base](skills/knowledge-base/) | This repo | MIT | 05 | Skill (copy to `~/.claude/skills/`) |
-| [knowledge-distillation](skills/knowledge-distillation/) | This repo | MIT | 05 | Skill (copy to `~/.claude/skills/`) |
-| [obsidian-*](skills/) (7 skills) | This repo | MIT | 05 | Skill (copy to `~/.claude/skills/`) |
+| [knowledge-base](modules/05-knowledge/skills/knowledge-base/) | This repo | MIT | 05 | Skill (copy to `~/.claude/skills/`) |
+| [knowledge-distillation](modules/05-knowledge/skills/knowledge-distillation/) | This repo | MIT | 05 | Skill (copy to `~/.claude/skills/`) |
+| [obsidian-*](modules/05-knowledge/skills/) (7 skills) | This repo | MIT | 05 | Skill (copy to `~/.claude/skills/`) |
 | [MemPalace](https://github.com/MemPalace/mempalace) | MemPalace | MIT | 05 | `pip install mempalace` (separate conda env) |
 | [ChromaDB](https://github.com/chroma-core/chroma) | Chroma | Apache-2.0 | 05 | `pip install chromadb` |
-| [academic-pptx](skills/academic-pptx/) | This repo | MIT | 06 | Skill (copy to `~/.claude/skills/`) |
-| [group-meeting-slides](skills/group-meeting-slides/) | This repo | MIT | 06 | Skill (copy to `~/.claude/skills/`) |
-| [academic-plotting](skills/academic-plotting/) | This repo | MIT | 06 | Skill (copy to `~/.claude/skills/`) |
+| [academic-pptx](modules/06-presentation/skills/academic-pptx/) | This repo | MIT | 06 | Skill (copy to `~/.claude/skills/`) |
+| [group-meeting-slides](modules/06-presentation/skills/group-meeting-slides/) | This repo | MIT | 06 | Skill (copy to `~/.claude/skills/`) |
+| [academic-plotting](modules/06-presentation/skills/academic-plotting/) | This repo | MIT | 06 | Skill (copy to `~/.claude/skills/`) |
 | [draw.io MCP](https://github.com/nicholaschenai/drawio-mcp) | nicholaschenai | MIT | 06 | `npx @drawio/mcp` |
-| [notion-infographic](skills/notion-infographic/) | This repo | MIT | 06 | Skill (copy to `~/.claude/skills/`) |
-| [publication-chart-skill](skills/publication-chart-skill/) | This repo | MIT | 06 | Skill (copy to `~/.claude/skills/`) |
-| [presenting-conference-talks](skills/presenting-conference-talks/) | This repo | MIT | 06 | Skill (copy to `~/.claude/skills/`) |
+| [notion-infographic](modules/06-presentation/skills/notion-infographic/) | This repo | MIT | 06 | Skill (copy to `~/.claude/skills/`) |
+| [publication-chart-skill](modules/06-presentation/skills/publication-chart-skill/) | This repo | MIT | 06 | Skill (copy to `~/.claude/skills/`) |
+| [presenting-conference-talks](modules/06-presentation/skills/presenting-conference-talks/) | This repo | MIT | 06 | Skill (copy to `~/.claude/skills/`) |
 | [Playwright MCP](https://github.com/microsoft/playwright-mcp) | Microsoft | Apache-2.0 | All | `npx @playwright/mcp@latest` |
 | [Context7](https://github.com/nicholaschenai/context7) | Context7 | MIT | All | Plugin (via compound-engineering) |
 
@@ -663,8 +661,8 @@ The [experimental/](experimental/) directory contains advanced components that r
 - **7-phase module structure** -- organized into Discovery, Processing, Analysis, Writing, Knowledge, Presentation, and Pipeline (was 4 phases)
 - **42 skills** (was 17) -- 25 new skills across all phases
 - **16 agents** -- literature reviewers, LaTeX specialists, rebuttal writers, and more
-- **5 profile presets** -- install only what you need (minimal, writer, researcher, knowledge, full)
-- **7 Obsidian skills** -- literature workflow, research log, synthesis map, experiment log, link graph, project memory, Markdown formatting
+- **3 profile presets** -- install only what you need (minimal, knowledge, full)
+- **7 Obsidian skills** -- Bases, CLI automation, literature workflow, experiment log, project bootstrap, project memory, Markdown formatting
 - **Knowledge-base unified skill** -- replaces old kb-scan/kb-apply/kb-lint/kb-stats shell scripts
 - **rebuild_graph.py** -- GraphRAG-inspired semantic extraction pipeline with LLM entity extraction, incremental caching, Louvain community detection, and gleaning
 - **6 presentation skills** -- academic PPTX, group meeting slides, academic plotting, draw.io, infographics, conference talks

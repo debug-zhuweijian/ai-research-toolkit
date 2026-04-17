@@ -136,7 +136,7 @@ claude
 
 ---
 
-## 第 3 步：Clone 本 Repo + 复制 Skills/Agents
+## 第 3 步：Clone 本 Repo + 安装 Skills/Agents
 
 ### 3.1 Clone
 
@@ -145,26 +145,42 @@ git clone https://github.com/debug-zhuweijian/ai-research-toolkit.git
 cd ai-research-toolkit
 ```
 
-### 3.2 复制 Skills
+### 3.2 使用安装脚本
 
-Skills 是 Claude Code 的扩展命令，放在 `~/.claude/skills/` 目录下。
+推荐使用仓库自带安装脚本，而不是手动复制 `modules/*/skills` 和 `modules/*/agents`。
 
 ```bash
-# Linux/macOS:
-cp -rn skills/* ~/.claude/skills/
+# Bash / zsh / Git Bash
+./scripts/install.sh --list
+./scripts/install.sh --profile full
 
-# Windows (Git Bash):
-cp -rn skills/* ~/.claude/skills/
+# 只安装知识管理相关模块
+./scripts/install.sh --profile knowledge
+
+# 只安装某个模块
+./scripts/install.sh --module 05-knowledge
 ```
 
-`-n` 参数防止覆盖已有 skill。
+```powershell
+# PowerShell
+.\scripts\install.ps1 -List
+.\scripts\install.ps1 -Profile full
 
-### 3.3 复制 Agents
+# 只安装某个模块
+.\scripts\install.ps1 -Module 05-knowledge
+```
 
-Agents 是 Claude Code 的子代理配置，放在 `~/.claude/agents/` 目录下。
+安装脚本默认写入：
+
+- Skills → `~/.claude/skills/`
+- Agents → `~/.claude/agents/`
+
+可通过 `--skills-path` / `--agents-path`（PowerShell 为 `-SkillsPath` / `-AgentsPath`）覆盖目标路径；传 `--force` / `-Force` 可覆盖已有安装。
+
+### 3.3 验证安装
 
 ```bash
-cp -rn agents/* ~/.claude/agents/
+./scripts/verify-setup.sh
 ```
 
 ### 3.4 替换路径占位符
@@ -179,6 +195,7 @@ cp -rn agents/* ~/.claude/agents/
 | `<OBSIDIAN_VAULT>` | Obsidian vault 路径 | `/c/Users/YOU/obsidian-vault` |
 | `<KNOWLEDGE_BASE_PATH>` | 知识库目录路径 | `/c/Users/YOU/knowledge` |
 | `<KB_SCRIPTS_PATH>` | kb.js 脚本目录路径 | `/c/Users/YOU/scripts/kb` |
+| `<DRAWIO_OUTPUT_DIR>` | draw.io 图表输出目录 | `/c/Users/YOU/drawio-output` |
 
 **替换方法（以 paper-search 为例）：**
 
@@ -631,7 +648,7 @@ claude
 | `mempalace` MCP 启动失败 | conda 环境路径错误 | 用 `conda run -n mempalace which python` 获取正确路径 |
 | web-search-prime 无结果 | 智谱 Key 无效 | 检查 Key 格式（`xxx.xxx`），确认账户有免费额度 |
 | npx 下载超时 | 网络问题 | 设置 `HTTPS_PROXY` 环境变量，或手动 `npm install -g` 对应包 |
-| Windows `cmd /c` 不工作 | Node.js 不在系统 PATH | 确保 Node.js 在系统 PATH（不仅是 Git Bash PATH），重启终端 |
+| `npx` 不工作 | Node.js 不在系统 PATH | 确保 Node.js 与 npm/npx 在系统 PATH，重启终端 |
 
 ### 安全提醒
 

@@ -103,10 +103,10 @@ git clone https://github.com/debug-zhuweijian/ai-research-toolkit.git
 cd ai-research-toolkit
 
 # 설치 프리셋으로 설치
-./scripts/install.sh --profile researcher    # 연구자에게 권장
-./scripts/install.sh --profile writer        # 논문 작문 중심
-./scripts/install.sh --profile full          # 전체 설치
 ./scripts/install.sh --profile minimal       # 검색 + PDF 처리만
+./scripts/install.sh --profile knowledge     # 지식 관리 + 프레젠테이션
+./scripts/install.sh --profile full          # 전체 설치
+./scripts/install.sh --list                  # 프리셋과 모듈 보기
 
 # 또는 개별 모듈 설치
 ./scripts/install.sh --module 03-analysis    # 단계 03만
@@ -466,16 +466,16 @@ graphify-out/
 | knowledge-base | 이 저장소 | 스킬 |
 | knowledge-distillation | 이 저장소 | 스킬 |
 | obsidian-markdown | 이 저장소 | 스킬 |
+| obsidian-bases | 이 저장소 | 스킬 |
+| obsidian-cli | 이 저장소 | 스킬 |
 | obsidian-literature-workflow | 이 저장소 | 스킬 |
-| obsidian-research-log | 이 저장소 | 스킬 |
-| obsidian-synthesis-map | 이 저장소 | 스킬 |
 | obsidian-experiment-log | 이 저장소 | 스킬 |
-| obsidian-link-graph | 이 저장소 | 스킬 |
+| obsidian-project-bootstrap | 이 저장소 | 스킬 |
 | obsidian-project-memory | 이 저장소 | 스킬 |
 | MemPalace | [MemPalace/mempalace](https://github.com/MemPalace/mempalace) | `pip install mempalace` (별도 conda 환경) |
 | ChromaDB | [chroma-core/chroma](https://github.com/chroma-core/chroma) | `pip install chromadb` |
 
-연구 자료로부터 구조화되고 검색 가능한 지식 베이스를 구축합니다. Knowledge-base 스킬은 기존 kb-* 셸 스크립트를 통합 인터페이스로 대체합니다. Graphify는 문서 폴더를 커뮤니티 탐지, 대화형 HTML 시각화 및 감사 보고서가 포함된 탐색 가능한 그래프로 변환합니다. **rebuild_graph.py**는 GraphRAG에서 영감받은 확장 파이프라인으로, graphify의 코드 분석 위에 LLM 기반 시맨틱 엔티티 추출, 증분 캐싱, Louvain 커뮤니티 감지 및 다중 라운드 추출(Gleaning)을 통한 누락 엔티티 복구를 추가합니다. 7개의 Obsidian 스킬은 문헌 노트, 연구 로그, 종합 지도, 실험 로그, 링크 그래프, 프로젝트 메모리 및 Markdown 포맷팅을 위한 전문 워크플로우를 제공합니다. MemPalace은 지식 그래프 지원이 포함된 영구 시맨틱 메모리를 추가합니다.
+연구 자료로부터 구조화되고 검색 가능한 지식 베이스를 구축합니다. Knowledge-base 스킬은 기존 kb-* 셸 스크립트를 통합 인터페이스로 대체합니다. Graphify는 문서 폴더를 커뮤니티 탐지, 대화형 HTML 시각화 및 감사 보고서가 포함된 탐색 가능한 그래프로 변환합니다. **rebuild_graph.py**는 GraphRAG에서 영감받은 확장 파이프라인으로, graphify의 코드 분석 위에 LLM 기반 시맨틱 엔티티 추출, 증분 캐싱, Louvain 커뮤니티 감지 및 다중 라운드 추출(Gleaning)을 통한 누락 엔티티 복구를 추가합니다. 7개의 Obsidian 스킬은 Bases 조회, CLI 자동화, 문헌 워크플로우, 실험 로그, 프로젝트 부트스트랩, 프로젝트 메모리 및 Markdown 포맷팅을 지원합니다. MemPalace는 지식 그래프 지원이 포함된 영구 시맨틱 메모리를 제공합니다.
 
 지식 베이스 아키텍처, Obsidian 설정 및 그래프 생성 옵션에 대해서는 [modules/05-knowledge/README.md](modules/05-knowledge/README.md)를 참조하십시오.
 
@@ -512,8 +512,6 @@ graphify-out/
 | 프리셋 | 모듈 | 스킬 | 에이전트 | 적합 대상 |
 |---------|---------|--------|--------|----------|
 | `minimal` | 01, 02 | 7 | 2 | 문헌 검색 및 문서 처리 |
-| `writer` | 04, 06 | 16 | 7 | 학술 작문 및 프레젠테이션 |
-| `researcher` | 01-04 | 25 | 14 | 전체 연구 워크플로우(권장) |
 | `knowledge` | 05, 06 | 17 | 2 | 지식 관리 및 Obsidian |
 | `full` | 01-06 | 42 | 16 | 전체 툴킷 |
 
@@ -589,32 +587,32 @@ graphify-out/
 | [MinerU](https://github.com/opendatalab/MinerU) | OpenDataLab | Apache-2.0 | 02 | `pip install mineru-mcp-server` |
 | [pdf-mcp](https://github.com/angshuman/pdf-mcp) | angshuman | MIT | 02 | `git clone` + `npm install` |
 | [MarkItDown](https://github.com/microsoft/markitdown) | Microsoft | MIT | 02 | `pip install markitdown-mcp` |
-| [paper-review](skills/paper-review/) | 이 저장소 | MIT | 03 | 스킬(`~/.claude/skills/`에 복사) |
-| [paper-proofread](skills/paper-proofread/) | 이 저장소 + [LimHyungTae](https://github.com/LimHyungTae/awesome-claudecode-paper-proofreading) | MIT | 03 | 스킬(`~/.claude/skills/`에 복사) |
-| [deep-research-v5](skills/deep-research-v5/) | 이 저장소 | MIT | 03 | 스킬(9개 파일) |
+| [paper-review](modules/03-analysis/skills/paper-review/) | 이 저장소 | MIT | 03 | 스킬(`~/.claude/skills/`에 복사) |
+| [paper-proofread](modules/03-analysis/skills/paper-proofread/) | 이 저장소 + [LimHyungTae](https://github.com/LimHyungTae/awesome-claudecode-paper-proofreading) | MIT | 03 | 스킬(`~/.claude/skills/`에 복사) |
+| [deep-research-v5](modules/03-analysis/skills/deep-research-v5/) | 이 저장소 | MIT | 03 | 스킬(9개 파일) |
 | [Sequential Thinking](https://github.com/modelcontextprotocol/servers) | MCP | MIT | 03 | `npx @modelcontextprotocol/server-sequential-thinking` |
 | [Claude Code](https://docs.anthropic.com/en/docs/claude-code) | Anthropic | Commercial | 전체 | `npm i -g @anthropic-ai/claude-code` |
-| [academic-writing](skills/academic-writing/) | 이 저장소 | MIT | 04 | 스킬(`~/.claude/skills/`에 복사) |
-| [ml-paper-writing](skills/ml-paper-writing/) | 이 저장소 | MIT | 04 | 스킬(`~/.claude/skills/`에 복사) |
-| [systems-paper-writing](skills/systems-paper-writing/) | 이 저장소 | MIT | 04 | 스킬(`~/.claude/skills/`에 복사) |
-| [writing-anti-ai](skills/writing-anti-ai/) | 이 저장소 | MIT | 04 | 스킬(`~/.claude/skills/`에 복사) |
-| [review-response](skills/review-response/) | 이 저장소 | MIT | 04 | 스킬(`~/.claude/skills/`에 복사) |
-| [post-acceptance](skills/post-acceptance/) | 이 저장소 | MIT | 04 | 스킬(`~/.claude/skills/`에 복사) |
-| [results-analysis](skills/results-analysis/) | 이 저장소 | MIT | 04 | 스킬(`~/.claude/skills/`에 복사) |
-| [results-report](skills/results-report/) | 이 저장소 | MIT | 04 | 스킬(`~/.claude/skills/`에 복사) |
+| [academic-writing](modules/04-writing/skills/academic-writing/) | 이 저장소 | MIT | 04 | 스킬(`~/.claude/skills/`에 복사) |
+| [ml-paper-writing](modules/04-writing/skills/ml-paper-writing/) | 이 저장소 | MIT | 04 | 스킬(`~/.claude/skills/`에 복사) |
+| [systems-paper-writing](modules/04-writing/skills/systems-paper-writing/) | 이 저장소 | MIT | 04 | 스킬(`~/.claude/skills/`에 복사) |
+| [writing-anti-ai](modules/04-writing/skills/writing-anti-ai/) | 이 저장소 | MIT | 04 | 스킬(`~/.claude/skills/`에 복사) |
+| [review-response](modules/04-writing/skills/review-response/) | 이 저장소 | MIT | 04 | 스킬(`~/.claude/skills/`에 복사) |
+| [post-acceptance](modules/04-writing/skills/post-acceptance/) | 이 저장소 | MIT | 04 | 스킬(`~/.claude/skills/`에 복사) |
+| [results-analysis](modules/04-writing/skills/results-analysis/) | 이 저장소 | MIT | 04 | 스킬(`~/.claude/skills/`에 복사) |
+| [results-report](modules/04-writing/skills/results-report/) | 이 저장소 | MIT | 04 | 스킬(`~/.claude/skills/`에 복사) |
 | [Graphify](https://github.com/safishamsi/graphify) | safishamsi | MIT | 05 | `pip install graphifyy` |
-| [knowledge-base](skills/knowledge-base/) | 이 저장소 | MIT | 05 | 스킬(`~/.claude/skills/`에 복사) |
-| [knowledge-distillation](skills/knowledge-distillation/) | 이 저장소 | MIT | 05 | 스킬(`~/.claude/skills/`에 복사) |
-| [obsidian-*](skills/) (7개 스킬) | 이 저장소 | MIT | 05 | 스킬(`~/.claude/skills/`에 복사) |
+| [knowledge-base](modules/05-knowledge/skills/knowledge-base/) | 이 저장소 | MIT | 05 | 스킬(`~/.claude/skills/`에 복사) |
+| [knowledge-distillation](modules/05-knowledge/skills/knowledge-distillation/) | 이 저장소 | MIT | 05 | 스킬(`~/.claude/skills/`에 복사) |
+| [obsidian-*](modules/05-knowledge/skills/) (7개 스킬) | 이 저장소 | MIT | 05 | 스킬(`~/.claude/skills/`에 복사) |
 | [MemPalace](https://github.com/MemPalace/mempalace) | MemPalace | MIT | 05 | `pip install mempalace` (별도 conda 환경) |
 | [ChromaDB](https://github.com/chroma-core/chroma) | Chroma | Apache-2.0 | 05 | `pip install chromadb` |
-| [academic-pptx](skills/academic-pptx/) | 이 저장소 | MIT | 06 | 스킬(`~/.claude/skills/`에 복사) |
-| [group-meeting-slides](skills/group-meeting-slides/) | 이 저장소 | MIT | 06 | 스킬(`~/.claude/skills/`에 복사) |
-| [academic-plotting](skills/academic-plotting/) | 이 저장소 | MIT | 06 | 스킬(`~/.claude/skills/`에 복사) |
+| [academic-pptx](modules/06-presentation/skills/academic-pptx/) | 이 저장소 | MIT | 06 | 스킬(`~/.claude/skills/`에 복사) |
+| [group-meeting-slides](modules/06-presentation/skills/group-meeting-slides/) | 이 저장소 | MIT | 06 | 스킬(`~/.claude/skills/`에 복사) |
+| [academic-plotting](modules/06-presentation/skills/academic-plotting/) | 이 저장소 | MIT | 06 | 스킬(`~/.claude/skills/`에 복사) |
 | [draw.io MCP](https://github.com/nicholaschenai/drawio-mcp) | nicholaschenai | MIT | 06 | `npx @drawio/mcp` |
-| [notion-infographic](skills/notion-infographic/) | 이 저장소 | MIT | 06 | 스킬(`~/.claude/skills/`에 복사) |
-| [publication-chart-skill](skills/publication-chart-skill/) | 이 저장소 | MIT | 06 | 스킬(`~/.claude/skills/`에 복사) |
-| [presenting-conference-talks](skills/presenting-conference-talks/) | 이 저장소 | MIT | 06 | 스킬(`~/.claude/skills/`에 복사) |
+| [notion-infographic](modules/06-presentation/skills/notion-infographic/) | 이 저장소 | MIT | 06 | 스킬(`~/.claude/skills/`에 복사) |
+| [publication-chart-skill](modules/06-presentation/skills/publication-chart-skill/) | 이 저장소 | MIT | 06 | 스킬(`~/.claude/skills/`에 복사) |
+| [presenting-conference-talks](modules/06-presentation/skills/presenting-conference-talks/) | 이 저장소 | MIT | 06 | 스킬(`~/.claude/skills/`에 복사) |
 | [Playwright MCP](https://github.com/microsoft/playwright-mcp) | Microsoft | Apache-2.0 | 전체 | `npx @playwright/mcp@latest` |
 | [Context7](https://github.com/nicholaschenai/context7) | Context7 | MIT | 전체 | 플러그인(compound-engineering 통해) |
 
@@ -663,8 +661,8 @@ graphify-out/
 - **7단계 모듈 구조** -- 문헌 검색, 문서 처리, 논문 분석, 학술 작문, 지식 관리, 프레젠테이션, 파이프라인으로 구성(이전 4단계에서 변경)
 - **42개 스킬**(이전 17개) -- 모든 단계에 25개의 새로운 스킬 추가
 - **16개 에이전트** -- 문헌 리뷰어, LaTeX 전문가, 리벗털 작성자 등
-- **5개 설치 프리셋** -- 필요한 것만 설치(minimal, writer, researcher, knowledge, full)
-- **7개 Obsidian 스킬** -- 문헌 워크플로우, 연구 로그, 종합 지도, 실험 로그, 링크 그래프, 프로젝트 메모리, Markdown 포맷팅
+- **3개 설치 프리셋** -- 필요한 것만 설치(minimal, knowledge, full)
+- **7개 Obsidian 스킬** -- Bases, CLI 자동화, 문헌 워크플로우, 실험 로그, 프로젝트 부트스트랩, 프로젝트 메모리, Markdown 포맷팅
 - **Knowledge-base 통합 스킬** -- 기존 kb-scan/kb-apply/kb-lint/kb-stats 셸 스크립트를 대체
 - **rebuild_graph.py** -- GraphRAG에서 영감받은 시맨틱 추출 파이프라인 (LLM 엔티티 추출, 증분 캐싱, Louvain 커뮤니티 감지, 다중 라운드 추출)
 - **6개 프레젠테이션 스킬** -- 학술 PPTX, 연구실 미팅 슬라이드, 학술 플로팅, draw.io, 인포그래픽, 학회 발표

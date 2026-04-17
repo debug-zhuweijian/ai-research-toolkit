@@ -103,10 +103,10 @@ git clone https://github.com/debug-zhuweijian/ai-research-toolkit.git
 cd ai-research-toolkit
 
 # 按预设安装
-./scripts/install.sh --profile researcher    # 研究者推荐
-./scripts/install.sh --profile writer        # 专注论文写作
-./scripts/install.sh --profile full          # 全部安装
 ./scripts/install.sh --profile minimal       # 仅搜索 + PDF 处理
+./scripts/install.sh --profile knowledge     # 知识管理 + 演示
+./scripts/install.sh --profile full          # 全部安装
+./scripts/install.sh --list                  # 查看预设和模块
 
 # 或安装单独模块
 ./scripts/install.sh --module 03-analysis    # 仅阶段 03
@@ -466,16 +466,16 @@ graphify-out/
 | knowledge-base | 本仓库 | Skill |
 | knowledge-distillation | 本仓库 | Skill |
 | obsidian-markdown | 本仓库 | Skill |
+| obsidian-bases | 本仓库 | Skill |
+| obsidian-cli | 本仓库 | Skill |
 | obsidian-literature-workflow | 本仓库 | Skill |
-| obsidian-research-log | 本仓库 | Skill |
-| obsidian-synthesis-map | 本仓库 | Skill |
 | obsidian-experiment-log | 本仓库 | Skill |
-| obsidian-link-graph | 本仓库 | Skill |
+| obsidian-project-bootstrap | 本仓库 | Skill |
 | obsidian-project-memory | 本仓库 | Skill |
 | MemPalace | [MemPalace/mempalace](https://github.com/MemPalace/mempalace) | `pip install mempalace`（独立 conda 环境） |
 | ChromaDB | [chroma-core/chroma](https://github.com/chroma-core/chroma) | `pip install chromadb` |
 
-从研究材料构建结构化的、可搜索的知识库。knowledge-base Skill 用统一接口替代了旧的 kb-* 脚本。Graphify 将任意文档文件夹转换为可导航的图谱，带社区检测、交互式 HTML 可视化和审计报告。**rebuild_graph.py** 是 GraphRAG 启发的增强管线，在 graphify 代码分析之上增加了基于 LLM 的语义实体提取、增量缓存、Louvain 社区检测和多轮清洗（Gleaning）以回收遗漏实体。7 个 Obsidian Skill 提供专门的工作流：文献笔记、研究日志、综合图谱、实验日志、链接图、项目记忆和 Markdown 格式化。MemPalace 增加了带知识图谱支持的持久化语义记忆。
+从研究材料构建结构化、可搜索的知识库。knowledge-base Skill 用统一接口替代了旧的 kb-* 脚本。Graphify 将任意文档文件夹转换为可导航的图谱，带社区检测、交互式 HTML 可视化和审计报告。**rebuild_graph.py** 是 GraphRAG 启发的增强管线，在 graphify 代码分析之上增加了基于 LLM 的语义实体提取、增量缓存、Louvain 社区检测和多轮清洗（Gleaning）以回收遗漏实体。7 个 Obsidian Skill 现在覆盖 Bases 查询、CLI 自动化、文献工作流、实验日志、项目初始化、项目记忆和 Markdown 格式化。MemPalace 增加了带知识图谱支持的持久化语义记忆。
 
 知识库架构、Obsidian 设置和图谱生成选项请参考 [modules/05-knowledge/README.md](modules/05-knowledge/README.md)。
 
@@ -512,8 +512,6 @@ graphify-out/
 | 预设 | 模块 | Skill 数 | Agent 数 | 适用场景 |
 |------|------|----------|----------|----------|
 | `minimal` | 01, 02 | 7 | 2 | 文献搜索和文档处理 |
-| `writer` | 04, 06 | 16 | 7 | 学术写作和演示 |
-| `researcher` | 01-04 | 25 | 14 | 完整研究工作流（推荐） |
 | `knowledge` | 05, 06 | 17 | 2 | 知识管理和 Obsidian |
 | `full` | 01-06 | 42 | 16 | 完整工具集 |
 
@@ -589,32 +587,32 @@ graphify-out/
 | [MinerU](https://github.com/opendatalab/MinerU) | OpenDataLab | Apache-2.0 | 02 | `pip install mineru-mcp-server` |
 | [pdf-mcp](https://github.com/angshuman/pdf-mcp) | angshuman | MIT | 02 | `git clone` + `npm install` |
 | [MarkItDown](https://github.com/microsoft/markitdown) | Microsoft | MIT | 02 | `pip install markitdown-mcp` |
-| [paper-review](skills/paper-review/) | 本仓库 | MIT | 03 | Skill（复制到 `~/.claude/skills/`） |
-| [paper-proofread](skills/paper-proofread/) | 本仓库 + [LimHyungTae](https://github.com/LimHyungTae/awesome-claudecode-paper-proofreading) | MIT | 03 | Skill（复制到 `~/.claude/skills/`） |
-| [deep-research-v5](skills/deep-research-v5/) | 本仓库 | MIT | 03 | Skill（9 个文件） |
+| [paper-review](modules/03-analysis/skills/paper-review/) | 本仓库 | MIT | 03 | Skill（复制到 `~/.claude/skills/`） |
+| [paper-proofread](modules/03-analysis/skills/paper-proofread/) | 本仓库 + [LimHyungTae](https://github.com/LimHyungTae/awesome-claudecode-paper-proofreading) | MIT | 03 | Skill（复制到 `~/.claude/skills/`） |
+| [deep-research-v5](modules/03-analysis/skills/deep-research-v5/) | 本仓库 | MIT | 03 | Skill（9 个文件） |
 | [Sequential Thinking](https://github.com/modelcontextprotocol/servers) | MCP | MIT | 03 | `npx @modelcontextprotocol/server-sequential-thinking` |
 | [Claude Code](https://docs.anthropic.com/en/docs/claude-code) | Anthropic | 商业许可 | 全部 | `npm i -g @anthropic-ai/claude-code` |
-| [academic-writing](skills/academic-writing/) | 本仓库 | MIT | 04 | Skill（复制到 `~/.claude/skills/`） |
-| [ml-paper-writing](skills/ml-paper-writing/) | 本仓库 | MIT | 04 | Skill（复制到 `~/.claude/skills/`） |
-| [systems-paper-writing](skills/systems-paper-writing/) | 本仓库 | MIT | 04 | Skill（复制到 `~/.claude/skills/`） |
-| [writing-anti-ai](skills/writing-anti-ai/) | 本仓库 | MIT | 04 | Skill（复制到 `~/.claude/skills/`） |
-| [review-response](skills/review-response/) | 本仓库 | MIT | 04 | Skill（复制到 `~/.claude/skills/`） |
-| [post-acceptance](skills/post-acceptance/) | 本仓库 | MIT | 04 | Skill（复制到 `~/.claude/skills/`） |
-| [results-analysis](skills/results-analysis/) | 本仓库 | MIT | 04 | Skill（复制到 `~/.claude/skills/`） |
-| [results-report](skills/results-report/) | 本仓库 | MIT | 04 | Skill（复制到 `~/.claude/skills/`） |
+| [academic-writing](modules/04-writing/skills/academic-writing/) | 本仓库 | MIT | 04 | Skill（复制到 `~/.claude/skills/`） |
+| [ml-paper-writing](modules/04-writing/skills/ml-paper-writing/) | 本仓库 | MIT | 04 | Skill（复制到 `~/.claude/skills/`） |
+| [systems-paper-writing](modules/04-writing/skills/systems-paper-writing/) | 本仓库 | MIT | 04 | Skill（复制到 `~/.claude/skills/`） |
+| [writing-anti-ai](modules/04-writing/skills/writing-anti-ai/) | 本仓库 | MIT | 04 | Skill（复制到 `~/.claude/skills/`） |
+| [review-response](modules/04-writing/skills/review-response/) | 本仓库 | MIT | 04 | Skill（复制到 `~/.claude/skills/`） |
+| [post-acceptance](modules/04-writing/skills/post-acceptance/) | 本仓库 | MIT | 04 | Skill（复制到 `~/.claude/skills/`） |
+| [results-analysis](modules/04-writing/skills/results-analysis/) | 本仓库 | MIT | 04 | Skill（复制到 `~/.claude/skills/`） |
+| [results-report](modules/04-writing/skills/results-report/) | 本仓库 | MIT | 04 | Skill（复制到 `~/.claude/skills/`） |
 | [Graphify](https://github.com/safishamsi/graphify) | safishamsi | MIT | 05 | `pip install graphifyy` |
-| [knowledge-base](skills/knowledge-base/) | 本仓库 | MIT | 05 | Skill（复制到 `~/.claude/skills/`） |
-| [knowledge-distillation](skills/knowledge-distillation/) | 本仓库 | MIT | 05 | Skill（复制到 `~/.claude/skills/`） |
-| [obsidian-*](skills/)（7 个 Skill） | 本仓库 | MIT | 05 | Skill（复制到 `~/.claude/skills/`） |
+| [knowledge-base](modules/05-knowledge/skills/knowledge-base/) | 本仓库 | MIT | 05 | Skill（复制到 `~/.claude/skills/`） |
+| [knowledge-distillation](modules/05-knowledge/skills/knowledge-distillation/) | 本仓库 | MIT | 05 | Skill（复制到 `~/.claude/skills/`） |
+| [obsidian-*](modules/05-knowledge/skills/)（7 个 Skill） | 本仓库 | MIT | 05 | Skill（复制到 `~/.claude/skills/`） |
 | [MemPalace](https://github.com/MemPalace/mempalace) | MemPalace | MIT | 05 | `pip install mempalace`（独立 conda 环境） |
 | [ChromaDB](https://github.com/chroma-core/chroma) | Chroma | Apache-2.0 | 05 | `pip install chromadb` |
-| [academic-pptx](skills/academic-pptx/) | 本仓库 | MIT | 06 | Skill（复制到 `~/.claude/skills/`） |
-| [group-meeting-slides](skills/group-meeting-slides/) | 本仓库 | MIT | 06 | Skill（复制到 `~/.claude/skills/`） |
-| [academic-plotting](skills/academic-plotting/) | 本仓库 | MIT | 06 | Skill（复制到 `~/.claude/skills/`） |
+| [academic-pptx](modules/06-presentation/skills/academic-pptx/) | 本仓库 | MIT | 06 | Skill（复制到 `~/.claude/skills/`） |
+| [group-meeting-slides](modules/06-presentation/skills/group-meeting-slides/) | 本仓库 | MIT | 06 | Skill（复制到 `~/.claude/skills/`） |
+| [academic-plotting](modules/06-presentation/skills/academic-plotting/) | 本仓库 | MIT | 06 | Skill（复制到 `~/.claude/skills/`） |
 | [draw.io MCP](https://github.com/nicholaschenai/drawio-mcp) | nicholaschenai | MIT | 06 | `npx @drawio/mcp` |
-| [notion-infographic](skills/notion-infographic/) | 本仓库 | MIT | 06 | Skill（复制到 `~/.claude/skills/`） |
-| [publication-chart-skill](skills/publication-chart-skill/) | 本仓库 | MIT | 06 | Skill（复制到 `~/.claude/skills/`） |
-| [presenting-conference-talks](skills/presenting-conference-talks/) | 本仓库 | MIT | 06 | Skill（复制到 `~/.claude/skills/`） |
+| [notion-infographic](modules/06-presentation/skills/notion-infographic/) | 本仓库 | MIT | 06 | Skill（复制到 `~/.claude/skills/`） |
+| [publication-chart-skill](modules/06-presentation/skills/publication-chart-skill/) | 本仓库 | MIT | 06 | Skill（复制到 `~/.claude/skills/`） |
+| [presenting-conference-talks](modules/06-presentation/skills/presenting-conference-talks/) | 本仓库 | MIT | 06 | Skill（复制到 `~/.claude/skills/`） |
 | [Playwright MCP](https://github.com/microsoft/playwright-mcp) | Microsoft | Apache-2.0 | 全部 | `npx @playwright/mcp@latest` |
 | [Context7](https://github.com/nicholaschenai/context7) | Context7 | MIT | 全部 | 插件（通过 compound-engineering） |
 
@@ -663,8 +661,8 @@ graphify-out/
 - **7 阶段模块结构** -- 组织为文献发现、文档处理、论文分析、学术写作、知识管理、演示与可视化、管道编排（原为 4 个阶段）
 - **42 个 Skill**（原为 17 个）-- 各阶段新增 25 个 Skill
 - **16 个 Agent** -- 文献审阅者、LaTeX 专家、rebuttal 撰写者等
-- **5 个安装预设** -- 只安装你需要的（minimal、writer、researcher、knowledge、full）
-- **7 个 Obsidian Skill** -- 文献工作流、研究日志、综合图谱、实验日志、链接图、项目记忆、Markdown 格式化
+- **3 个安装预设** -- 只安装你需要的（minimal、knowledge、full）
+- **7 个 Obsidian Skill** -- Bases、CLI 自动化、文献工作流、实验日志、项目初始化、项目记忆、Markdown 格式化
 - **knowledge-base 统一 Skill** -- 替代旧的 kb-scan/kb-apply/kb-lint/kb-stats 脚本
 - **rebuild_graph.py** -- GraphRAG 启发的语义提取管线，支持 LLM 实体提取、增量缓存、Louvain 社区检测和多轮清洗
 - **6 个演示 Skill** -- 学术 PPTX、组会幻灯片、学术绘图、draw.io、信息图、会议演讲

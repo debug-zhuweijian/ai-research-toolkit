@@ -71,8 +71,8 @@ uv run --directory /path/to/paper-search-mcp paper-search search "attention mech
 paper-search Skill 提供了 `/paper-search` 命令，需要在 Claude Code 中注册：
 
 ```bash
-# 方式 A：从 ai-research-toolkit 复制 Skill
-cp -r ai-research-toolkit/skills/paper-search ~/.claude/skills/paper-search
+# 方式 A：使用 ai-research-toolkit 安装脚本
+./scripts/install.sh --module 01-discovery
 
 # 方式 B：直接在 ai-research-toolkit 中使用（已集成）
 ```
