@@ -120,6 +120,14 @@ check_optional "MemPalace import" python -c "import mempalace"
 check_optional "Obsidian CLI" command -v obsidian
 
 echo
+echo ""
+echo "--- Paperclip Template ---"
+if [[ -x "$(dirname "${BASH_SOURCE[0]}")/verify-paperclip-config.sh" ]]; then
+  check "Paperclip public template" "$(dirname "${BASH_SOURCE[0]}")/verify-paperclip-config.sh"
+else
+  echo "  [INFO] Paperclip verifier not found"
+fi
+
 echo "=== Results: $PASS passed, $FAIL failed ==="
 
 if [[ $FAIL -gt 0 ]]; then

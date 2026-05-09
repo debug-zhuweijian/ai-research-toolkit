@@ -1,51 +1,65 @@
 ---
 phase: 07-pipeline
-title: 管道编排
-status: planned
+title: Pipeline Orchestration
+status: active-beta
 ---
 
-# Phase 07: 管道编排
+# Phase 07: Pipeline Orchestration
 
-跨阶段研究工作流的自动化编排与状态管理。
+Phase 07 coordinates the earlier AI Research Toolkit phases with a Paperclip-style multi-agent workflow. It turns discovery, processing, analysis, writing, knowledge management, and presentation tasks into explicit agent assignments with handoff packets and verification gates.
 
-## 状态：计划中
+## Status
 
-本模块将在 v0.2.0 发布阶段开发。
+Active beta in `v0.3.0-beta.1`.
 
-## 计划组件
+This phase provides public workflow protocols and sanitized templates. It does not include private Paperclip deployment details or a production connector to a private Paperclip service.
 
-### Skills（计划）
+## Components
 
-| Skill | 说明 | 状态 |
-|-------|------|------|
-| `research-pipeline` | 研究工作流状态机（Phase 01-06 编排） | planned |
+### Skills
 
-## 设计目标
+| Skill | Purpose | Status |
+| --- | --- | --- |
+| `paperclip-pipeline` | Multi-agent orchestration, handoff contracts, verification gates, and release-safe outputs | active-beta |
 
+### Configs
+
+| Config | Purpose |
+| --- | --- |
+| `configs/paperclip.example.json` | Placeholder-only Paperclip pipeline configuration template |
+
+## Workflow
+
+```text
+01-discovery -> 02-processing -> 03-analysis
+                                      |
+                                      v
+06-presentation <- 05-knowledge <- 04-writing
+                                      |
+                                      v
+07-pipeline: decompose -> dispatch -> handoff -> verify -> sanitize -> release
 ```
-research-pipeline 设计思路：
 
-  01-discovery --> 02-processing --> 03-analysis
-                                         |
-                                         v
-  06-presentation <-- 05-knowledge <-- 04-writing
+## Design Goals
+
+- Coordinate work across Phase 01-06 without replacing those tools.
+- Require explicit handoff packets for multi-agent work.
+- Verify files, diffs, and command outputs instead of trusting summaries alone.
+- Keep public outputs free of real paths, accounts, tokens, private URLs, logs, and runtime state.
+- Support debug-to-release synchronization through whitelist and security gates.
+
+## Verification
+
+Run:
+
+```bash
+./scripts/verify-paperclip-config.sh
 ```
 
-- 自动检测当前研究阶段
-- 管理跨阶段的数据传递
-- 支持断点续跑与状态恢复
-- 与各模块 skill/agent 无缝集成
+Expected:
 
-## 依赖
-
-- Phase 01-06 所有模块的基础设施
-- 工作流状态持久化机制（待设计）
-- 跨 MCP server 的协调协议
-
-## 路线图
-
-| 里程碑 | 内容 | 预计版本 |
-|--------|------|---------|
-| M1 | 基础状态机 + Phase 串联 | v0.2.0-alpha |
-| M2 | 断点续跑 + 错误恢复 | v0.2.0-beta |
-| M3 | 可视化进度 + 配置化流程 | v0.2.0 |
+```text
+[PASS] Paperclip template files are public-safe
+[PASS] Paperclip references are present
+[PASS] Paperclip skill files verified
+```

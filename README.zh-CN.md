@@ -2,7 +2,7 @@
 
 # AI Research Toolkit
 
-**基于 Claude Code 的全管道 AI 辅助学术研究工作流**
+**基于 Claude Code 的全流程 AI 辅助学术研究工作流与多 Agent 编排**
 
 [![GitHub Release](https://img.shields.io/github/v/release/debug-zhuweijian/ai-research-toolkit?label=release)](https://github.com/debug-zhuweijian/ai-research-toolkit/releases) [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE) [![Ask DeepWiki](https://deepwiki.com/badge.svg)](https://deepwiki.com/debug-zhuweijian/ai-research-toolkit) [![zread](https://img.shields.io/badge/Ask_Zread-_.svg?style=flat&color=00b0aa&labelColor=000000&logo=data%3Aimage%2Fsvg%2Bxml%3Bbase64%2CPHN2ZyB3aWR0aD0iMTYiIGhlaWdodD0iMTYiIHZpZXdCb3g9IjAgMCAxNiAxNiIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHBhdGggZD0iTTQuOTYxNTYgMS42MDAxSDIuMjQxNTZDMS44ODgxIDEuNjAwMSAxLjYwMTU2IDEuODg2NjQgMS42MDE1NiAyLjI0MDFWNC45NjAxQzEuNjAxNTYgNS4zMTM1NiAxLjg4ODEgNS42MDAxIDIuMjQxNTYgNS42MDAxSDQuOTYxNTZDNS4zMTUwMiA1LjYwMDEgNS42MDE1NiA1LjMxMzU2IDUuNjAxNTYgNC45NjAxVjIuMjQwMUM1LjYwMTU2IDEuODg2NjQgNS4zMTUwMiAxLjYwMDEgNC45NjE1NiAxLjYwMDFaIiBmaWxsPSIjZmZmIi8%2BCjxwYXRoIGQ9Ik00Ljk2MTU2IDEwLjM5OTlIMi4yNDE1NkMxLjg4ODEgMTAuMzk5OSAxLjYwMTU2IDEwLjY4NjQgMS42MDE1NiAxMS4wMzk5VjEzLjc1OTlDMS42MDE1NiAxNC4xMTM0IDEuODg4MSAxNC4zOTk5IDIuMjQxNTYgMTQuMzk5OUg0Ljk2MTU2QzUuMzE1MDIgMTQuMzk5OSA1LjYwMTU2IDE0LjExMzQgNS42MDE1NiAxMy43NTk5VjExLjAzOTlDNS42MDE1NiAxMC42ODY0IDUuMzE1MDIgMTAuMzk5OSA0Ljk2MTU2IDEwLjM5OTlaIiBmaWxsPSIjZmZmIi8%2BCjxwYXRoIGQ9Ik0xMy43NTg0IDEuNjAwMUgxMS4wMzg0QzEwLjY4NSAxLjYwMDEgMTAuMzk4NCAxLjg4NjY0IDEwLjM5ODQgMi4yNDAxVjQuOTYwMUMxMC4zOTg0IDUuMzEzNTYgMTAuNjg1IDUuNjAwMSAxMS4wMzg0IDUuNjAwMUgxMy43NTg0QzE0LjExMTkgNS42MDAxIDE0LjM5ODQgNS4zMTM1NiAxNC4zOTg0IDQuOTYwMVYyLjI0MDFDMTQuMzk4NCAxLjg4NjY0IDE0LjExMTkgMS42MDAxIDEzLjc1ODQgMS42MDAxWiIgZmlsbD0iI2ZmZiIvPgo8cGF0aCBkPSJNNCAxMkwxMiA0TDQgMTJaIiBmaWxsPSIjI2ZmZiIvPgo8cGF0aCBkPSJNNCAxMkwxMiA0IiBzdHJva2U9IiNmZmZmZiIgc3Ryb2tlLXdpZHRoPSIxLjUiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIvPgo8L3N2Zz4K&logoColor=ffffff)](https://zread.ai/debug-zhuweijian/ai-research-toolkit)
 
@@ -12,7 +12,7 @@
 
 ---
 
-一套有主见的端到端工具集，带你从*发现论文*到*构建可导航的知识图谱*——全部在 Claude Code 内完成。专为研究生设计，让 AI 处理研究中繁琐的部分，你可以把精力集中在思考上。
+一套有主见的端到端工具集，带你从*发现论文*到*构建可导航的知识图谱*——全部在 Claude Code 内完成。现在还包含结构化研究交接与 Paperclip 风格多 Agent 编排，同时确保私有运行细节不会进入公开发布。
 
 ## 管道总览
 
@@ -25,7 +25,7 @@ flowchart LR
     C --> E["05 知识管理\n知识库与图谱"]
     D --> F["06 演示与可视化\n幻灯片与图表"]
     E --> F
-    F --> G["07 管道编排\n自动化流程"]
+    F --> G["07 管道编排\nPaperclip 编排"]
 
     A -.- A1["paper-search-mcp\nzotero-mcp\narxiv-latex-mcp"]
     B -.- B1["MinerU MCP\npdf-mcp\nMarkItDown"]
@@ -33,7 +33,7 @@ flowchart LR
     D -.- D1["academic-writing\nml-paper-writing\nwriting-anti-ai"]
     E -.- E1["graphify\nknowledge-base\nMemPalace"]
     F -.- F1["academic-pptx\nacademic-plotting\ndraw.io"]
-    G -.- G1["research-pipeline\n(规划中)"]
+    G -.- G1["paperclip-pipeline\n交接 + 验证"]
 ```
 
 每个阶段对应一个 Skill 或 MCP 服务器，通过斜杠命令或自然语言在 Claude Code 中调用。管道是线性的但可以迭代——你可以独立运行任意阶段，也可以随着理解加深回到前面的阶段。
@@ -58,6 +58,7 @@ flowchart LR
 - [工具清单](#工具清单)
 - [推荐资源](#推荐资源)
 - [实验性功能](#实验性功能)
+- [v0.3 beta 更新内容](#v03-beta-更新内容)
 - [v0.2 更新内容](#v02-更新内容)
 - [致谢](#致谢)
 - [贡献指南](#贡献指南)
@@ -71,7 +72,7 @@ flowchart LR
 - **阶段 04 -- 学术写作** -- 使用面向 ML、系统研究和通用学术写作的领域专用 Skill 起草、润色和组织论文。反 AI 检测技巧、审稿人回复起草和录用后排版。
 - **阶段 05 -- 知识管理** -- 扫描、导入、检查和查询结构化知识库。用社区检测和交互式可视化构建可导航的知识图谱。Obsidian 工作流用于研究笔记和文献管理。
 - **阶段 06 -- 演示与可视化** -- 从研究成果生成会议幻灯片、组会报告、学术图表、draw.io 图、信息图和出版质量的图片。
-- **阶段 07 -- 管道编排** -- 跨阶段的端到端自动化研究工作流（规划中）。
+- **阶段 07 -- 管道编排** -- Paperclip 风格编排，支持任务拆分、Agent 交接包、证据验收和发布安全同步。
 
 ## 前置依赖
 
@@ -499,11 +500,11 @@ graphify-out/
 
 | 工具 | 来源 | 状态 |
 |------|--------|------|
-| research-pipeline | 本仓库 | 规划中 |
+| paperclip-pipeline | 本仓库 | active beta |
 
-用于端到端自动化研究工作流的跨阶段编排。将支持串联各阶段（如搜索 -> 下载 -> 转换 -> 审阅 -> 摘要），带可配置参数和错误恢复。目前处于规划阶段。
+Paperclip 风格编排将前面各阶段通过明确的任务拆分、交接包、验证门禁和发布安全输出连接起来。公开模块只包含可复用工作流协议和脱敏模板，不包含私有 Paperclip 服务连接器。
 
-设计方案和路线图请参考 [modules/07-pipeline/README.md](modules/07-pipeline/README.md)。
+active beta 模块说明请参考 [modules/07-pipeline/README.md](modules/07-pipeline/README.md)。
 
 ---
 
@@ -513,7 +514,7 @@ graphify-out/
 |------|------|----------|----------|----------|
 | `minimal` | 01, 02 | 7 | 2 | 文献搜索和文档处理 |
 | `knowledge` | 05, 06 | 17 | 2 | 知识管理和 Obsidian |
-| `full` | 01-06 | 42 | 16 | 完整工具集 |
+| `full` | 01-07 | 43 | 16 | 完整工具集 |
 
 使用 `./scripts/install.sh --profile <名称>` 按预设安装，或使用 `--module <阶段>` 安装单独模块。
 
@@ -613,6 +614,9 @@ graphify-out/
 | [notion-infographic](modules/06-presentation/skills/notion-infographic/) | 本仓库 | MIT | 06 | Skill（复制到 `~/.claude/skills/`） |
 | [publication-chart-skill](modules/06-presentation/skills/publication-chart-skill/) | 本仓库 | MIT | 06 | Skill（复制到 `~/.claude/skills/`） |
 | [presenting-conference-talks](modules/06-presentation/skills/presenting-conference-talks/) | 本仓库 | MIT | 06 | Skill（复制到 `~/.claude/skills/`） |
+| [paperclip-pipeline](modules/07-pipeline/skills/paperclip-pipeline/) | 本仓库 | MIT | 07 | Skill（复制到 `~/.claude/skills/`） |
+| [paperclip.example.json](modules/07-pipeline/configs/paperclip.example.json) | 本仓库 | MIT | 07 | 仅占位符配置模板 |
+| [verify-paperclip-config](scripts/verify-paperclip-config.sh) | 本仓库 | MIT | 07 | `./scripts/verify-paperclip-config.sh` |
 | [Playwright MCP](https://github.com/microsoft/playwright-mcp) | Microsoft | Apache-2.0 | 全部 | `npx @playwright/mcp@latest` |
 | [Context7](https://github.com/nicholaschenai/context7) | Context7 | MIT | 全部 | 插件（通过 compound-engineering） |
 
@@ -653,6 +657,18 @@ graphify-out/
 [experimental/](experimental/) 目录包含需要独立平台的高级组件：
 
 **DeepScientist 智能体（14 个）：** 一组 14 个专用智能体（想法生成、实验执行、审稿模拟、rebuttal 辅助、图片润色等），需要 [DeepScientist](https://github.com/DoriRoth/DeepScientist) 平台才能运行。这些不包含在标准安装中。完整列表和设置说明请参考 [experimental/README.md](experimental/README.md)。
+
+---
+
+## v0.3 beta 更新内容
+
+- **Phase 07 正式化** -- Paperclip 风格编排层从 planned 状态升级为 active beta 模块。
+- **paperclip-pipeline skill** -- 支持多 Agent 研究任务拆分、交接包、直接验收和发布安全输出。
+- **脱敏 Paperclip 模板** -- `paperclip.example.json` 只保留公开占位符，不包含真实部署信息。
+- **模板验证脚本** -- `verify-paperclip-config` 检查公开模板中没有真实凭据、本地路径、运行 ID 或私有服务细节。
+- **调试库到发布库边界** -- 发布同步采用白名单和安全扫描，避免私有运行现场进入 GitHub。
+
+完整详情请参考 [CHANGELOG.md](CHANGELOG.md)。
 
 ---
 

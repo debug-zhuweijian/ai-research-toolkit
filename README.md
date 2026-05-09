@@ -2,7 +2,7 @@
 
 # AI Research Toolkit
 
-**Full-pipeline AI-assisted academic research workflow powered by Claude Code**
+**Full-pipeline AI-assisted academic research workflow with multi-agent orchestration**
 
 [![GitHub Release](https://img.shields.io/github/v/release/debug-zhuweijian/ai-research-toolkit?label=release)](https://github.com/debug-zhuweijian/ai-research-toolkit/releases) [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE) [![Ask DeepWiki](https://deepwiki.com/badge.svg)](https://deepwiki.com/debug-zhuweijian/ai-research-toolkit) [![zread](https://img.shields.io/badge/Ask_Zread-_.svg?style=flat&color=00b0aa&labelColor=000000&logo=data%3Aimage%2Fsvg%2Bxml%3Bbase64%2CPHN2ZyB3aWR0aD0iMTYiIGhlaWdodD0iMTYiIHZpZXdCb3g9IjAgMCAxNiAxNiIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHBhdGggZD0iTTQuOTYxNTYgMS42MDAxSDIuMjQxNTZDMS44ODgxIDEuNjAwMSAxLjYwMTU2IDEuODg2NjQgMS42MDE1NiAyLjI0MDFWNC45NjAxQzEuNjAxNTYgNS4zMTM1NiAxLjg4ODEgNS42MDAxIDIuMjQxNTYgNS42MDAxSDQuOTYxNTZDNS4zMTUwMiA1LjYwMDEgNS42MDE1NiA1LjMxMzU2IDUuNjAxNTYgNC45NjAxVjIuMjQwMUM1LjYwMTU2IDEuODg2NjQgNS4zMTUwMiAxLjYwMDEgNC45NjE1NiAxLjYwMDFaIiBmaWxsPSIjZmZmIi8%2BCjxwYXRoIGQ9Ik00Ljk2MTU2IDEwLjM5OTlIMi4yNDE1NkMxLjg4ODEgMTAuMzk5OSAxLjYwMTU2IDEwLjY4NjQgMS42MDE1NiAxMS4wMzk5VjEzLjc1OTlDMS42MDE1NiAxNC4xMTM0IDEuODg4MSAxNC4zOTk5IDIuMjQxNTYgMTQuMzk5OUg0Ljk2MTU2QzUuMzE1MDIgMTQuMzk5OSA1LjYwMTU2IDE0LjExMzQgNS42MDE1NiAxMy43NTk5VjExLjAzOTlDNS42MDE1NiAxMC42ODY0IDUuMzE1MDIgMTAuMzk5OSA0Ljk2MTU2IDEwLjM5OTlaIiBmaWxsPSIjZmZmIi8%2BCjxwYXRoIGQ9Ik0xMy43NTg0IDEuNjAwMUgxMS4wMzg0QzEwLjY4NSAxLjYwMDEgMTAuMzk4NCAxLjg4NjY0IDEwLjM5ODQgMi4yNDAxVjQuOTYwMUMxMC4zOTg0IDUuMzEzNTYgMTAuNjg1IDUuNjAwMSAxMS4wMzg0IDUuNjAwMUgxMy43NTg0QzE0LjExMTkgNS42MDAxIDE0LjM5ODQgNS4zMTM1NiAxNC4zOTg0IDQuOTYwMVYyLjI0MDFDMTQuMzk4NCAxLjg4NjY0IDE0LjExMTkgMS42MDAxIDEzLjc1ODQgMS42MDAxWiIgZmlsbD0iI2ZmZiIvPgo8cGF0aCBkPSJNNCAxMkwxMiA0TDQgMTJaIiBmaWxsPSIjI2ZmZiIvPgo8cGF0aCBkPSJNNCAxMkwxMiA0IiBzdHJva2U9IiNmZmZmZiIgc3Ryb2tlLXdpZHRoPSIxLjUiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIvPgo8L3N2Zz4K&logoColor=ffffff)](https://zread.ai/debug-zhuweijian/ai-research-toolkit)
 
@@ -12,7 +12,7 @@
 
 ---
 
-An opinionated, end-to-end toolkit that takes you from *discovering papers* to *building a navigable knowledge graph* -- all inside Claude Code. Designed for graduate students who want AI to handle the tedious parts of research so they can focus on thinking.
+An opinionated, end-to-end toolkit that takes you from *discovering papers* to *building a navigable knowledge graph* -- all inside Claude Code. It now includes structured research handoffs and Paperclip-style multi-agent orchestration, while keeping private runtime details out of public releases.
 
 ## Pipeline Overview
 
@@ -25,7 +25,7 @@ flowchart LR
     C --> E["05 Knowledge\nBase & Graph"]
     D --> F["06 Presentation\nSlides & Figures"]
     E --> F
-    F --> G["07 Pipeline\nOrchestration"]
+    F --> G["07 Pipeline\nPaperclip Orchestration"]
 
     A -.- A1["paper-search-mcp\nzotero-mcp\narxiv-latex-mcp"]
     B -.- B1["MinerU MCP\npdf-mcp\nMarkItDown"]
@@ -33,7 +33,7 @@ flowchart LR
     D -.- D1["academic-writing\nml-paper-writing\nwriting-anti-ai"]
     E -.- E1["graphify\nknowledge-base\nMemPalace"]
     F -.- F1["academic-pptx\nacademic-plotting\ndraw.io"]
-    G -.- G1["research-pipeline\n(planned)"]
+    G -.- G1["paperclip-pipeline\nhandoff + verification"]
 ```
 
 Each phase maps to a skill or MCP server you invoke with a slash command or natural language in Claude Code. The pipeline is linear but iterative -- you can run any phase independently or loop back to earlier phases as your understanding deepens.
@@ -58,6 +58,7 @@ Each phase maps to a skill or MCP server you invoke with a slash command or natu
 - [Tool Map](#tool-map)
 - [Recommended Resources](#recommended-resources)
 - [Experimental](#experimental)
+- [What's New in v0.3 beta](#whats-new-in-v03-beta)
 - [What's New in v0.2](#whats-new-in-v02)
 - [Acknowledgments](#acknowledgments)
 - [Contributing](#contributing)
@@ -71,7 +72,7 @@ Each phase maps to a skill or MCP server you invoke with a slash command or natu
 - **Phase 04 -- Writing** -- Draft, polish, and structure papers with domain-specific skills for ML, systems, and general academic writing. Anti-AI-detection tips, reviewer response drafting, and post-acceptance formatting.
 - **Phase 05 -- Knowledge** -- Scan, ingest, lint, and query a structured knowledge base. Build navigable knowledge graphs with community detection and interactive visualization. Obsidian workflows for research notes and literature management.
 - **Phase 06 -- Presentation** -- Generate conference slides, group meeting decks, academic plots, draw.io diagrams, infographics, and publication-quality figures from your research.
-- **Phase 07 -- Pipeline** -- Cross-phase orchestration for end-to-end automated research workflows (planned).
+- **Phase 07 -- Pipeline** -- Paperclip-style orchestration for task decomposition, agent handoff packets, evidence verification, and release-safe synchronization.
 
 ## Prerequisites
 
@@ -499,11 +500,11 @@ See [modules/06-presentation/README.md](modules/06-presentation/README.md) for s
 
 | Tool | Source | Status |
 |------|--------|--------|
-| research-pipeline | This repo | Planned |
+| paperclip-pipeline | This repo | Active beta |
 
-Cross-phase orchestration for automated end-to-end research workflows. Will support chaining phases together (e.g. search -> download -> convert -> review -> summarize) with configurable parameters and error recovery. Currently in planning.
+Paperclip-style orchestration coordinates the earlier phases with explicit task decomposition, handoff packets, verification gates, and release-safe outputs. The public module contains reusable workflow protocols and sanitized templates only; it does not include a private Paperclip service connector.
 
-See [modules/07-pipeline/README.md](modules/07-pipeline/README.md) for design proposals and roadmap.
+See [modules/07-pipeline/README.md](modules/07-pipeline/README.md) for the active beta module.
 
 ---
 
@@ -513,7 +514,7 @@ See [modules/07-pipeline/README.md](modules/07-pipeline/README.md) for design pr
 |---------|---------|--------|--------|----------|
 | `minimal` | 01, 02 | 7 | 2 | Literature search and document processing |
 | `knowledge` | 05, 06 | 17 | 2 | Knowledge management and Obsidian |
-| `full` | 01-06 | 42 | 16 | Complete toolkit |
+| `full` | 01-07 | 43 | 16 | Complete toolkit |
 
 Install with `./scripts/install.sh --profile <name>` or install individual modules with `--module <phase>`.
 
@@ -613,6 +614,9 @@ Global servers are configured via `configs/mcp-servers-full.json`. Replace `<YOU
 | [notion-infographic](modules/06-presentation/skills/notion-infographic/) | This repo | MIT | 06 | Skill (copy to `~/.claude/skills/`) |
 | [publication-chart-skill](modules/06-presentation/skills/publication-chart-skill/) | This repo | MIT | 06 | Skill (copy to `~/.claude/skills/`) |
 | [presenting-conference-talks](modules/06-presentation/skills/presenting-conference-talks/) | This repo | MIT | 06 | Skill (copy to `~/.claude/skills/`) |
+| [paperclip-pipeline](modules/07-pipeline/skills/paperclip-pipeline/) | This repo | MIT | 07 | Skill (copy to `~/.claude/skills/`) |
+| [paperclip.example.json](modules/07-pipeline/configs/paperclip.example.json) | This repo | MIT | 07 | Placeholder-only config template |
+| [verify-paperclip-config](scripts/verify-paperclip-config.sh) | This repo | MIT | 07 | `./scripts/verify-paperclip-config.sh` |
 | [Playwright MCP](https://github.com/microsoft/playwright-mcp) | Microsoft | Apache-2.0 | All | `npx @playwright/mcp@latest` |
 | [Context7](https://github.com/nicholaschenai/context7) | Context7 | MIT | All | Plugin (via compound-engineering) |
 
@@ -653,6 +657,18 @@ Global servers are configured via `configs/mcp-servers-full.json`. Replace `<YOU
 The [experimental/](experimental/) directory contains advanced components that require separate platforms:
 
 **DeepScientist Agents (14):** A collection of 14 specialized agents (idea generation, experiment execution, review simulation, rebuttal assistance, figure polishing, etc.) that require the [DeepScientist](https://github.com/DoriRoth/DeepScientist) platform to run. These are not included in standard installations. See [experimental/README.md](experimental/README.md) for the full list and setup instructions.
+
+---
+
+## What's New in v0.3 beta
+
+- **Phase 07 formalized** -- Paperclip-style orchestration is now an active beta module instead of a planned stage.
+- **paperclip-pipeline skill** -- multi-agent research coordination with task decomposition, handoff packets, direct verification, and release-safe output handling.
+- **Sanitized Paperclip template** -- `paperclip.example.json` documents the public configuration shape with placeholders only.
+- **Template verification** -- `verify-paperclip-config` checks that public Paperclip examples do not contain real credentials, local paths, runtime IDs, or private service details.
+- **Debug-to-release boundary** -- release sync now uses a whitelist and security scan model to keep private runtime details out of GitHub.
+
+See [CHANGELOG.md](CHANGELOG.md) for full details.
 
 ---
 

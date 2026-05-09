@@ -2,7 +2,7 @@
 
 # AI Research Toolkit
 
-**Claude Code 기반 전체 파이프라인 AI 보조 학술 연구 워크플로우**
+**multi-agent orchestration을 지원하는 Claude Code 기반 전체 파이프라인 AI 보조 학술 연구 워크플로우**
 
 [![GitHub Release](https://img.shields.io/github/v/release/debug-zhuweijian/ai-research-toolkit?label=release)](https://github.com/debug-zhuweijian/ai-research-toolkit/releases) [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE) [![Ask DeepWiki](https://deepwiki.com/badge.svg)](https://deepwiki.com/debug-zhuweijian/ai-research-toolkit) [![zread](https://img.shields.io/badge/Ask_Zread-_.svg?style=flat&color=00b0aa&labelColor=000000&logo=data%3Aimage%2Fsvg%2Bxml%3Bbase64%2CPHN2ZyB3aWR0aD0iMTYiIGhlaWdodD0iMTYiIHZpZXdCb3g9IjAgMCAxNiAxNiIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHBhdGggZD0iTTQuOTYxNTYgMS42MDAxSDIuMjQxNTZDMS44ODgxIDEuNjAwMSAxLjYwMTU2IDEuODg2NjQgMS42MDE1NiAyLjI0MDFWNC45NjAxQzEuNjAxNTYgNS4zMTM1NiAxLjg4ODEgNS42MDAxIDIuMjQxNTYgNS42MDAxSDQuOTYxNTZDNS4zMTUwMiA1LjYwMDEgNS42MDE1NiA1LjMxMzU2IDUuNjAxNTYgNC45NjAxVjIuMjQwMUM1LjYwMTU2IDEuODg2NjQgNS4zMTUwMiAxLjYwMDEgNC45NjE1NiAxLjYwMDFaIiBmaWxsPSIjZmZmIi8%2BCjxwYXRoIGQ9Ik00Ljk2MTU2IDEwLjM5OTlIMi4yNDE1NkMxLjg4ODEgMTAuMzk5OSAxLjYwMTU2IDEwLjY4NjQgMS42MDE1NiAxMS4wMzk5VjEzLjc1OTlDMS42MDE1NiAxNC4xMTM0IDEuODg4MSAxNC4zOTk5IDIuMjQxNTYgMTQuMzk5OUg0Ljk2MTU2QzUuMzE1MDIgMTQuMzk5OSA1LjYwMTU2IDE0LjExMzQgNS42MDE1NiAxMy43NTk5VjExLjAzOTlDNS42MDE1NiAxMC42ODY0IDUuMzE1MDIgMTAuMzk5OSA0Ljk2MTU2IDEwLjM5OTlaIiBmaWxsPSIjZmZmIi8%2BCjxwYXRoIGQ9Ik0xMy43NTg0IDEuNjAwMUgxMS4wMzg0QzEwLjY4NSAxLjYwMDEgMTAuMzk4NCAxLjg4NjY0IDEwLjM5ODQgMi4yNDAxVjQuOTYwMUMxMC4zOTg0IDUuMzEzNTYgMTAuNjg1IDUuNjAwMSAxMS4wMzg0IDUuNjAwMUgxMy43NTg0QzE0LjExMTkgNS42MDAxIDE0LjM5ODQgNS4zMTM1NiAxNC4zOTg0IDQuOTYwMVYyLjI0MDFDMTQuMzk4NCAxLjg4NjY0IDE0LjExMTkgMS42MDAxIDEzLjc1ODQgMS42MDAxWiIgZmlsbD0iI2ZmZiIvPgo8cGF0aCBkPSJNNCAxMkwxMiA0TDQgMTJaIiBmaWxsPSIjI2ZmZiIvPgo8cGF0aCBkPSJNNCAxMkwxMiA0IiBzdHJva2U9IiNmZmZmZiIgc3Ryb2tlLXdpZHRoPSIxLjUiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIvPgo8L3N2Zz4K&logoColor=ffffff)](https://zread.ai/debug-zhuweijian/ai-research-toolkit)
 
@@ -25,7 +25,7 @@ flowchart LR
     C --> E["05 지식 관리\n베이스 & 그래프"]
     D --> F["06 프레젠테이션\n슬라이드 & 도표"]
     E --> F
-    F --> G["07 파이프라인\n오케스트레이션"]
+    F --> G["07 파이프라인\nPaperclip Orchestration"]
 
     A -.- A1["paper-search-mcp\nzotero-mcp\narxiv-latex-mcp"]
     B -.- B1["MinerU MCP\npdf-mcp\nMarkItDown"]
@@ -33,7 +33,7 @@ flowchart LR
     D -.- D1["academic-writing\nml-paper-writing\nwriting-anti-ai"]
     E -.- E1["graphify\nknowledge-base\nMemPalace"]
     F -.- F1["academic-pptx\nacademic-plotting\ndraw.io"]
-    G -.- G1["research-pipeline\n(planned)"]
+    G -.- G1["paperclip-pipeline\nhandoff + verification"]
 ```
 
 각 단계는 슬래시 명령어나 자연어로 Claude Code에서 호출하는 스킬 또는 MCP 서버에 매핑됩니다. 파이프라인은 선형적이지만 반복적입니다. 즉, 어떤 단계든 독립적으로 실행하거나 이해가 깊어짐에 따라 이전 단계로 돌아갈 수 있습니다.
@@ -58,6 +58,7 @@ flowchart LR
 - [도구 맵](#도구-맵)
 - [추천 리소스](#추천-리소스)
 - [실험적 기능](#실험적-기능)
+- [What's New in v0.3 beta](#whats-new-in-v03-beta)
 - [v0.2의 새로운 기능](#v02의-새로운-기능)
 - [감사의 글](#감사의-글)
 - [기여하기](#기여하기)
@@ -71,7 +72,7 @@ flowchart LR
 - **단계 04 -- 학술 작문** -- ML, 시스템, 일반 학술 작문을 위한 도메인 특화 스킬로 논문을 초안 작성, 다듬기, 구조화합니다. AI 탐지 회피 팁, 리뷰어 응답 작성, 게재 후 포맷팅을 지원합니다.
 - **단계 05 -- 지식 관리** -- 구조화된 지식 베이스를 스캔, 수집, 린트, 쿼리합니다. 커뮤니티 탐지 및 대화형 시각화를 갖춘 탐색 가능한 지식 그래프를 구축합니다. 연구 노트 및 문헌 관리를 위한 Obsidian 워크플로우를 제공합니다.
 - **단계 06 -- 프레젠테이션** -- 학회 슬라이드, 연구실 미팅 자료, 학술 플롯, draw.io 다이어그램, 인포그래픽, 출판 품질의 도표를 생성합니다.
-- **단계 07 -- 파이프라인** -- 엔드투엔드 자동화 연구 워크플로우를 위한 교차 단계 오케스트레이션(계획 중).
+- **단계 07 -- 파이프라인** -- Paperclip-style orchestration으로 task decomposition, handoff, verification, release-safe sync를 포함한 multi-agent 연구 워크플로우를 지원합니다.
 
 ## 필수 사항
 
@@ -499,9 +500,9 @@ graphify-out/
 
 | 도구 | 출처 | 상태 |
 |------|--------|--------|
-| research-pipeline | 이 저장소 | 계획 중 |
+| paperclip-pipeline | 이 저장소 | active beta |
 
-자동화된 엔드투엔드 연구 워크플로우를 위한 교차 단계 오케스트레이션입니다. 구성 가능한 매개변수 및 오류 복구와 함께 단계를 연결(예: 검색 -> 다운로드 -> 변환 -> 리뷰 -> 요약)하는 기능을 지원할 예정입니다. 현재 계획 단계에 있습니다.
+Paperclip-style orchestration 기반의 교차 단계 연구 워크플로우입니다. task decomposition, agent handoff, evidence-based verification, release-safe sync를 공개 프로토콜과 템플릿으로 제공합니다. 비공개 Paperclip 서비스 연결 정보나 배포 세부 사항은 포함하지 않습니다.
 
 설계 제안서 및 로드맵은 [modules/07-pipeline/README.md](modules/07-pipeline/README.md)를 참조하십시오.
 
@@ -513,7 +514,7 @@ graphify-out/
 |---------|---------|--------|--------|----------|
 | `minimal` | 01, 02 | 7 | 2 | 문헌 검색 및 문서 처리 |
 | `knowledge` | 05, 06 | 17 | 2 | 지식 관리 및 Obsidian |
-| `full` | 01-06 | 42 | 16 | 전체 툴킷 |
+| `full` | 01-07 | 43 | 16 | 전체 툴킷 |
 
 `./scripts/install.sh --profile <이름>`으로 설치하거나 `--module <단계>`로 개별 모듈을 설치하십시오.
 
@@ -613,6 +614,9 @@ graphify-out/
 | [notion-infographic](modules/06-presentation/skills/notion-infographic/) | 이 저장소 | MIT | 06 | 스킬(`~/.claude/skills/`에 복사) |
 | [publication-chart-skill](modules/06-presentation/skills/publication-chart-skill/) | 이 저장소 | MIT | 06 | 스킬(`~/.claude/skills/`에 복사) |
 | [presenting-conference-talks](modules/06-presentation/skills/presenting-conference-talks/) | 이 저장소 | MIT | 06 | 스킬(`~/.claude/skills/`에 복사) |
+| [paperclip-pipeline](modules/07-pipeline/skills/paperclip-pipeline/) | 이 저장소 | MIT | 07 | 스킬(`~/.claude/skills/`에 복사) |
+| [paperclip.example.json](modules/07-pipeline/configs/paperclip.example.json) | 이 저장소 | MIT | 07 | 공개 placeholder 기반 설정 템플릿 |
+| [verify-paperclip-config](scripts/verify-paperclip-config.sh) | 이 저장소 | MIT | 07 | 공개 템플릿의 credentials, local paths, runtime IDs, private service details 검사 |
 | [Playwright MCP](https://github.com/microsoft/playwright-mcp) | Microsoft | Apache-2.0 | 전체 | `npx @playwright/mcp@latest` |
 | [Context7](https://github.com/nicholaschenai/context7) | Context7 | MIT | 전체 | 플러그인(compound-engineering 통해) |
 
@@ -655,6 +659,13 @@ graphify-out/
 **DeepScientist 에이전트(14개):** [DeepScientist](https://github.com/DoriRoth/DeepScientist) 플랫폼이 필요한 14개의 전문 에이전트(아이디어 생성, 실험 실행, 리뷰 시뮬레이션, 리벗털 지원, 도표 다듬기 등) 컬렉션입니다. 이 에이전트들은 표준 설치에 포함되지 않습니다. 전체 목록 및 설정 지침은 [experimental/README.md](experimental/README.md)를 참조하십시오.
 
 ---
+
+## What's New in v0.3 beta
+
+- **Phase 07 formalized** -- Paperclip-style orchestration is now an active beta module instead of a planned stage.
+- **paperclip-pipeline skill** -- coordinates multi-agent research tasks with handoff packets, direct verification, and release-safe outputs.
+- **Sanitized Paperclip template** -- `paperclip.example.json` uses placeholders only and contains no private deployment details.
+- **Template verification** -- `verify-paperclip-config` checks public examples for credentials, local paths, runtime IDs, and private service details.
 
 ## v0.2의 새로운 기능
 

@@ -1,0 +1,33 @@
+{
+  "paperclip_url": "<PAPERCLIP_API_URL>",
+  "auth": "<PAPERCLIP_AUTH_METHOD>",
+  "workspace": "<PUBLIC_WORKSPACE_NAME>",
+  "pipeline_mode": "template-only",
+  "allowed_outputs": [
+    "docs",
+    "modules",
+    "configs",
+    "scripts",
+    "README",
+    "CHANGELOG"
+  ],
+  "forbidden_outputs": [
+    "tokens",
+    "local_paths",
+    "private_logs",
+    "runtime_state",
+    "database_urls",
+    "oauth_accounts",
+    "team_ids",
+    "job_ids"
+  ],
+  "handoff_required_fields": [
+    "task_objective",
+    "files_read",
+    "files_modified",
+    "commands_run",
+    "evidence",
+    "open_risks",
+    "next_step"
+  ]
+}

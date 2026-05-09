@@ -2,7 +2,7 @@
 
 # AI Research Toolkit
 
-**Claude Code で駆動する、全工程 AI 支援学術研究ワークフロー**
+**Claude Code で駆動する、マルチエージェント orchestration 対応の全工程 AI 支援学術研究ワークフロー**
 
 [![GitHub Release](https://img.shields.io/github/v/release/debug-zhuweijian/ai-research-toolkit?label=release)](https://github.com/debug-zhuweijian/ai-research-toolkit/releases) [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE) [![Ask DeepWiki](https://deepwiki.com/badge.svg)](https://deepwiki.com/debug-zhuweijian/ai-research-toolkit) [![zread](https://img.shields.io/badge/Ask_Zread-_.svg?style=flat&color=00b0aa&labelColor=000000&logo=data%3Aimage%2Fsvg%2Bxml%3Bbase64%2CPHN2ZyB3aWR0aD0iMTYiIGhlaWdodD0iMTYiIHZpZXdCb3g9IjAgMCAxNiAxNiIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHBhdGggZD0iTTQuOTYxNTYgMS42MDAxSDIuMjQxNTZDMS44ODgxIDEuNjAwMSAxLjYwMTU2IDEuODg2NjQgMS42MDE1NiAyLjI0MDFWNC45NjAxQzEuNjAxNTYgNS4zMTM1NiAxLjg4ODEgNS42MDAxIDIuMjQxNTYgNS42MDAxSDQuOTYxNTZDNS4zMTUwMiA1LjYwMDEgNS42MDE1NiA1LjMxMzU2IDUuNjAxNTYgNC45NjAxVjIuMjQwMUM1LjYwMTU2IDEuODg2NjQgNS4zMTUwMiAxLjYwMDEgNC45NjE1NiAxLjYwMDFaIiBmaWxsPSIjZmZmIi8%2BCjxwYXRoIGQ9Ik00Ljk2MTU2IDEwLjM5OTlIMi4yNDE1NkMxLjg4ODEgMTAuMzk5OSAxLjYwMTU2IDEwLjY4NjQgMS42MDE1NiAxMS4wMzk5VjEzLjc1OTlDMS42MDE1NiAxNC4xMTM0IDEuODg4MSAxNC4zOTk5IDIuMjQxNTYgMTQuMzk5OUg0Ljk2MTU2QzUuMzE1MDIgMTQuMzk5OSA1LjYwMTU2IDE0LjExMzQgNS42MDE1NiAxMy43NTk5VjExLjAzOTlDNS42MDE1NiAxMC42ODY0IDUuMzE1MDIgMTAuMzk5OSA0Ljk2MTU2IDEwLjM5OTlaIiBmaWxsPSIjZmZmIi8%2BCjxwYXRoIGQ9Ik0xMy43NTg0IDEuNjAwMUgxMS4wMzg0QzEwLjY4NSAxLjYwMDEgMTAuMzk4NCAxLjg4NjY0IDEwLjM5ODQgMi4yNDAxVjQuOTYwMUMxMC4zOTg0IDUuMzEzNTYgMTAuNjg1IDUuNjAwMSAxMS4wMzg0IDUuNjAwMUgxMy43NTg0QzE0LjExMTkgNS42MDAxIDE0LjM5ODQgNS4zMTM1NiAxNC4zOTg0IDQuOTYwMVYyLjI0MDFDMTQuMzk4NCAxLjg4NjY0IDE0LjExMTkgMS42MDAxIDEzLjc1ODQgMS42MDAxWiIgZmlsbD0iI2ZmZiIvPgo8cGF0aCBkPSJNNCAxMkwxMiA0TDQgMTJaIiBmaWxsPSIjI2ZmZiIvPgo8cGF0aCBkPSJNNCAxMkwxMiA0IiBzdHJva2U9IiNmZmZmZiIgc3Ryb2tlLXdpZHRoPSIxLjUiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIvPgo8L3N2Zz4K&logoColor=ffffff)](https://zread.ai/debug-zhuweijian/ai-research-toolkit)
 
@@ -25,7 +25,7 @@ flowchart LR
     C --> E["05 ナレッジ管理\nKnowledge\nベース＆グラフ"]
     D --> F["06 プレゼンテーション\nPresentation\nスライド＆図表"]
     E --> F
-    F --> G["07 パイプライン\nPipeline\n全体制御"]
+    F --> G["07 パイプライン\nPipeline\nPaperclip Orchestration"]
 
     A -.- A1["paper-search-mcp\nzotero-mcp\narxiv-latex-mcp"]
     B -.- B1["MinerU MCP\npdf-mcp\nMarkItDown"]
@@ -33,7 +33,7 @@ flowchart LR
     D -.- D1["academic-writing\nml-paper-writing\nwriting-anti-ai"]
     E -.- E1["graphify\nknowledge-base\nMemPalace"]
     F -.- F1["academic-pptx\nacademic-plotting\ndraw.io"]
-    G -.- G1["research-pipeline\n(計画中)"]
+    G -.- G1["paperclip-pipeline\nhandoff + verification"]
 ```
 
 各フェーズは、Claude Code 内でスラッシュコマンドまたは自然言語で呼び出すスキルまたは MCP サーバーに対応しています。パイプラインは直線的ですが反復的です。理解が深まるにつれて、任意のフェーズを単独で実行したり、前のフェーズに戻ったりできます。
@@ -58,6 +58,7 @@ flowchart LR
 - [ツールマップ](#ツールマップ)
 - [推奨リソース](#推奨リソース)
 - [実験的機能](#実験的機能)
+- [What's New in v0.3 beta](#whats-new-in-v03-beta)
 - [v0.2 の新機能](#v02-の新機能)
 - [謝辞](#謝辞)
 - [コントリビューション](#コントリビューション)
@@ -71,7 +72,7 @@ flowchart LR
 - **フェーズ 04 -- 学術執筆 (Writing)** -- ML、システム、一般学術執筆向けのドメイン特化スキルで論文を執筆・推敲・構成します。AI 検出回避のヒント、査読者への回答作成、採録後のフォーマット調整。
 - **フェーズ 05 -- ナレッジ管理 (Knowledge)** -- 構造化されたナレッジベースのスキャン、取り込み、リント、クエリ。コミュニティ検出とインタラクティブ可視化によるナビゲーション可能なナレッジグラフの構築。Obsidian ワークフローによる研究ノートと文献管理。
 - **フェーズ 06 -- プレゼンテーション (Presentation)** -- 研究内容から学会スライド、グループミーティング資料、学術プロット、draw.io 図、インフォグラフィック、出版品質の図表を生成。
-- **フェーズ 07 -- パイプライン (Pipeline)** -- エンドツーエンドの自動化研究ワークフローのためのクロスフェーズオーケストレーション（計画中）。
+- **フェーズ 07 -- パイプライン (Pipeline)** -- Paperclip-style orchestration により、タスク分解、handoff、verification、release-safe sync を含むマルチエージェント研究ワークフローを支援します。
 
 ## 前提条件
 
@@ -499,9 +500,9 @@ graphify-out/
 
 | ツール | ソース | ステータス |
 |------|--------|-----------|
-| research-pipeline | 本リポジトリ | 計画中 |
+| paperclip-pipeline | 本リポジトリ | active beta |
 
-自動化されたエンドツーエンド研究ワークフローのためのクロスフェーズオーケストレーションです。フェーズのチェーン（例: 検索 -> ダウンロード -> 変換 -> レビュー -> 要約）を設定可能なパラメータとエラーリカバリでサポートする予定です。現在計画中です。
+Paperclip-style orchestration によるクロスフェーズの研究ワークフローです。タスク分解、agent handoff、証拠ベースの verification、release-safe sync を公開プロトコルとテンプレートとして提供します。私有 Paperclip サービスの接続情報やデプロイ詳細は含みません。
 
 設計提案とロードマップについては [modules/07-pipeline/README.md](modules/07-pipeline/README.md) をご覧ください。
 
@@ -513,7 +514,7 @@ graphify-out/
 |------------|-----------|--------|-------------|--------------|
 | `minimal` | 01, 02 | 7 | 2 | 文献検索とドキュメント処理 |
 | `knowledge` | 05, 06 | 17 | 2 | ナレッジ管理と Obsidian |
-| `full` | 01-06 | 42 | 16 | 完全ツールキット |
+| `full` | 01-07 | 43 | 16 | 完全ツールキット |
 
 `./scripts/install.sh --profile <name>` でインストールするか、`--module <phase>` で個別モジュールをインストールしてください。
 
@@ -613,6 +614,9 @@ graphify-out/
 | [notion-infographic](modules/06-presentation/skills/notion-infographic/) | 本リポジトリ | MIT | 06 | スキル（`~/.claude/skills/` にコピー） |
 | [publication-chart-skill](modules/06-presentation/skills/publication-chart-skill/) | 本リポジトリ | MIT | 06 | スキル（`~/.claude/skills/` にコピー） |
 | [presenting-conference-talks](modules/06-presentation/skills/presenting-conference-talks/) | 本リポジトリ | MIT | 06 | スキル（`~/.claude/skills/` にコピー） |
+| [paperclip-pipeline](modules/07-pipeline/skills/paperclip-pipeline/) | 本リポジトリ | MIT | 07 | スキル（`~/.claude/skills/` にコピー） |
+| [paperclip.example.json](modules/07-pipeline/configs/paperclip.example.json) | 本リポジトリ | MIT | 07 | 公開プレースホルダー付き設定テンプレート |
+| [verify-paperclip-config](scripts/verify-paperclip-config.sh) | 本リポジトリ | MIT | 07 | 公開テンプレートの秘密情報・ローカルパス・実行 ID・私有サービス詳細を検査 |
 | [Playwright MCP](https://github.com/microsoft/playwright-mcp) | Microsoft | Apache-2.0 | 全 | `npx @playwright/mcp@latest` |
 | [Context7](https://github.com/nicholaschenai/context7) | Context7 | MIT | 全 | プラグイン（compound-engineering 経由） |
 
@@ -655,6 +659,13 @@ graphify-out/
 **DeepScientist エージェント（14 個）:** アイデア生成、実験実行、レビュー シミュレーション、リバタル支援、図表仕上げなどを担う 14 の特化エージェントコレクションです。[DeepScientist](https://github.com/DoriRoth/DeepScientist) プラットフォームが必要です。標準インストールには含まれません。全一覧とセットアップ手順は [experimental/README.md](experimental/README.md) をご覧ください。
 
 ---
+
+## What's New in v0.3 beta
+
+- **Phase 07 formalized** -- Paperclip-style orchestration is now an active beta module instead of a planned stage.
+- **paperclip-pipeline skill** -- coordinates multi-agent research tasks with handoff packets, direct verification, and release-safe outputs.
+- **Sanitized Paperclip template** -- `paperclip.example.json` uses placeholders only and contains no private deployment details.
+- **Template verification** -- `verify-paperclip-config` checks public examples for credentials, local paths, runtime IDs, and private service details.
 
 ## v0.2 の新機能
 
