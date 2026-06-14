@@ -14,9 +14,13 @@ docs/research-*
 
 # 密钥 & 凭证
 *.env
+.env
 *.key
 *.token
 *.secret
+secrets.*
+auths/*.json
+config.local.*
 **/api-keys-local.json
 **/*-local.*
 **/*-private.*
@@ -24,11 +28,23 @@ docs/research-*
 # 个人数据 & 缓存
 downloads/
 *.log
+logs/
+*.db
+*.db-wal
+*.db-shm
+.omc/
+graphify-out/
+.coverage
+htmlcov/
+.pytest_cache/
+.ruff_cache/
 Thumbs.db
 .DS_Store
 __pycache__/
 *.pyc
 node_modules/
+exports/
+tmp/
 
 # 编辑器
 .vscode/
