@@ -2,7 +2,7 @@
 
 [CmdletBinding()]
 param(
-    [ValidateSet("minimal", "knowledge", "full")]
+    [ValidateSet("minimal", "researcher", "writer", "knowledge", "full")]
     [string]$Profile,
 
     [string[]]$Module,
@@ -28,8 +28,10 @@ function Get-ProfileModules {
 
     switch ($Name) {
         "minimal"   { return @("01-discovery", "02-processing") }
+        "researcher" { return @("01-discovery", "02-processing", "03-analysis", "04-writing") }
+        "writer"    { return @("04-writing", "06-presentation") }
         "knowledge" { return @("05-knowledge", "06-presentation") }
-        "full"      { return @("01-discovery", "02-processing", "03-analysis", "04-writing", "05-knowledge", "06-presentation") }
+        "full"      { return @("01-discovery", "02-processing", "03-analysis", "04-writing", "05-knowledge", "06-presentation", "07-pipeline") }
         default     { throw "Unknown profile: $Name" }
     }
 }
@@ -48,15 +50,48 @@ function Get-ModuleSummary {
 
 if ($List) {
     Write-Host "Profiles:" -ForegroundColor Cyan
-    Write-Host "  minimal   -> 01-discovery, 02-processing"
-    Write-Host "  knowledge -> 05-knowledge, 06-presentation"
-    Write-Host "  full      -> 01-discovery, 02-processing, 03-analysis, 04-writing, 05-knowledge, 06-presentation"
+    Write-Host "  minimal    -> 01-discovery, 02-processing"
+    Write-Host "  researcher -> 01-discovery, 02-processing, 03-analysis, 04-writing"
+    Write-Host "  writer     -> 04-writing, 06-presentation"
+    Write-Host "  knowledge  -> 05-knowledge, 06-presentation"
+    Write-Host "  full       -> 01-discovery, 02-processing, 03-analysis, 04-writing, 05-knowledge, 06-presentation, 07-pipeline"
     Write-Host ""
     Write-Host "Modules:" -ForegroundColor Cyan
     Get-ModuleSummary | ForEach-Object {
         Write-Host ("  {0} (skills: {1}, agents: {2})" -f $_.Name, $_.Skills, $_.Agents)
     }
     return
+}
+
+function Assert-SafeInstallDestination {
+    param(
+        [string]$TargetRoot,
+        [string]$ItemName,
+        [string]$Destination
+    )
+
+    if ([string]::IsNullOrWhiteSpace($ItemName)) {
+        throw "Refusing empty install item name."
+    }
+    if ([string]::IsNullOrWhiteSpace($Destination)) {
+        throw "Refusing empty install destination."
+    }
+
+    $RootPath = (Resolve-Path -LiteralPath $TargetRoot).ProviderPath
+    $ParentPath = Split-Path -Parent $Destination
+    $ResolvedParent = (Resolve-Path -LiteralPath $ParentPath).ProviderPath
+    $HomePath = (Resolve-Path -LiteralPath $env:USERPROFILE).ProviderPath
+    $ClaudePath = Join-Path $HomePath ".claude"
+
+    if ($Destination.Equals($HomePath, [System.StringComparison]::OrdinalIgnoreCase)) {
+        throw "Refusing home install destination."
+    }
+    if ($Destination.Equals($ClaudePath, [System.StringComparison]::OrdinalIgnoreCase)) {
+        throw "Refusing .claude install destination."
+    }
+    if (-not $ResolvedParent.Equals($RootPath, [System.StringComparison]::OrdinalIgnoreCase)) {
+        throw "Refusing install destination outside target root: $Destination"
+    }
 }
 
 if ($Profile -and $Module) {
@@ -120,6 +155,7 @@ foreach ($ModuleName in $OrderedModules) {
 
     foreach ($SkillDir in $SkillDirs) {
         $Destination = Join-Path $SkillsPath $SkillDir.Name
+        Assert-SafeInstallDestination -TargetRoot $SkillsPath -ItemName $SkillDir.Name -Destination $Destination
         if (Test-Path $Destination) {
             if ($Force) {
                 Remove-Item -LiteralPath $Destination -Recurse -Force
@@ -139,6 +175,7 @@ foreach ($ModuleName in $OrderedModules) {
 
     foreach ($AgentFile in $AgentFiles) {
         $Destination = Join-Path $AgentsPath $AgentFile.Name
+        Assert-SafeInstallDestination -TargetRoot $AgentsPath -ItemName $AgentFile.Name -Destination $Destination
         if (Test-Path $Destination) {
             if ($Force) {
                 Copy-Item -LiteralPath $AgentFile.FullName -Destination $Destination -Force

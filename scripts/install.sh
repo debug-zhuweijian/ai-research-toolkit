@@ -18,7 +18,7 @@ REQUESTED_MODULES=()
 usage() {
   cat <<'EOF'
 Usage:
-  ./scripts/install.sh [--profile <minimal|knowledge|full>]
+  ./scripts/install.sh [--profile <minimal|researcher|writer|knowledge|full>]
   ./scripts/install.sh [--module <module-id> ...]
   ./scripts/install.sh --list
 
@@ -40,8 +40,10 @@ EOF
 profile_modules() {
   case "$1" in
     minimal) echo "01-discovery 02-processing" ;;
+    researcher) echo "01-discovery 02-processing 03-analysis 04-writing" ;;
+    writer) echo "04-writing 06-presentation" ;;
     knowledge) echo "05-knowledge 06-presentation" ;;
-    full) echo "01-discovery 02-processing 03-analysis 04-writing 05-knowledge 06-presentation" ;;
+    full) echo "01-discovery 02-processing 03-analysis 04-writing 05-knowledge 06-presentation 07-pipeline" ;;
     *)
       echo "Unknown profile: $1" >&2
       return 1
@@ -53,9 +55,11 @@ list_installable_modules() {
   local module_dir module_name skill_count agent_count
 
   echo "Profiles:"
-  echo "  minimal   -> 01-discovery, 02-processing"
-  echo "  knowledge -> 05-knowledge, 06-presentation"
-  echo "  full      -> 01-discovery, 02-processing, 03-analysis, 04-writing, 05-knowledge, 06-presentation"
+  echo "  minimal    -> 01-discovery, 02-processing"
+  echo "  researcher -> 01-discovery, 02-processing, 03-analysis, 04-writing"
+  echo "  writer     -> 04-writing, 06-presentation"
+  echo "  knowledge  -> 05-knowledge, 06-presentation"
+  echo "  full       -> 01-discovery, 02-processing, 03-analysis, 04-writing, 05-knowledge, 06-presentation, 07-pipeline"
   echo
   echo "Modules:"
 
@@ -78,6 +82,30 @@ list_installable_modules() {
 
     echo "  $module_name (skills: $skill_count, agents: $agent_count)"
   done
+}
+
+assert_safe_destination() {
+  local target_root="$1"
+  local item_name="$2"
+  local destination="$3"
+  local parent root_abs parent_abs home_abs claude_abs
+
+  [[ -n "$item_name" ]] || { echo "Refusing empty install item name." >&2; exit 1; }
+  [[ -n "$destination" ]] || { echo "Refusing empty install destination." >&2; exit 1; }
+  [[ "$destination" != "/" ]] || { echo "Refusing root install destination." >&2; exit 1; }
+
+  parent="$(dirname "$destination")"
+  root_abs="$(cd "$target_root" && pwd -P)"
+  parent_abs="$(cd "$parent" && pwd -P)"
+  home_abs="$(cd "$HOME" && pwd -P)"
+  claude_abs="$home_abs/.claude"
+
+  [[ "$destination" != "$home_abs" ]] || { echo "Refusing home install destination." >&2; exit 1; }
+  [[ "$destination" != "$claude_abs" ]] || { echo "Refusing .claude install destination." >&2; exit 1; }
+  [[ "$parent_abs" == "$root_abs" ]] || {
+    echo "Refusing install destination outside target root: $destination" >&2
+    exit 1
+  }
 }
 
 while [[ $# -gt 0 ]]; do
@@ -200,6 +228,7 @@ for module_name in "${ORDERED_MODULES[@]}"; do
   for skill_dir in "${skill_dirs[@]}"; do
     skill_name="$(basename "$skill_dir")"
     dest="$SKILLS_DIR/$skill_name"
+    assert_safe_destination "$SKILLS_DIR" "$skill_name" "$dest"
     if [[ -e "$dest" ]]; then
       if $FORCE; then
         rm -rf "$dest"
@@ -220,6 +249,7 @@ for module_name in "${ORDERED_MODULES[@]}"; do
   for agent_file in "${agent_files[@]}"; do
     agent_name="$(basename "$agent_file")"
     dest="$AGENTS_DIR/$agent_name"
+    assert_safe_destination "$AGENTS_DIR" "$agent_name" "$dest"
     if [[ -e "$dest" ]]; then
       if $FORCE; then
         cp -f "$agent_file" "$dest"
