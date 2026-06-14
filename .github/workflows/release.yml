@@ -17,6 +17,9 @@ jobs:
         with:
           fetch-depth: 0
 
+      - name: Run Public Safety Scan
+        run: python scripts/scan-public-safety.py --tree
+
       - name: Generate Release Notes
         uses: orhun/git-cliff-action@v4
         with:
@@ -25,7 +28,25 @@ jobs:
         env:
           OUTPUT: CHANGELOG.md
 
+      - name: Scan Generated Release Notes
+        run: python scripts/scan-public-safety.py --paths CHANGELOG.md
+
+      - name: Detect Release Metadata
+        id: release_meta
+        shell: bash
+        run: |
+          tag="${GITHUB_REF_NAME}"
+          if [[ "$tag" == *"-alpha"* || "$tag" == *"-beta"* || "$tag" == *"-rc"* ]]; then
+            echo "prerelease=true" >> "$GITHUB_OUTPUT"
+            echo "make_latest=false" >> "$GITHUB_OUTPUT"
+          else
+            echo "prerelease=false" >> "$GITHUB_OUTPUT"
+            echo "make_latest=legacy" >> "$GITHUB_OUTPUT"
+          fi
+
       - name: Create GitHub Release
         uses: softprops/action-gh-release@v2
         with:
           body_path: CHANGELOG.md
+          prerelease: ${{ steps.release_meta.outputs.prerelease }}
+          make_latest: ${{ steps.release_meta.outputs.make_latest }}
