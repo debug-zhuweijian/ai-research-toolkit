@@ -55,6 +55,8 @@ ls ~/.claude/skills/
 ./scripts/install.sh --profile full
 ```
 
+Use `./scripts/install.sh --list` or `.\scripts\install.ps1 -List` to confirm the five supported profiles: `minimal`, `researcher`, `writer`, `knowledge`, and `full`. The `full` profile installs Phase 01 through Phase 07, including the active beta `07-pipeline` module.
+
 #### Agents not appearing
 
 ```bash
@@ -132,6 +134,27 @@ Use the installer instead of manual copy:
 ```bash
 ./scripts/install.sh --profile full
 ```
+
+### Release and Public Safety Issues
+
+#### Beta release appears as Latest
+
+Alpha, beta, and rc tags should publish as GitHub prereleases and should not become Latest. If a beta release metadata state looks wrong:
+
+1. Check `.github/workflows/release.yml` contains `prerelease` and `make_latest`.
+2. Check the release by tag with GitHub CLI or API.
+3. Patch only release metadata fields from the real release id; do not delete/recreate the release and do not rewrite the tag.
+
+#### Public safety scan blocks a commit or release
+
+The scanner intentionally reports only path, line, category, and severity. It does not print the matched secret value.
+
+```bash
+python scripts/scan-public-safety.py --staged
+python scripts/scan-public-safety.py --tree
+```
+
+Use placeholders such as `<ANTHROPIC_API_KEY>`, `<BIGMODEL_API_KEY>`, `<MINERU_API_KEY>`, and `<ANTHROPIC_COMPATIBLE_BASE_URL>` in public docs and templates.
 
 ## Still Stuck?
 

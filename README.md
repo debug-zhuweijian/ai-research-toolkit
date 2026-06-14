@@ -2,7 +2,7 @@
 
 # AI Research Toolkit
 
-**Full-pipeline AI-assisted academic research workflow with multi-agent orchestration**
+**Claude Code toolkit for public-safe AI-assisted research workflows and multi-agent orchestration**
 
 [![GitHub Release](https://img.shields.io/github/v/release/debug-zhuweijian/ai-research-toolkit?label=release)](https://github.com/debug-zhuweijian/ai-research-toolkit/releases) [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE) [![Ask DeepWiki](https://deepwiki.com/badge.svg)](https://deepwiki.com/debug-zhuweijian/ai-research-toolkit) [![zread](https://img.shields.io/badge/Ask_Zread-_.svg?style=flat&color=00b0aa&labelColor=000000&logo=data%3Aimage%2Fsvg%2Bxml%3Bbase64%2CPHN2ZyB3aWR0aD0iMTYiIGhlaWdodD0iMTYiIHZpZXdCb3g9IjAgMCAxNiAxNiIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHBhdGggZD0iTTQuOTYxNTYgMS42MDAxSDIuMjQxNTZDMS44ODgxIDEuNjAwMSAxLjYwMTU2IDEuODg2NjQgMS42MDE1NiAyLjI0MDFWNC45NjAxQzEuNjAxNTYgNS4zMTM1NiAxLjg4ODEgNS42MDAxIDIuMjQxNTYgNS42MDAxSDQuOTYxNTZDNS4zMTUwMiA1LjYwMDEgNS42MDE1NiA1LjMxMzU2IDUuNjAxNTYgNC45NjAxVjIuMjQwMUM1LjYwMTU2IDEuODg2NjQgNS4zMTUwMiAxLjYwMDEgNC45NjE1NiAxLjYwMDFaIiBmaWxsPSIjZmZmIi8%2BCjxwYXRoIGQ9Ik00Ljk2MTU2IDEwLjM5OTlIMi4yNDE1NkMxLjg4ODEgMTAuMzk5OSAxLjYwMTU2IDEwLjY4NjQgMS42MDE1NiAxMS4wMzk5VjEzLjc1OTlDMS42MDE1NiAxNC4xMTM0IDEuODg4MSAxNC4zOTk5IDIuMjQxNTYgMTQuMzk5OUg0Ljk2MTU2QzUuMzE1MDIgMTQuMzk5OSA1LjYwMTU2IDE0LjExMzQgNS42MDE1NiAxMy43NTk5VjExLjAzOTlDNS42MDE1NiAxMC42ODY0IDUuMzE1MDIgMTAuMzk5OSA0Ljk2MTU2IDEwLjM5OTlaIiBmaWxsPSIjZmZmIi8%2BCjxwYXRoIGQ9Ik0xMy43NTg0IDEuNjAwMUgxMS4wMzg0QzEwLjY4NSAxLjYwMDEgMTAuMzk4NCAxLjg4NjY0IDEwLjM5ODQgMi4yNDAxVjQuOTYwMUMxMC4zOTg0IDUuMzEzNTYgMTAuNjg1IDUuNjAwMSAxMS4wMzg0IDUuNjAwMUgxMy43NTg0QzE0LjExMTkgNS42MDAxIDE0LjM5ODQgNS4zMTM1NiAxNC4zOTg0IDQuOTYwMVYyLjI0MDFDMTQuMzk4NCAxLjg4NjY0IDE0LjExMTkgMS42MDAxIDEzLjc1ODQgMS42MDAxWiIgZmlsbD0iI2ZmZiIvPgo8cGF0aCBkPSJNNCAxMkwxMiA0TDQgMTJaIiBmaWxsPSIjI2ZmZiIvPgo8cGF0aCBkPSJNNCAxMkwxMiA0IiBzdHJva2U9IiNmZmZmZiIgc3Ryb2tlLXdpZHRoPSIxLjUiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIvPgo8L3N2Zz4K&logoColor=ffffff)](https://zread.ai/debug-zhuweijian/ai-research-toolkit)
 
@@ -12,7 +12,9 @@
 
 ---
 
-An opinionated, end-to-end toolkit that takes you from *discovering papers* to *building a navigable knowledge graph* -- all inside Claude Code. It now includes structured research handoffs and Paperclip-style multi-agent orchestration, while keeping private runtime details out of public releases.
+An opinionated, end-to-end toolkit that takes you from *discovering papers* to *building a navigable knowledge graph* -- all inside Claude Code. Current beta: `v0.3.0-beta.2`.
+
+This public repository is not a mirror of any private local Claude environment. Local-only skills, agents, credentials, runtime IDs, logs, private URLs, and machine paths are intentionally excluded from releases. The public surface contains reusable modules, sanitized templates, profile installers, and release-safe documentation.
 
 ## Pipeline Overview
 
@@ -56,6 +58,7 @@ Each phase maps to a skill or MCP server you invoke with a slash command or natu
 - [API Keys Guide](#api-keys-guide)
 - [MCP Servers](#mcp-servers)
 - [Tool Map](#tool-map)
+- [Tool Catalog](#tool-catalog)
 - [Recommended Resources](#recommended-resources)
 - [Experimental](#experimental)
 - [What's New in v0.3 beta](#whats-new-in-v03-beta)
@@ -105,8 +108,10 @@ cd ai-research-toolkit
 
 # Install with a profile preset
 ./scripts/install.sh --profile minimal       # Just search + PDF processing
+./scripts/install.sh --profile researcher    # Discovery + processing + analysis + writing
+./scripts/install.sh --profile writer        # Writing + presentation
 ./scripts/install.sh --profile knowledge     # Knowledge management + presentation
-./scripts/install.sh --profile full          # Everything
+./scripts/install.sh --profile full          # Everything, Phase 01 through Phase 07
 ./scripts/install.sh --list                  # Show profiles and modules
 
 # Or install individual modules
@@ -513,10 +518,14 @@ See [modules/07-pipeline/README.md](modules/07-pipeline/README.md) for the activ
 | Profile | Modules | Skills | Agents | Best For |
 |---------|---------|--------|--------|----------|
 | `minimal` | 01, 02 | 7 | 2 | Literature search and document processing |
+| `researcher` | 01, 02, 03, 04 | 25 | 14 | Literature discovery, analysis, and drafting |
+| `writer` | 04, 06 | 16 | 7 | Academic writing, revision, slides, and figures |
 | `knowledge` | 05, 06 | 17 | 2 | Knowledge management and Obsidian |
-| `full` | 01-07 | 43 | 16 | Complete toolkit |
+| `full` | 01-07 | 43 | 16 | Complete toolkit, including the active beta `07-pipeline` module |
 
 Install with `./scripts/install.sh --profile <name>` or install individual modules with `--module <phase>`.
+
+Profile JSON keeps a compatibility `skills_count` field. `scripts/verify-profiles.py` recalculates module contents and checks the JSON, Bash installer, and PowerShell installer stay consistent.
 
 ---
 
@@ -622,6 +631,17 @@ Global servers are configured via `configs/mcp-servers-full.json`. Replace `<YOU
 
 ---
 
+## Tool Catalog
+
+The current public catalog is split out for easier review:
+
+- [English tool catalog](docs/tool-catalog.md)
+- [Chinese tool catalog](docs/tool-catalog.zh-CN.md)
+
+The catalog only lists modules, skills, agents, and public integrations present in this repository. It intentionally does not enumerate private local runtime tools, private Claude profiles, local plugin caches, API keys, private endpoints, logs, or machine-specific paths.
+
+---
+
 ## Recommended Resources
 
 ### AI for Research
@@ -662,6 +682,11 @@ The [experimental/](experimental/) directory contains advanced components that r
 
 ## What's New in v0.3 beta
 
+- **v0.3.0-beta.2 public refresh** -- updates the public README surface, profile installers, changelog, and catalog without migrating private local skills or agents.
+- **Release metadata guardrails** -- alpha, beta, and rc tags now publish as GitHub prereleases and do not become Latest.
+- **Release body safety scan** -- generated release notes are scanned before publication.
+- **Public safety scanner** -- tracked trees, staged blobs, and release-note files are scanned for credentials, private URLs, local paths, logs, databases, and cache artifacts.
+- **Five install profiles** -- `minimal`, `researcher`, `writer`, `knowledge`, and `full` are consistent across JSON, Bash, PowerShell, and verifier checks.
 - **Phase 07 formalized** -- Paperclip-style orchestration is now an active beta module instead of a planned stage.
 - **paperclip-pipeline skill** -- multi-agent research coordination with task decomposition, handoff packets, direct verification, and release-safe output handling.
 - **Sanitized Paperclip template** -- `paperclip.example.json` documents the public configuration shape with placeholders only.
@@ -675,9 +700,9 @@ See [CHANGELOG.md](CHANGELOG.md) for full details.
 ## What's New in v0.2
 
 - **7-phase module structure** -- organized into Discovery, Processing, Analysis, Writing, Knowledge, Presentation, and Pipeline (was 4 phases)
-- **42 skills** (was 17) -- 25 new skills across all phases
+- **Expanded skills** -- new skills across all phases
 - **16 agents** -- literature reviewers, LaTeX specialists, rebuttal writers, and more
-- **3 profile presets** -- install only what you need (minimal, knowledge, full)
+- **Profile presets** -- install only what you need
 - **7 Obsidian skills** -- Bases, CLI automation, literature workflow, experiment log, project bootstrap, project memory, Markdown formatting
 - **Knowledge-base unified skill** -- replaces old kb-scan/kb-apply/kb-lint/kb-stats shell scripts
 - **rebuild_graph.py** -- GraphRAG-inspired semantic extraction pipeline with LLM entity extraction, incremental caching, Louvain community detection, and gleaning

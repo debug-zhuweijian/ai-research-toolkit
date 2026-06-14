@@ -2,7 +2,7 @@
 
 # AI Research Toolkit
 
-**基于 Claude Code 的全流程 AI 辅助学术研究工作流与多 Agent 编排**
+**基于 Claude Code 的公开安全 AI 辅助研究工作流与多 Agent 编排工具集**
 
 [![GitHub Release](https://img.shields.io/github/v/release/debug-zhuweijian/ai-research-toolkit?label=release)](https://github.com/debug-zhuweijian/ai-research-toolkit/releases) [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE) [![Ask DeepWiki](https://deepwiki.com/badge.svg)](https://deepwiki.com/debug-zhuweijian/ai-research-toolkit) [![zread](https://img.shields.io/badge/Ask_Zread-_.svg?style=flat&color=00b0aa&labelColor=000000&logo=data%3Aimage%2Fsvg%2Bxml%3Bbase64%2CPHN2ZyB3aWR0aD0iMTYiIGhlaWdodD0iMTYiIHZpZXdCb3g9IjAgMCAxNiAxNiIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHBhdGggZD0iTTQuOTYxNTYgMS42MDAxSDIuMjQxNTZDMS44ODgxIDEuNjAwMSAxLjYwMTU2IDEuODg2NjQgMS42MDE1NiAyLjI0MDFWNC45NjAxQzEuNjAxNTYgNS4zMTM1NiAxLjg4ODEgNS42MDAxIDIuMjQxNTYgNS42MDAxSDQuOTYxNTZDNS4zMTUwMiA1LjYwMDEgNS42MDE1NiA1LjMxMzU2IDUuNjAxNTYgNC45NjAxVjIuMjQwMUM1LjYwMTU2IDEuODg2NjQgNS4zMTUwMiAxLjYwMDEgNC45NjE1NiAxLjYwMDFaIiBmaWxsPSIjZmZmIi8%2BCjxwYXRoIGQ9Ik00Ljk2MTU2IDEwLjM5OTlIMi4yNDE1NkMxLjg4ODEgMTAuMzk5OSAxLjYwMTU2IDEwLjY4NjQgMS42MDE1NiAxMS4wMzk5VjEzLjc1OTlDMS42MDE1NiAxNC4xMTM0IDEuODg4MSAxNC4zOTk5IDIuMjQxNTYgMTQuMzk5OUg0Ljk2MTU2QzUuMzE1MDIgMTQuMzk5OSA1LjYwMTU2IDE0LjExMzQgNS42MDE1NiAxMy43NTk5VjExLjAzOTlDNS42MDE1NiAxMC42ODY0IDUuMzE1MDIgMTAuMzk5OSA0Ljk2MTU2IDEwLjM5OTlaIiBmaWxsPSIjZmZmIi8%2BCjxwYXRoIGQ9Ik0xMy43NTg0IDEuNjAwMUgxMS4wMzg0QzEwLjY4NSAxLjYwMDEgMTAuMzk4NCAxLjg4NjY0IDEwLjM5ODQgMi4yNDAxVjQuOTYwMUMxMC4zOTg0IDUuMzEzNTYgMTAuNjg1IDUuNjAwMSAxMS4wMzg0IDUuNjAwMUgxMy43NTg0QzE0LjExMTkgNS42MDAxIDE0LjM5ODQgNS4zMTM1NiAxNC4zOTg0IDQuOTYwMVYyLjI0MDFDMTQuMzk4NCAxLjg4NjY0IDE0LjExMTkgMS42MDAxIDEzLjc1ODQgMS42MDAxWiIgZmlsbD0iI2ZmZiIvPgo8cGF0aCBkPSJNNCAxMkwxMiA0TDQgMTJaIiBmaWxsPSIjI2ZmZiIvPgo8cGF0aCBkPSJNNCAxMkwxMiA0IiBzdHJva2U9IiNmZmZmZiIgc3Ryb2tlLXdpZHRoPSIxLjUiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIvPgo8L3N2Zz4K&logoColor=ffffff)](https://zread.ai/debug-zhuweijian/ai-research-toolkit)
 
@@ -12,7 +12,9 @@
 
 ---
 
-一套有主见的端到端工具集，带你从*发现论文*到*构建可导航的知识图谱*——全部在 Claude Code 内完成。现在还包含结构化研究交接与 Paperclip 风格多 Agent 编排，同时确保私有运行细节不会进入公开发布。
+一套有主见的端到端工具集，带你从*发现论文*到*构建可导航的知识图谱*——全部在 Claude Code 内完成。当前 beta：`v0.3.0-beta.2`。
+
+本公开仓库不是任何本机 Claude 私有环境的镜像。仅限本机使用的 skills、agents、凭据、运行 ID、日志、私有 URL 和机器路径不会进入公开发布。公开面只包含可复用模块、脱敏模板、安装预设和发布安全文档。
 
 ## 管道总览
 
@@ -56,6 +58,7 @@ flowchart LR
 - [API 密钥指南](#api-密钥指南)
 - [MCP 服务器](#mcp-服务器)
 - [工具清单](#工具清单)
+- [工具目录](#工具目录)
 - [推荐资源](#推荐资源)
 - [实验性功能](#实验性功能)
 - [v0.3 beta 更新内容](#v03-beta-更新内容)
@@ -105,8 +108,10 @@ cd ai-research-toolkit
 
 # 按预设安装
 ./scripts/install.sh --profile minimal       # 仅搜索 + PDF 处理
+./scripts/install.sh --profile researcher    # 文献发现 + 处理 + 分析 + 写作
+./scripts/install.sh --profile writer        # 学术写作 + 演示
 ./scripts/install.sh --profile knowledge     # 知识管理 + 演示
-./scripts/install.sh --profile full          # 全部安装
+./scripts/install.sh --profile full          # 全部安装，覆盖阶段 01 到阶段 07
 ./scripts/install.sh --list                  # 查看预设和模块
 
 # 或安装单独模块
@@ -513,10 +518,14 @@ active beta 模块说明请参考 [modules/07-pipeline/README.md](modules/07-pip
 | 预设 | 模块 | Skill 数 | Agent 数 | 适用场景 |
 |------|------|----------|----------|----------|
 | `minimal` | 01, 02 | 7 | 2 | 文献搜索和文档处理 |
+| `researcher` | 01, 02, 03, 04 | 25 | 14 | 文献发现、论文分析和草稿写作 |
+| `writer` | 04, 06 | 16 | 7 | 学术写作、修订、幻灯片和图表 |
 | `knowledge` | 05, 06 | 17 | 2 | 知识管理和 Obsidian |
-| `full` | 01-07 | 43 | 16 | 完整工具集 |
+| `full` | 01-07 | 43 | 16 | 完整工具集，包含 active beta 的 `07-pipeline` 模块 |
 
 使用 `./scripts/install.sh --profile <名称>` 按预设安装，或使用 `--module <阶段>` 安装单独模块。
+
+profile JSON 保留兼容字段 `skills_count`。`scripts/verify-profiles.py` 会重新计算模块内容，并检查 JSON、Bash 安装器和 PowerShell 安装器一致。
 
 ---
 
@@ -622,6 +631,17 @@ active beta 模块说明请参考 [modules/07-pipeline/README.md](modules/07-pip
 
 ---
 
+## 工具目录
+
+当前公开工具目录已拆分为独立文档，便于审查和维护：
+
+- [英文工具目录](docs/tool-catalog.md)
+- [中文工具目录](docs/tool-catalog.zh-CN.md)
+
+目录只列出本仓库公开包含的 modules、skills、agents 和公开集成类别。它不会列出本机私有运行工具、私有 Claude profile、本机 plugin cache、API key、私有 endpoint、日志或机器专属路径。
+
+---
+
 ## 推荐资源
 
 ### AI 辅助研究
@@ -662,6 +682,11 @@ active beta 模块说明请参考 [modules/07-pipeline/README.md](modules/07-pip
 
 ## v0.3 beta 更新内容
 
+- **v0.3.0-beta.2 公开面刷新** -- 更新 README、profile 安装器、changelog 和工具目录，不迁移本机私有 skills 或 agents。
+- **Release metadata 防护** -- alpha、beta、rc 标签自动发布为 GitHub prerelease，且不会成为 Latest。
+- **Release body 安全扫描** -- 生成的 release notes 在发布前必须通过扫描。
+- **公开安全扫描器** -- 对 tracked tree、staged blob 和 release notes 文件扫描凭据、私有 URL、本机路径、日志、数据库和缓存产物。
+- **五个安装预设** -- `minimal`、`researcher`、`writer`、`knowledge`、`full` 在 JSON、Bash、PowerShell 和验证脚本中保持一致。
 - **Phase 07 正式化** -- Paperclip 风格编排层从 planned 状态升级为 active beta 模块。
 - **paperclip-pipeline skill** -- 支持多 Agent 研究任务拆分、交接包、直接验收和发布安全输出。
 - **脱敏 Paperclip 模板** -- `paperclip.example.json` 只保留公开占位符，不包含真实部署信息。
@@ -675,9 +700,9 @@ active beta 模块说明请参考 [modules/07-pipeline/README.md](modules/07-pip
 ## v0.2 更新内容
 
 - **7 阶段模块结构** -- 组织为文献发现、文档处理、论文分析、学术写作、知识管理、演示与可视化、管道编排（原为 4 个阶段）
-- **42 个 Skill**（原为 17 个）-- 各阶段新增 25 个 Skill
+- **扩展 Skill 集合** -- 各阶段新增研究、写作、知识管理和演示能力
 - **16 个 Agent** -- 文献审阅者、LaTeX 专家、rebuttal 撰写者等
-- **3 个安装预设** -- 只安装你需要的（minimal、knowledge、full）
+- **安装预设** -- 只安装你需要的模块组合
 - **7 个 Obsidian Skill** -- Bases、CLI 自动化、文献工作流、实验日志、项目初始化、项目记忆、Markdown 格式化
 - **knowledge-base 统一 Skill** -- 替代旧的 kb-scan/kb-apply/kb-lint/kb-stats 脚本
 - **rebuild_graph.py** -- GraphRAG 启发的语义提取管线，支持 LLM 实体提取、增量缓存、Louvain 社区检测和多轮清洗

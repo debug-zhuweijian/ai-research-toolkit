@@ -114,12 +114,12 @@ Claude Code 需要一个 API Key 才能运行。有两种方式：
 
 **方式 B：使用 Anthropic 兼容端点（如智谱 BigModel）**
 
-如果你通过 Anthropic 兼容端点运行 Claude Code（例如智谱 BigModel 的 GLM 系列），无需 Anthropic API Key，只需配置对应平台的 API Key 和 `base_url`：
+如果你通过 Anthropic 兼容端点运行 Claude Code（例如智谱 BigModel 的公开兼容 API），无需 Anthropic API Key，只需配置对应平台的 API Key 和 `base_url`。公开文档只使用占位符，具体服务商、模型和私有端点请留在你的本机配置中：
 
 ```bash
 # 在 ~/.bashrc 或启动时设置环境变量
-export ANTHROPIC_API_KEY="你的兼容端点API密钥"
-export ANTHROPIC_BASE_URL="https://open.bigmodel.cn/api/paas/v4/"  # 以智谱为例
+export ANTHROPIC_API_KEY="<ANTHROPIC_API_KEY>"
+export ANTHROPIC_BASE_URL="<ANTHROPIC_COMPATIBLE_BASE_URL>"
 ```
 
 > 其他兼容端点（如 OpenRouter、AWS Bedrock 等）也支持类似配置，只需替换对应的 API Key 和 base_url。
@@ -132,7 +132,7 @@ claude
 # 能正常对话即说明配置成功
 ```
 
-> 也可以用环境变量：`export ANTHROPIC_API_KEY="你的Key"`
+> 也可以用环境变量：`export ANTHROPIC_API_KEY="<ANTHROPIC_API_KEY>"`
 
 ---
 
@@ -152,7 +152,11 @@ cd ai-research-toolkit
 ```bash
 # Bash / zsh / Git Bash
 ./scripts/install.sh --list
-./scripts/install.sh --profile full
+./scripts/install.sh --profile minimal       # 文献搜索 + 文档处理
+./scripts/install.sh --profile researcher    # 文献发现 + 处理 + 分析 + 写作
+./scripts/install.sh --profile writer        # 学术写作 + 演示
+./scripts/install.sh --profile knowledge     # 知识管理 + 演示
+./scripts/install.sh --profile full          # 阶段 01 到阶段 07
 
 # 只安装知识管理相关模块
 ./scripts/install.sh --profile knowledge
@@ -164,6 +168,10 @@ cd ai-research-toolkit
 ```powershell
 # PowerShell
 .\scripts\install.ps1 -List
+.\scripts\install.ps1 -Profile minimal
+.\scripts\install.ps1 -Profile researcher
+.\scripts\install.ps1 -Profile writer
+.\scripts\install.ps1 -Profile knowledge
 .\scripts\install.ps1 -Profile full
 
 # 只安装某个模块
@@ -410,7 +418,7 @@ npx --version
 无需手动安装，npx 自动下载。需要设置环境变量：
 
 ```bash
-export Z_AI_API_KEY="你的智谱API密钥"
+export Z_AI_API_KEY="<BIGMODEL_API_KEY>"
 export Z_AI_MODE="ZHIPU"
 ```
 
@@ -523,21 +531,21 @@ conda run -n mempalace which python
       "type": "http",
       "url": "https://open.bigmodel.cn/api/mcp/web_reader/mcp",
       "headers": {
-        "Authorization": "Bearer 你的智谱API密钥"    // ← 替换
+        "Authorization": "Bearer <BIGMODEL_API_KEY>"    // ← 替换
       }
     },
     "web-search-prime": {
       "type": "http",
       "url": "https://open.bigmodel.cn/api/mcp/web_search_prime/mcp",
       "headers": {
-        "Authorization": "Bearer 你的智谱API密钥"    // ← 替换
+        "Authorization": "Bearer <BIGMODEL_API_KEY>"    // ← 替换
       }
     },
     "zread": {
       "type": "http",
       "url": "https://open.bigmodel.cn/api/mcp/zread/mcp",
       "headers": {
-        "Authorization": "Bearer 你的智谱API密钥"    // ← 替换
+        "Authorization": "Bearer <BIGMODEL_API_KEY>"    // ← 替换
       }
     },
     "zai-mcp-server": {
@@ -545,7 +553,7 @@ conda run -n mempalace which python
       "command": "cmd", "args": ["/c", "npx", "-y", "@z_ai/mcp-server"],
       // Linux/macOS 用: "command": "npx", "args": ["-y", "@z_ai/mcp-server"]
       "env": {
-        "Z_AI_API_KEY": "你的智谱API密钥",           // ← 替换
+        "Z_AI_API_KEY": "<BIGMODEL_API_KEY>",           // ← 替换
         "Z_AI_MODE": "ZHIPU"
       }
     },
@@ -555,7 +563,7 @@ conda run -n mempalace which python
       "type": "stdio",
       "command": "mineru-mcp-server",
       "env": {
-        "MINERU_API_KEY": "你的OpenXLab_Token"        // ← 替换
+        "MINERU_API_KEY": "<MINERU_API_KEY>"        // ← 替换
       }
     },
     "pdf-mcp": {
@@ -615,7 +623,7 @@ claude
     "mineru-mcp": {
       "type": "stdio",
       "command": "mineru-mcp-server",
-      "env": { "MINERU_API_KEY": "你的OpenXLab_Token" }
+      "env": { "MINERU_API_KEY": "<MINERU_API_KEY>" }
     },
     "pdf-mcp": {
       "type": "stdio",
@@ -625,7 +633,7 @@ claude
     "web-search-prime": {
       "type": "http",
       "url": "https://open.bigmodel.cn/api/mcp/web_search_prime/mcp",
-      "headers": { "Authorization": "Bearer 你的智谱API密钥" }
+      "headers": { "Authorization": "Bearer <BIGMODEL_API_KEY>" }
     }
   }
 }
