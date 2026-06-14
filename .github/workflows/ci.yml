@@ -1,0 +1,68 @@
+name: CI
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  validate:
+    name: Validate on ${{ matrix.os }}
+    runs-on: ${{ matrix.os }}
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, windows-latest]
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v6.0.3
+
+      - name: Set up Python
+        uses: actions/setup-python@v6.2.0
+        with:
+          python-version: "3.12"
+
+      - name: Run public safety scan
+        run: python scripts/scan-public-safety.py --tree
+
+      - name: Verify install profiles
+        run: python scripts/verify-profiles.py
+
+      - name: Run governance script tests
+        run: python -m unittest discover -s tests -p "test_*.py"
+
+      - name: Validate Bash installer
+        if: runner.os == 'Linux'
+        shell: bash
+        run: |
+          set -euo pipefail
+          for profile in minimal researcher writer knowledge full; do
+            root="$(mktemp -d)"
+            ./scripts/install.sh --profile "$profile" \
+              --skills-path "$root/skills" \
+              --agents-path "$root/agents"
+            if [[ "$profile" == "full" && ! -d "$root/skills/paperclip-pipeline" ]]; then
+              echo "full profile did not install paperclip-pipeline" >&2
+              exit 1
+            fi
+          done
+
+      - name: Validate PowerShell installer
+        if: runner.os == 'Windows'
+        shell: pwsh
+        run: |
+          $ErrorActionPreference = "Stop"
+          foreach ($profile in @("minimal", "researcher", "writer", "knowledge", "full")) {
+              $root = Join-Path ([System.IO.Path]::GetTempPath()) ([System.Guid]::NewGuid().ToString("N"))
+              $skills = Join-Path $root "skills"
+              $agents = Join-Path $root "agents"
+              New-Item -ItemType Directory -Force -Path $skills, $agents | Out-Null
+              .\scripts\install.ps1 -Profile $profile -SkillsPath $skills -AgentsPath $agents
+              if ($profile -eq "full" -and -not (Test-Path (Join-Path $skills "paperclip-pipeline") -PathType Container)) {
+                  throw "full profile did not install paperclip-pipeline"
+              }
+          }

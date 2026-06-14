@@ -36,6 +36,15 @@ def count_skills(module_names: list[str]) -> int:
     return total
 
 
+def count_agents(module_names: list[str]) -> int:
+    total = 0
+    for module_name in module_names:
+        agents_dir = MODULES_DIR / module_name / "agents"
+        if agents_dir.exists():
+            total += sum(1 for child in agents_dir.glob("*.md") if child.is_file())
+    return total
+
+
 def parse_bash_profiles() -> dict[str, list[str]]:
     text = INSTALL_SH.read_text(encoding="utf-8")
     pattern = re.compile(r"^\s*([a-z][a-z0-9_-]*)\)\s+echo \"([^\"]*)\"", re.MULTILINE)
@@ -61,6 +70,9 @@ def validate_profiles() -> list[str]:
     powershell_profiles = parse_powershell_profiles()
 
     expected_names = set(profiles)
+    required_names = {"minimal", "researcher", "writer", "knowledge", "full"}
+    if expected_names != required_names:
+        errors.append(f"profile JSON names mismatch: {sorted(expected_names)} != {sorted(required_names)}")
     if set(bash_profiles) != expected_names:
         errors.append(f"install.sh profiles mismatch: {sorted(bash_profiles)} != {sorted(expected_names)}")
     if set(powershell_profiles) != expected_names:
@@ -86,10 +98,24 @@ def validate_profiles() -> list[str]:
             errors.append(
                 f"{name}: skills_count {profile.get('skills_count')} != actual {actual_skill_count}"
             )
+        actual_agent_count = count_agents(modules)
+        if profile.get("agents_count") != actual_agent_count:
+            errors.append(
+                f"{name}: agents_count {profile.get('agents_count')} != actual {actual_agent_count}"
+            )
 
     full_modules = profiles.get("full", {}).get("modules", [])
-    if "07-pipeline" not in full_modules:
-        errors.append("full profile must include 07-pipeline")
+    expected_full_modules = [
+        "01-discovery",
+        "02-processing",
+        "03-analysis",
+        "04-writing",
+        "05-knowledge",
+        "06-presentation",
+        "07-pipeline",
+    ]
+    if full_modules != expected_full_modules:
+        errors.append(f"full profile modules {full_modules} != {expected_full_modules}")
 
     return errors
 

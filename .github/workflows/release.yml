@@ -13,23 +13,25 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@v6.0.3
         with:
           fetch-depth: 0
+
+      - name: Set up Python
+        uses: actions/setup-python@v6.2.0
+        with:
+          python-version: "3.12"
 
       - name: Run Public Safety Scan
         run: python scripts/scan-public-safety.py --tree
 
-      - name: Generate Release Notes
-        uses: orhun/git-cliff-action@v4
-        with:
-          config: cliff.toml
-          args: --current
-        env:
-          OUTPUT: CHANGELOG.md
+      - name: Extract Release Notes
+        run: |
+          mkdir -p dist
+          python scripts/extract-release-notes.py --tag "$GITHUB_REF_NAME" --output dist/release-notes.md
 
-      - name: Scan Generated Release Notes
-        run: python scripts/scan-public-safety.py --paths CHANGELOG.md
+      - name: Scan Release Notes
+        run: python scripts/scan-public-safety.py --paths dist/release-notes.md
 
       - name: Detect Release Metadata
         id: release_meta
@@ -45,8 +47,8 @@ jobs:
           fi
 
       - name: Create GitHub Release
-        uses: softprops/action-gh-release@v2
+        uses: softprops/action-gh-release@v3.0.0
         with:
-          body_path: CHANGELOG.md
+          body_path: dist/release-notes.md
           prerelease: ${{ steps.release_meta.outputs.prerelease }}
           make_latest: ${{ steps.release_meta.outputs.make_latest }}

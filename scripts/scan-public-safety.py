@@ -90,7 +90,7 @@ IP_URL_RE = re.compile(r"https?://(?:\d{1,3}\.){3}\d{1,3}(?::\d+)?(?:/|\b)")
 URL_RE = re.compile(r"https?://([^/\s\"'<>]+)")
 BASE_URL_RE = re.compile(r"(?i)\b(vps|base[_-]?url|openai_base_url|compatible endpoint)\b")
 WINDOWS_USER_PATH_RE = re.compile(
-    r"(?i)C:\\Users\\(?!(YOU|YOUR_USERNAME|USERNAME|yourname)\\)[^\\\s]+"
+    r"(?i)C:\\Users\\(?!(you|YOUR_USERNAME|USERNAME|yourname)\\)[^\\\s]+"
 )
 LONG_RANDOM_RE = re.compile(r"^[A-Za-z0-9._~+/=-]{24,}$")
 
@@ -282,6 +282,11 @@ def print_findings(findings: list[Finding]) -> None:
 
 def parse_args() -> argparse.Namespace:
     parser = argparse.ArgumentParser(description="Scan public files for sensitive values.")
+    parser.add_argument(
+        "--repo-root",
+        default=str(Path(__file__).resolve().parents[1]),
+        help="repository root to scan; defaults to this script's repository",
+    )
     group = parser.add_mutually_exclusive_group(required=True)
     group.add_argument("--tree", action="store_true", help="scan tracked public tree")
     group.add_argument("--staged", action="store_true", help="scan staged index blobs")
@@ -290,8 +295,8 @@ def parse_args() -> argparse.Namespace:
 
 
 def main() -> int:
-    os.chdir(Path(__file__).resolve().parents[1])
     args = parse_args()
+    os.chdir(Path(args.repo_root).resolve())
     if args.tree:
         findings = scan_tree()
     elif args.staged:
